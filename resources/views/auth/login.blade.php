@@ -1,209 +1,179 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | G-EXIS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    <title>Login - G-EXIS</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
         body {
-            background: url('{{ asset('images/background-sekolah.jpg') }}') no-repeat center center/cover;
             height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            animation: fadeIn 1s ease-in-out;
+            margin: 0;
+            background: url('/images/bg-login.png') no-repeat center center;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
         }
 
-        /* Bagian kiri: overlay */
         .overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 50%;
+            width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,68,123,0.7), rgba(0,100,180,0.5));
-            color: white;
+            padding-left: 120px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-left: 60px;
-            animation: slideInLeft 1s ease-out;
-            backdrop-filter: blur(3px);
+            color: white;
         }
 
-        .overlay img {
-            width: 150px; 
-            margin-bottom: 35px;
-            filter: drop-shadow(0 0 12px rgba(255,255,255,0.9));
-            animation: fadeIn 2s ease-in-out;
+        .title-login {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 5px;
         }
 
-        .overlay h1 {
-            font-size: 38px;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            text-shadow: 0 0 12px rgba(255,255,255,0.5);
-            animation: fadeUp 1.2s ease-in-out;
-        }
-
-        .overlay p {
-            font-size: 15.5px;
+        .desc-login {
+            font-size: 18px;
             margin-bottom: 40px;
-            line-height: 1.7;
-            max-width: 400px;
-            color: #f8f8f8;
-            text-shadow: 0 0 8px rgba(255,255,255,0.3);
-            animation: fadeUp 1.5s ease-in-out;
+            max-width: 500px;
+            line-height: 1.4;
         }
 
-        /* Form kanan */
-        .form-container {
-            position: relative;
-            width: 50%;
-            height: 100%;
+        .login-box {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: slideInRight 1.2s ease-out;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 300px; 
         }
 
-        form {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(14px);
-            border-radius: 25px;
-            padding: 45px;
-            width: 80%;
-            max-width: 400px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-            animation: fadeIn 1.3s ease-in-out;
-        }
-
-        input {
-            width: 100%;
-            padding: 13px 18px;
-            margin: 10px 0;
-            border-radius: 30px;
+        .modern-input {
+            width: 420px;
+            padding: 18px 25px;
+            border-radius: 35px;
             border: none;
             outline: none;
-            font-weight: 500;
-            color: #333;
-            transition: 0.3s;
-        }
-
-        input:focus {
-            box-shadow: 0 0 10px rgba(0, 68, 123, 0.5);
-        }
-
-        input::placeholder {
-            color: #666;
-            font-weight: 600;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(90deg, #00447b, #0078d4);
+            background: rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(8px);
             color: white;
+            font-size: 16px;
+        }
+
+        .modern-input::placeholder {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .btn-modern {
+            width: 420px;
+            padding: 15px;
+            border-radius: 35px;
             border: none;
-            border-radius: 30px;
+            background: #1A73E8;
+            color: white;
+            font-size: 17px;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 10px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transition: 0.4s;
-            box-shadow: 0 0 8px rgba(0,120,212,0.5);
         }
 
-        button:hover {
-            background: linear-gradient(90deg, #005da3, #0090ff);
-            box-shadow: 0 0 20px rgba(0,140,255,0.7);
-            transform: translateY(-2px);
+        .register-link {
+            margin-top: 8px;
+            font-size: 15px;
+            color: white;
         }
 
-        .small-text {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 14px;
-            color: #fff;
-            animation: fadeIn 2s ease-in-out;
-        }
-
-        .small-text a {
-            color: #E3EEB2;
+        .register-link a {
+            color: #001BFF;
             text-decoration: none;
             font-weight: 600;
-            transition: 0.3s;
         }
 
-        .small-text a:hover {
-            text-decoration: underline;
-            color: #fff;
-        }
+        /* ===================== RESPONSIVE ===================== */
+@media (max-width: 992px) {
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    .overlay{
+        padding-left: 40px;
+    }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .title-login{
+        font-size: 32px;
+    }
 
-        @keyframes slideInLeft {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
-        }
+    .desc-login{
+        font-size: 15px;
+        max-width: 350px;
+    }
 
-        @keyframes slideInRight {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
-        }
+    .login-box{
+        margin-top: 200px;
+    }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            .overlay {
-                position: relative;
-                width: 100%;
-                height: 40%;
-                padding: 30px;
-                text-align: center;
-                align-items: center;
-            }
-            .overlay img {
-                width: 150px;
-                margin-bottom: 20px;
-            }
-            .form-container {
-                width: 100%;
-                height: 60%;
-            }
-            form { width: 90%; }
-        }
+    .modern-input,
+    .btn-modern{
+        width: 300px;
+    }
+}
+
+@media (max-width: 576px){
+
+    body{
+        background-position: center;
+        background-size: cover;
+    }
+
+    .overlay{
+        padding-left: 20px;
+        padding-right: 20px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .title-login{
+        font-size: 26px;
+    }
+
+    .desc-login{
+        font-size: 14px;
+        max-width: 270px;
+        margin-bottom: 25px;
+    }
+
+    .login-box{
+        margin-top: 120px;
+        width: 100%;
+        align-items: center;
+    }
+
+    .modern-input,
+    .btn-modern{
+        width: 100%;
+    }
+}
+
     </style>
 </head>
-<body>
-    <div class="overlay">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo G-EXIS">
-        <h1>Hai, Sobat Ekskul!</h1>
-        <p>Saatnya berkreasi, berprestasi, dan jadi inspirasi.<br>
-        Login dulu yuk, biar gak ketinggalan kegiatan seru!</p>
-    </div>
 
-    <div class="form-container">
-        <form>
-            <input type="email" placeholder="Masukkan email">
-            <input type="password" placeholder="Masukkan password">
-            <button>Masuk</button>
-            <div class="small-text">
-                Belum punya akun? <a href="{{ url('/register') }}">Daftar Akun</a>
+<body>
+
+    <div class="overlay">
+
+        <form method="POST" action="{{ route('login') }}" class="login-box">
+            @csrf
+
+            <input type="email" name="email" class="modern-input"
+                placeholder="Masukan email" required>
+
+            <input type="password" name="password" class="modern-input"
+                placeholder="Masukan password" required>
+
+            <button class="btn-modern">Masuk</button>
+
+            <div class="register-link">
+                Belum punya akun? <a href="{{ route('register') }}">Daftar Akun</a>
             </div>
         </form>
+
     </div>
+
 </body>
+
 </html>
