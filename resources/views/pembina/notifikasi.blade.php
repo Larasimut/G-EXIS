@@ -6,11 +6,17 @@
 <div class="shadow card">
     <div class="card-body">
 
-        <form class="mb-4">
-            <label class="form-label fw-bold">Buat Notifikasi Baru</label>
-            <textarea class="mb-2 form-control" rows="3"></textarea>
-            <button class="btn btn-success">Kirim Notifikasi</button>
-        </form>
+       <form action="{{ route('pembina.notifikasi.store') }}" method="POST" class="mb-4">
+    @csrf
+
+    <label class="form-label fw-bold">Isi Pesan</label>
+    <textarea name="pesan" class="form-control mb-3" rows="3" placeholder="Tulis isi pesan"></textarea>
+
+    <button class="btn btn-success w-100">Kirim Notifikasi</button>
+</form>
+
+
+
 
         <hr>
 

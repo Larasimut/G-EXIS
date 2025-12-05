@@ -14,7 +14,6 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        /* Header */
         .notif-header {
             background: #4A76A8;
             padding: 18px 22px;
@@ -31,13 +30,11 @@
             font-weight: 600;
         }
 
-        /* Burger bar */
         .burger {
             font-size: 25px;
             cursor: pointer;
         }
 
-        /* Notif card */
         .notif-card {
             background: white;
             border-radius: 18px;
@@ -47,13 +44,14 @@
             display: flex;
             gap: 15px;
             align-items: flex-start;
-            cursor: pointer;
             transition: 0.25s;
         }
+
         .notif-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 9px 18px rgba(0,0,0,0.18);
         }
+
         .notif-icon {
             background: #4A76A8;
             border-radius: 12px;
@@ -61,6 +59,7 @@
             padding: 10px;
             font-size: 18px;
         }
+
         .notif-time {
             font-size: 13px;
             color: #6c757d;
@@ -76,9 +75,9 @@
         }
     </style>
 </head>
+
 <body>
 
-<!-- Header -->
 <header class="notif-header shadow-sm">
     <i class="fa fa-arrow-left burger" onclick="history.back()"></i>
     <span class="notif-title">Notifikasi</span>
@@ -87,40 +86,30 @@
 
 <div class="container mt-3 mb-4">
 
-    <!-- OPTIONAL: alert info -->
-    <div class="alert-info-custom text-center">
-        📢 Kamu memiliki <b>3 notifikasi baru</b> — jangan lupa untuk cek semua ya!
-    </div>
-
-    <!-- Notifikasi 1 -->
-    <div class="notif-card">
-        <div class="notif-icon"><i class="fa fa-trophy"></i></div>
-        <div>
-            <h6 class="fw-bold mb-1">Pengumuman Juara Lomba Futsal</h6>
-            <p class="mb-1">Selamat kepada tim futsal G-EXIS yang berhasil meraih juara 1 turnamen antar sekolah!</p>
-            <p class="notif-time"><i class="fa fa-clock me-1"></i> 2 jam yang lalu</p>
+    @if($notifs->count() > 0)
+        <div class="alert-info-custom text-center">
+            📢 Kamu memiliki <b>{{ $notifs->count() }}</b> notifikasi.
         </div>
-    </div>
-
-    <!-- Notifikasi 2 -->
-    <div class="notif-card">
-        <div class="notif-icon"><i class="fa fa-calendar"></i></div>
-        <div>
-            <h6 class="fw-bold mb-1">Jadwal Latihan Ekskul</h6>
-            <p class="mb-1">Ekskul Basket akan dimulai kembali Jumat, 29 November 2025 pukul 15.00 di lapangan sekolah.</p>
-            <p class="notif-time"><i class="fa fa-clock me-1"></i> Kemarin</p>
+    @else
+        <div class="alert-info-custom text-center">
+            Tidak ada notifikasi.
         </div>
-    </div>
+    @endif
 
-    <!-- Notifikasi 3 -->
-    <div class="notif-card">
-        <div class="notif-icon"><i class="fa fa-bell"></i></div>
-        <div>
-            <h6 class="fw-bold mb-1">Informasi Seragam Ekskul</h6>
-            <p class="mb-1">Untuk anggota baru ekskul, pengambilan seragam mulai Senin — lokasi di ruang OSIS.</p>
-            <p class="notif-time"><i class="fa fa-clock me-1"></i> 3 hari yang lalu</p>
+    @foreach($notifs as $notif)
+        <div class="notif-card">
+            <div class="notif-icon"><i class="fa fa-bell"></i></div>
+            <div>
+                <h6 class="fw-bold mb-1">Notifikasi Baru</h6>
+                <p class="mb-1">{{ $notif->pesan }}</p>
+
+                <p class="notif-time">
+                    <i class="fa fa-clock me-1"></i>
+                    {{ $notif->created_at->diffForHumans() }}
+                </p>
+            </div>
         </div>
-    </div>
+    @endforeach
 
 </div>
 

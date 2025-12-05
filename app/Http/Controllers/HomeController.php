@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Notification; // ⬅ WAJIB
+
 class HomeController extends Controller
 {
     public function beranda()
@@ -20,40 +22,45 @@ class HomeController extends Controller
 
     public function tambahEkskul()
     {
-        return view('siswa.tambah-ekskul'); // gunakan dash sesuai nama file view
+        return view('siswa.tambah-ekskul');
     }
 
     public function ekskulTerdaftar()
     {
-        return view('siswa.ekskul-terdaftar'); // gunakan dash sesuai nama file view
+        return view('siswa.ekskul-terdaftar');
     }
 
     public function notifikasi()
     {
-        return view('siswa.notifikasi');
+        $notifs = Notification::where('role', 'siswa')
+                    ->latest()
+                    ->get();
+
+        return view('siswa.notifikasi', compact('notifs'));
     }
 
-
-public function lihatEkskul()
-{
-    return view('siswa.lihatekskul');
-}
-public function detailTerdaftar()
-{
-    return view('siswa.detailTerdaftar');
-}
- public function absen()
+    public function lihatEkskul()
     {
-        return view('siswa.absen'); // view untuk tampilan absen
+        return view('siswa.lihatekskul');
+    }
+
+    public function detailTerdaftar()
+    {
+        return view('siswa.detailTerdaftar');
+    }
+
+    public function absen()
+    {
+        return view('siswa.absen');
     }
 
     public function jadwal()
     {
-        return view('siswa.jadwal'); // view untuk tampilan jadwal latihan
+        return view('siswa.jadwal');
     }
 
     public function sertifikat()
     {
-        return view('siswa.sertifikat'); // view untuk tampilan sertifikat
+        return view('siswa.sertifikat');
     }
 }

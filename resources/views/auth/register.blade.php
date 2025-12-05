@@ -54,7 +54,7 @@
 
             <div class="mb-3 text-start">
                 <label class="form-label">Username</label>
-                <input type="text" name="username" class="form-control rounded-pill" required>
+                <input type="text" name="name" class="form-control rounded-pill" required>
             </div>
 
             <div class="mb-3 text-start">

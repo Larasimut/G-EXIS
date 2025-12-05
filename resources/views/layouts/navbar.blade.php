@@ -180,7 +180,7 @@
 
   <center>
     <i class="bi bi-person-circle profile-picture"></i>
-    <h5 class="fw-bold mb-4">Siswa - Mugni Tiarani</h5>
+    <h5 class="fw-bold mb-4">Siswa - {{ Auth::user()->name }}</h5>
   </center>
 
  <a href="{{ route('siswa.tambahEkskul') }}" class="menu-item text-white text-decoration-none">
