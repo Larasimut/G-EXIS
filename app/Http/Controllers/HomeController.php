@@ -63,4 +63,10 @@ class HomeController extends Controller
     {
         return view('siswa.sertifikat');
     }
+public function formpendaftaran()
+    {
+        return view('siswa.formpendaftaran');
+    }
+
+
 }

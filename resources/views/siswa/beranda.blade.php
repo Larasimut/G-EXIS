@@ -13,171 +13,219 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      background: linear-gradient(to bottom, #ffffff 0%, #e8f4ff 70%, #cfe7ff 100%);
-      overflow-x: hidden;
-      font-family: "Poppins", sans-serif;
-    }
-    /* HERO TEXT */
-    .welcome-title {
-      font-family: "Pacifico", cursive;
-      font-size: 48px;
-      color: #1273c5;
-    }
-    .subtitle {
-      font-size: 38px;
-      font-weight: 700;
-      color: #3aa0e6;
-      margin-top: -10px;
-    }
-    .btn-custom {
-      background: #7dc9ff;
-      padding: 14px 28px;
-      border-radius: 15px;
-      font-size: 18px;
-      font-weight: 600;
-      color: white;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
 
-    /* HERO ANIMATION */
-    .spin-circle {
-      width: 440px;
-      height: 440px;
-      border: 12px dashed #f4c27a;
-      border-radius: 50%;
-      position: absolute;
-      animation: spin 13s linear infinite;
-      z-index: 1;
-    }
-    @keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg);} }
+  body {
+    background: linear-gradient(to bottom, #ffffff 0%, #e8f4ff 70%, #cfe7ff 100%);
+    overflow-x: hidden;
+    font-family: "Poppins", sans-serif;
+  }
 
-    .blue-bg-circle {
-      width: 390px;
-      height: 390px;
-      background: #8ec4ee;
-      border-radius: 50%;
-      position: absolute;
-      z-index: 0;
-    }
+  /* HERO TEXT */
+  .welcome-title {
+    font-family: "Pacifico", cursive;
+    font-size: 48px;
+    color: #1273c5;
+  }
 
+  .subtitle {
+    font-size: 38px;
+    font-weight: 700;
+    color: #3aa0e6;
+    margin-top: -10px;
+  }
+
+  .btn-custom {
+    background: #7dc9ff;
+    padding: 14px 28px;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+  .hero-text-fix {
+    margin-top: -50px;
+  }
+
+  /* HERO ANIMATION & IMAGE (VERSI TENGAH) */
+  .hero-visual {
+    position: relative;
+    width: 100%;
+    max-width: 410px;
+    height: 410px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .spin-circle {
+    width: 390px;
+    height: 400px;
+    border: 12px dashed #f4c27a;
+    border-radius: 50%;
+    position: absolute;
+    animation: spin 13s linear infinite;
+    z-index: 1;
+    top: 6px;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0); }
+    to { transform: rotate(360deg); }
+  }
+
+  .blue-bg-circle {
+    width: 350px;
+    height: 350px;
+    background: #8ec4ee;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 0;
+    top: 32px;
+  }
+
+ .hero-img {
+    width: 500px;      /* perbesar */
+    height: 500px;     /* perbesar */
+    object-fit: contain; /* biar gambar tidak terpotong */
+    position: relative;
+    z-index: 50;       /* paling tinggi */
+    transform: translateY(-20px); /* sedikit dinaikkan */
+    filter: drop-shadow(0px 20px 40px rgba(0,0,0,0.28));
+}
+
+
+  .shadow-base {
+    width: 325px;
+    height: 78px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0px 16px 26px rgba(0,0,0,0.20);
+    margin-top: -10px;
+  }
+
+  .badge-floating {
+    position: absolute;
+    background: white;
+    border-radius: 40px;
+    padding: 9px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 7px 20px rgba(0,0,0,0.15);
+    z-index: 20;
+    transform: scale(0.92);
+  }
+
+  .badge-top {
+    top: -14px;
+    right: -18px;
+  }
+
+  .badge-bottom {
+    bottom: -14px;
+    left: -18px;
+  }
+
+  @media (max-width: 768px) {
+    .hero-visual {
+      transform: scale(0.84);
+      margin-top: 20px;
+    }
     .shadow-base {
-      width: 620px;
-      height: 140px;
-      background: white;
-      border-radius: 50%;
-      box-shadow: 0px 18px 32px rgba(0,0,0,0.25);
-      margin-top: -60px;
+      transform: scale(0.84);
+      margin-top: -24px;
     }
+  }
+  .ekskul-box {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: 0.32s;
+  border: 1px solid #e7eef5;
+}
+.ekskul-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.10);
+}
 
-    .badge-floating {
-      position: absolute;
-      background: white;
-      border-radius: 40px;
-      padding: 10px 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.15);
-      z-index: 20;
-    }
+.ekskul-img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+}
 
-    /* EKSKUL SECTION */
-    .ekskul-wrapper {
-      background: #eaf1f9;
-      padding: 50px;
-      border-radius: 20px;
-      max-width: 1000px;
-      margin: auto;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    }
+.ekskul-tag {
+  position: absolute;
+  top: 160px; /* ♥ inilah yang bikin posisinya pas */
+  left: 14px;
+  background: #0e6fdd;
+  color: white;
+  font-size: 13px;
+  padding: 7px 14px;
+  border-radius: 10px;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  font-weight: 600;
+}
 
-    .ekskul-container {
-      height: 260px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      gap: 40px;
-    }
+.desc {
+  font-size: 14px;
+  color: #6f8ea6;
+  height: 52px;
+}
 
-    .ekskul-card {
-      width: 180px;
-      height: 240px;
-      border-radius: 22px;
-      overflow: hidden;
-      position: relative;
-      box-shadow: 0px 10px 25px rgba(0,0,0,0.18);
-      transition: 0.3s ease;
-    }
+.read {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0e6fdd;
+  text-decoration: none;
+}
+.read:hover {
+  text-decoration: underline;
+}
 
-    .ekskul-card.big {
-      width: 220px;
-      height: 270px;
-      z-index: 3;
-    }
+</style>
 
-    .img-card {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .overlay {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      padding: 14px 0;
-      text-align: center;
-      background: linear-gradient(transparent, rgba(0,0,0,0.55));
-      color: white;
-    }
-
-    .overlay h5 {
-      margin-bottom: 6px;
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-    .ekskul-card:hover {
-      transform: scale(1.06);
-      z-index: 5;
-    }
-  </style>
 </head>
 
 <body>
-@include('layouts.navbar')
+  @include('layouts.navbar')
 
   <!-- HERO -->
   <div class="container mt-5 pb-5">
-    <div class="row align-items-center">
+    <div class="row align-items-center justify-content-between">
 
-      <div class="col-md-6">
+      <!-- TEXT -->
+      <div class="col-md-6 hero-text-fix">
+
         <h1 class="welcome-title">Welcome To</h1>
         <h2 class="subtitle">One System, All Activities.</h2>
 
         <p class="mt-3 mb-4" style="max-width: 480px;">
-          Platform digital yang dirancang khusus untuk memudahkan manajemen ekstrakurikuler di sekolah. Dengan G-EXIS, siswa, pembina, dan pihak sekolah dapat berkomunikasi lebih efektif, mencatat kegiatan secara rapi, serta mengelola keaktifan anggota dengan mudah dan terintegrasi."
+          Platform digital yang dirancang khusus untuk memudahkan manajemen ekstrakurikuler di sekolah. Dengan G-EXIS, siswa, pembina, dan pihak sekolah dapat berkomunikasi lebih efektif, mencatat kegiatan secara rapi, serta mengelola keaktifan anggota dengan mudah dan terintegrasi.
         </p>
 
         <button class="btn btn-custom">Lihat Selengkapnya</button>
       </div>
-<br> <br>
-      <div class="col-md-6 d-flex justify-content-center align-items-center position-relative mt-5 mt-md-0">
-        <div class="spin-circle"></div>
-        <div class="blue-bg-circle"></div>
 
-        <div style="position:relative; z-index:10;">
-         <img src="{{ asset('images/drumband.jpg') }}"
-               style="width:350px; height:350px; object-fit:cover; border-radius:50%; box-shadow:0px 12px 25px rgba(0,0,0,0.32);"/>
+      <!-- IMAGE & ANIMATION -->
+      <div class="col-md-6 d-flex flex-column justify-content-center align-items-center mt-5 mt-md-0">
+        <div class="hero-visual">
+          <div class="spin-circle"></div>
+          <div class="blue-bg-circle"></div>
 
-          <div class="badge-floating" style="top:-15px; right:-40px;">
+          <img src="{{ asset('images/anak.png') }}" class="hero-img">
+
+          <div class="badge-floating badge-top">
             <span style="font-size:22px;">🏅</span>
             <strong class="text-dark">Sertifikat</strong>
           </div>
 
-          <div class="badge-floating" style="bottom:-25px; left:-40px;">
+          <div class="badge-floating badge-bottom">
             <span style="font-size:22px;">👤</span>
             <div style="text-align:left;">
               <strong class="text-dark">300++</strong><br>
@@ -185,231 +233,140 @@
             </div>
           </div>
         </div>
+
+        <div class="shadow-base"></div>
       </div>
 
     </div>
-  </div>
+</div>
+<!-- EKSKUL SECTION -->
+<section class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold" style="font-size: 38px; color:#0e3a66;">Ekstrakurikuler Favorit</h2>
+            <p style="max-width:430px; font-size:15px; color:#567189;">
+                Berbagai ekstrakurikuler terbaik dan favorit dengan pembinaan terbaik untuk mengembangkan bakat siswa.
+            </p>
+        </div>
+        <a href="{{ route('siswa.ekstrakulikuler') }}" class="btn btn-primary rounded-pill px-4 py-2 fw-semibold" style="background:#0e6fdd;">
+    Lihat Semua Ekskul →
+</a>
 
-  <div class="d-flex justify-content-center">
-    <div class="shadow-base"></div>
-  </div>
-
-  <!-- EKSKUL SECTION -->
-  <section class="container my-5 py-5">
-
-    <div class="text-center mb-5">
-      <h2 class="fw-bold" style="font-size: 38px; color: #0e3a66;">Ekstrakulikuler</h2>
-      <h3 style="font-size: 30px; color: #4a86b8; font-family: 'Pacifico', cursive; margin-top: -8px;">
-        Favorit
-      </h3>
     </div>
 
-    <div class="ekskul-wrapper">
-      <div class="ekskul-container">
-
-        <div class="ekskul-card">
-          <img src="{{ asset('images/pmr.jpg') }}" class="img-card" />
-          <div class="overlay">
-            <h5>PMR</h5>
-            <button class="btn btn-primary btn-sm">Lihat..</button>
-          </div>
+    <div class="row gy-4">
+        <!-- Card 1 -->
+        <div class="col-md-3">
+            <div class="ekskul-box shadow-sm position-relative">
+                <img src="{{ asset('images/pramuka.jpg') }}" class="ekskul-img">
+                <span class="ekskul-tag"><i class="bi bi-star-fill"></i> Unggulan</span>
+                <div class="p-3">
+                    <h5 class="fw-bold mb-2">Pramuka</h5>
+                    <p class="desc">Melatih jiwa kepemimpinan, kedisiplinan dan kemandirian siswa.</p>
+                    <a href="#" class="read">Lihat Selengkapnya →</a>
+                </div>
+            </div>
         </div>
 
-        <div class="ekskul-card">
-          <img src="{{ asset('images/tari.jpg') }}" class="img-card" />
-          <div class="overlay">
-            <h5>Seni Tari</h5>
-            <button class="btn btn-primary btn-sm">Lihat..</button>
-          </div>
+        <!-- Card 2 -->
+        <div class="col-md-3">
+            <div class="ekskul-box shadow-sm position-relative">
+                <img src="{{ asset('images/pmr.jpg') }}" class="ekskul-img">
+                <span class="ekskul-tag"><i class="bi bi-heart-pulse"></i> Medis</span>
+                <div class="p-3">
+                    <h5 class="fw-bold mb-2">PMR</h5>
+                    <p class="desc">Kegiatan pertolongan pertama dan pendidikan kesehatan siswa.</p>
+                    <a href="#" class="read">Lihat Selengkapnya →</a>
+                </div>
+            </div>
         </div>
 
-        <div class="ekskul-card big">
-          <img src="{{ asset('images/pramuka.jpg') }}" class="img-card" />
-          <div class="overlay">
-            <h5>Pramuka</h5>
-            <button class="btn btn-primary btn-sm">Lihat..</button>
-          </div>
+        <!-- Card 3 -->
+        <div class="col-md-3">
+            <div class="ekskul-box shadow-sm position-relative">
+                <img src="{{ asset('images/paskibra.jpg') }}" class="ekskul-img">
+                <span class="ekskul-tag"><i class="bi bi-flag-fill"></i> Nasional</span>
+                <div class="p-3">
+                    <h5 class="fw-bold mb-2">Paskibra</h5>
+                    <p class="desc">Pembinaan kedisiplinan serta pelatihan baris-berbaris profesional.</p>
+                    <a href="#" class="read">Lihat Selengkapnya →</a>
+                </div>
+            </div>
         </div>
 
-        <div class="ekskul-card">
-          <img src="{{ asset('images/paskib.jpg') }}" class="img-card" />
-          <div class="overlay">
-            <h5>Paskibra</h5>
-            <button class="btn btn-primary btn-sm">Lihat..</button>
-          </div>
+        <!-- Card 4 -->
+        <div class="col-md-3">
+            <div class="ekskul-box shadow-sm position-relative">
+                <img src="{{ asset('images/drumband.jpg') }}" class="ekskul-img">
+                <span class="ekskul-tag"><i class="bi bi-music-note-beamed"></i> Seni</span>
+                <div class="p-3">
+                    <h5 class="fw-bold mb-2">Drum Band</h5>
+                    <p class="desc">Pengembangan kreativitas musik dan kekompakan dalam tim.</p>
+                    <a href="#" class="read">Lihat Selengkapnya →</a>
+                </div>
+            </div>
         </div>
-
-        <div class="ekskul-card">
-          <img src="{{ asset('images/drumband.jpg') }}" class="img-card" />
-          <div class="overlay">
-            <h5>Drum Band</h5>
-            <button class="btn btn-primary btn-sm">Lihat..</button>
-          </div>
-        </div>
-
-      </div>
     </div>
+</section>
 
-  </section>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- GRADIENT BOTTOM SHAPE -->
-<!-- STAT SECTION — WAVE PROGRESS BAR -->
-<section class="py-5" id="statSection" style="background:#79a8d8; color:white;">
-  <style>
-    .stat-card {
-      background: rgba(255,255,255,0.25);
-      border-radius: 18px;
-      width: 260px;
-      height: 180px;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.20);
-      transition: transform .4s;
-    }
-    .stat-card:hover { transform: translateY(-6px); }
+<!-- STAT SECTION -->
+<section class="py-5" id="statSection"
+  style="background:linear-gradient(160deg,#0a2247,#0f356c); color:white; position:relative; overflow:hidden;">
 
-    .wave {
-      position:absolute;
-      bottom:-10px;
-      width:200%;
-      height:100%;
-      background: rgba(255,255,255,0.55);
-      border-radius:45%;
-      animation: waveMove 5s infinite linear;
-      transform: translateX(-25%);
-    }
-    @keyframes waveMove { from { transform: translateX(-25%) rotate(0deg); } to { transform: translateX(-25%) rotate(360deg); } }
+  <!-- Soft Glow -->
+  <div class="glow"></div>
 
-    .float-icon { animation: floatIcon 3s infinite ease-in-out; }
-    @keyframes floatIcon { 0% { transform: translateY(0); } 50% { transform: translateY(-10px);} 100% { transform: translateY(0);} }
+  <div class="container text-center">
 
-    .stat-number {
-      font-size: 42px;
-      font-weight: 800;
-      line-height: 1;
-    }
-  </style>
+    <p class="text-uppercase fw-semibold mb-1"
+       style="letter-spacing:1px; opacity:.75; font-size:14px;">
+       DATA KEGIATAN EKSTRAKULIKULER
+    </p>
 
-  <div class="container d-flex justify-content-center gap-4 flex-wrap text-center">
-
-    <!-- Card 1 -->
-    <div class="stat-card d-flex flex-column justify-content-center align-items-center">
-      <div class="wave"></div>
-      <i class="bi bi-person-fill fs-1 float-icon"></i>
-      <h2 class="stat-number" data-target="87">0%</h2>
-      <p class="fw-bold m-0">Active Students</p>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="stat-card d-flex flex-column justify-content-center align-items-center">
-      <div class="wave"></div>
-      <i class="bi bi-people-fill fs-1 float-icon"></i>
-      <h2 class="stat-number" data-target="23">0</h2>
-      <p class="fw-bold m-0">Ekskul Terdaftar</p>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="stat-card d-flex flex-column justify-content-center align-items-center">
-      <div class="wave"></div>
-      <i class="bi bi-award-fill fs-1 float-icon"></i>
-      <h2 class="stat-number" data-target="50">0</h2>
-      <p class="fw-bold m-0">Sertifikat</p>
-    </div>
-
-  </div>
-</section>
-
-<script>
-  // animasi angka hanya berjalan saat section terlihat di layar
-  let started = false;
-  window.addEventListener("scroll", () => {
-    const section = document.getElementById("statSection");
-    const sectionTop = section.getBoundingClientRect().top;
-    if (!started && sectionTop < window.innerHeight - 100) {
-      started = true;
-      document.querySelectorAll(".stat-number").forEach(num => {
-        let target = +num.getAttribute("data-target");
-        let current = 0;
-        let increment = target / 90;
-        let interval = setInterval(() => {
-          current += increment;
-          if (current >= target) {
-            current = target;
-            clearInterval(interval);
-          }
-          num.innerHTML = target === 87 ? Math.floor(current) + "%" : Math.floor(current);
-        }, 20);
-      });
-    }
-  });
-</script>
-
-<!-- TESTIMONI SECTION -->
-<section class="py-5" style="background: linear-gradient(135deg, #0a2d52, #0d3a66); color:white; position:relative; overflow:hidden;">
-
-  <!-- Ornamen Bulat -->
-  <div style="
-      position:absolute; width:280px; height:280px;
-      background:rgba(255,255,255,0.07);
-      border-radius:50%; top:-60px; left:-60px; filter:blur(4px);
-  "></div>
-
-  <div style="
-      position:absolute; width:350px; height:350px;
-      background:rgba(255,255,255,0.05);
-      border-radius:50%; bottom:-80px; right:-80px; filter:blur(6px);
-  "></div>
-
-  <div class="container text-center position-relative" style="z-index:10;">
-
-    <h2 class="fw-bold mb-3" style="font-size: 38px; letter-spacing:1px;">
-      What They Say?
+    <h2 class="fw-bold mb-5" style="font-size:36px; line-height:1.3;">
+      Aktivitas yang Kami Jalani Sehari-hari
     </h2>
-    <p style="opacity:0.8">Pendapat alumni mengenai platform G-EXIS</p>
 
-    <div class="d-flex justify-content-center flex-wrap gap-4 mt-4">
+    <div class="row gy-4 justify-content-center">
 
-      <!-- CARD 1 -->
-      <div class="glass-card">
-        <div class="d-flex align-items-center gap-2">
-          <img src="{{ asset('images/pmr.jpg') }}" class="rounded-circle" width="50">
-          <div>
-            <h6 class="mb-0 fw-semibold">Dendi Irwansyah</h6>
-            <small style="opacity:0.8;">Alumni</small>
-          </div>
+      <!-- Item 1 -->
+      <div class="col-md-3 col-6">
+        <div class="stat-item">
+          <i class="bi bi-people-fill stat-icon"></i>
+          <h2 class="stat-number" data-target="578">0</h2>
+          <p class="stat-label">Siswa yang ikut ekstrakulikuler</p>
         </div>
-        <p class="mt-3">Website ini sangat membantu siswa menemukan kegiatan sesuai bakat.</p>
-        <div class="rating">★★★★★</div>
       </div>
 
-      <!-- CARD 2 -->
-      <div class="glass-card">
-        <div class="d-flex align-items-center gap-2">
-          <img src="{{ asset('images/tari.jpg') }}" class="rounded-circle" width="50">
-          <div>
-            <h6 class="mb-0 fw-semibold">Syifa Nurmala</h6>
-            <small style="opacity:0.8;">Alumni</small>
-          </div>
+      <!-- Item 2 -->
+      <div class="col-md-3 col-6">
+        <div class="stat-item">
+          <i class="bi bi-trophy stat-icon"></i>
+          <h2 class="stat-number" data-target="78">0</h2>
+          <p class="stat-label">Kegiatan lomba yang diikuti</p>
         </div>
-        <p class="mt-3">Website ini sangat membantu siswa mengenal kegiatan ekstrakurikuler.</p>
-        <div class="rating">★★★★★</div>
       </div>
 
-      <!-- CARD 3 -->
-      <div class="glass-card">
-        <div class="d-flex align-items-center gap-2">
-          <img src="{{ asset('images/pramuka.jpg') }}" class="rounded-circle" width="50">
-          <div>
-            <h6 class="mb-0 fw-semibold">Lani Dianti</h6>
-            <small style="opacity:0.8;">Alumni</small>
-          </div>
+      <!-- Item 3 -->
+      <div class="col-md-3 col-6">
+        <div class="stat-item">
+          <i class="bi bi-award stat-icon"></i>
+          <h2 class="stat-number" data-target="150">0</h2>
+          <p class="stat-label">Kegiatan rutin sekolah</p>
         </div>
-        <p class="mt-3">Website ini menjadi contoh platform digital sekolah yang menarik.</p><br>
-        <div class="rating">★★★★★</div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="col-md-3 col-6">
+        <div class="stat-item">
+          <i class="bi bi-lightning stat-icon"></i>
+          <h2 class="stat-number" data-target="21">0</h2>
+          <p class="stat-label">Ekstrakulikuler aktif berjalan</p>
+        </div>
       </div>
 
     </div>
@@ -417,97 +374,230 @@
 </section>
 
 <style>
-/* Card Glass Effect */
-.glass-card {
-  width: 270px;
-  padding: 22px;
-  border-radius: 22px;
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.22);
-  color: white;
-  transition: 0.35s ease;
-  text-align: left;
-  border: 1px solid rgba(255,255,255,0.2);
-}
-.glass-card img {
-  width: 55px;       /* bebas mau 40–70px */
-  height: 55px;
-  border-radius: 50%;
-  object-fit: cover; /* gambar auto crop, tidak distorsi */
-  object-position: center;
-  display: block;    /* jaga proporsi rapi */
+/* CARD */
+.stat-item {
+  padding: 25px 12px;
+  border-radius: 16px;
+  transition: .35s ease;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
-
-/* Hover elegan */
-.glass-card:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.35);
-  background: rgba(255,255,255,0.18);
+.stat-item:hover {
+  background: rgba(255,255,255,0.10);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 35px rgba(0,0,0,.25);
 }
 
-/* Rating Bintang */
-.rating {
-  font-size: 20px;
-  color: #ffdd57;
-  letter-spacing: 2px;
+/* ICON */
+.stat-icon {
+  font-size: 42px;
+  margin-bottom: 10px;
+  color: #82c8ff;
+  opacity: .9;
+  animation: floatIcon 3s infinite ease-in-out;
+}
+
+/* NUMBER */
+.stat-number {
+  font-size: 40px;
+  font-weight: 800;
+  margin: 0;
+}
+
+/* LABEL */
+.stat-label {
+  font-size: 15px;
+  margin-top: 6px;
+  opacity: .8;
+  line-height: 1.4;
+}
+
+/* FLOAT */
+@keyframes floatIcon {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+  100% { transform: translateY(0); }
+}
+
+/* GLOW */
+.glow {
+  position:absolute;
+  top:-160px;
+  left:50%;
+  width:480px;
+  height:480px;
+  background: radial-gradient(circle,#3ba4ff40,#0000);
+  filter: blur(65px);
+  transform: translateX(-50%);
+  pointer-events:none;
 }
 </style>
-<footer class="py-5 border-top"
-        style="background: linear-gradient(to right, #ffffff, #e8f3ff); width:100%; overflow:hidden; position:relative;">
 
-    <!-- WAVE SEBAGAI BACKGROUND KIRI -->
-    <img src="{{ asset('images/hias.png') }}" alt="Wave"
-         style="
-            position:absolute;
-            top:0;
-            left:0;
-            height:100%;
-            width:auto;
-            z-index:1;
-         ">
+<script>
+let started = false;
+window.addEventListener("scroll", () => {
+  const section = document.getElementById("statSection");
+  if (!section) return;
 
-    <!-- KONTEN FOOTER DI ATAS WAVE -->
-    <div style="position:relative; z-index:2; padding-left:170px;">
+  const top = section.getBoundingClientRect().top;
 
-        <!-- LOGO & TEXT -->
-        <div class="d-flex align-items-center mb-2">
-            <img src="{{ asset('images/logoGe.png') }}" alt="Logo" style="height:55px;">
-            <h2 class="ms-2 mb-0 fw-bold text-primary">- EXIS</h2>
-        </div>
+  if (!started && top < window.innerHeight - 150) {
+    started = true;
 
-        <h3 class="fw-bold text-dark" style="margin-top:-5px;">SMKN 2 SUMEDANG</h3>
+    document.querySelectorAll(".stat-number").forEach(num => {
+      let target = +num.getAttribute("data-target");
+      let current = 0;
+      let speed = target / 70;
 
-        <!-- INFO -->
-        <p class="mt-3 mb-1">
-            Jl. Prabu Gajah Agung No. 12 <br>
-            Kabupaten Sumedang, Jawa Barat 45111
-        </p>
+      let interval = setInterval(() => {
+        current += speed;
+        if (current >= target) {
+          current = target;
+          clearInterval(interval);
+        }
+        num.innerHTML = Math.floor(current);
+      }, 20);
+    });
+  }
+});
+</script>
+<!-- TESTIMONI SECTION -->
+<section class="py-5" style="background:white; position:relative; overflow:hidden;">
 
-        <p class="mb-1">
-            <i class="bi bi-telephone-fill text-danger me-2"></i> (0261) 123456
-        </p>
+  <!-- BULAT BIRU SOFT -->
+  <div style="
+      position:absolute; width:280px; height:280px;
+      background:rgba(0,123,255,0.12);
+      border-radius:50%; top:-60px; left:-60px; filter:blur(6px);
+  "></div>
 
-        <p class="mb-1">
-            <i class="bi bi-envelope-fill text-primary me-2"></i> info@smkn2sumedang.sch.id
-        </p>
+  <div style="
+      position:absolute; width:350px; height:350px;
+      background:rgba(0,140,255,0.10);
+      border-radius:50%; bottom:-80px; right:-80px; filter:blur(8px);
+  "></div>
 
-        <!-- CHAT BUTTON -->
-        <a href="#"
-           class="btn btn-primary px-4 py-2 shadow mt-4 d-inline-flex align-items-center gap-2"
-           style="border-radius:10px;">
-            <i class="bi bi-chat-dots-fill"></i> Chat Admin
-        </a>
+  <div class="container text-center position-relative" style="z-index:10;">
 
-        <!-- COPYRIGHT -->
-<div class="text-center mt-4 pt-3 border-top">
-    <small class="text-secondary">
-        © 2025 <strong>G-EXIS</strong> | Dikembangkan oleh Tim IT Gridas <br>
-        Versi 1.0 – Semua Hak Dilindungi
-    </small>
-</div>
+    <h2 class="fw-bold mb-3" style="font-size: 38px; color:#0a2d52;">
+      What They Say?
+    </h2>
+    <p style="opacity:0.8; color:#333;">Pendapat alumni mengenai platform G-EXIS</p>
 
+    <div class="d-flex justify-content-center flex-wrap gap-4 mt-4">
+
+      <!-- CARD 1 -->
+      <div class="testi-card">
+        <div class="quote-icon">❝</div>
+
+        <img src="{{ asset('images/dendi.png') }}" class="testi-img">
+
+        <div class="stars">★★★★★</div>
+
+        <p class="testi-text">Website ini sangat membantu siswa menemukan kegiatan sesuai bakat.</p>
+
+        <h6 class="testi-name">Dendi Irwansyah</h6>
+        <small class="testi-role">Alumni</small>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="testi-card">
+        <div class="quote-icon">❝</div>
+
+        <img src="{{ asset('images/air.png') }}" class="testi-img">
+
+        <div class="stars">★★★★★</div>
+
+        <p class="testi-text">Website ini sangat membantu siswa mengenal kegiatan ekstrakurikuler.</p>
+
+        <h6 class="testi-name">Syifa Nurmala</h6>
+        <small class="testi-role">Alumni</small>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="testi-card">
+        <div class="quote-icon">❝</div>
+
+        <img src="{{ asset('images/eva.png') }}" class="testi-img">
+
+        <div class="stars">★★★★★</div>
+
+        <p class="testi-text">Website ini menjadi contoh platform digital sekolah yang menarik.</p>
+
+        <h6 class="testi-name">Lani Dianti</h6>
+        <small class="testi-role">Alumni</small>
+      </div>
 
     </div>
-</footer>
+  </div>
+</section>
+
+
+<style>
+/* CARD STYLE */
+.testi-card {
+  width: 300px;
+  padding: 25px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  transition: 0.35s ease;
+  text-align: center;
+  border: 1px solid #e8e8e8;
+  position: relative;
+}
+
+/* Kutip biru */
+.quote-icon {
+  font-size: 50px;
+  color: #0a84ff;
+  opacity: 0.25;
+  position: absolute;
+  top: 10px;
+  left: 15px;
+}
+
+/* Foto bulat */
+.testi-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 10px auto;
+  display: block;
+}
+
+/* Bintang rating */
+.stars {
+  text-align: center;
+  font-size: 22px;
+  color: #ffc107;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+
+/* Teks testimoni */
+.testi-text {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+/* Nama & role */
+.testi-name {
+  margin: 0;
+  font-weight: 600;
+  color: #0a2d52;
+}
+.testi-role {
+  color: #777;
+}
+
+/* Hover effect */
+.testi-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.18);
+}
+</style>
+ @include('layouts.footer')

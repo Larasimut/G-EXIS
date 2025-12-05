@@ -8,210 +8,222 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         body {
-            background: linear-gradient(to bottom, #ffffff, #eef6ff, #d7eaff);
+            background: linear-gradient(to bottom, #f6faff, #eaf1ff);
             font-family: "Poppins", sans-serif;
+            overflow-x: hidden;
         }
+
         /* TITLE */
         .eskul-title {
-            font-family: 'Pacifico', cursive;
+            font-weight: 700;
             font-size: 2.6rem;
-            color: #1b4a70;
+            color: #1b3e6e;
+            animation: fadeDown 1s ease;
+        }
+        .eskul-subtitle {
+            font-size: 1rem;
+            color: #6d8bb5;
+            animation: fadeDown 1.3s ease;
         }
 
-        /* ESKUL CARD */
-        .eskul-card {
-            position: relative;
-            height: 230px;
-            border-radius: 18px;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        .eskul-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(60%);
-            transition: .3s;
-        }
-        .eskul-card:hover img {
-            filter: brightness(45%);
-            transform: scale(1.05);
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .eskul-overlay {
+        /* FLOAT DECORATIONS */
+        .float-shape {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: #fff;
-            width: 90%;
+            width: 160px;
+            height: 160px;
+            background: rgba(79, 129, 189, 0.12);
+            border-radius: 50%;
+            filter: blur(12px);
+            animation: float 6s ease-in-out infinite;
         }
-        .eskul-nama {
-            font-family: 'Pacifico', cursive;
-            font-size: 1.6rem;
+        .float1 { top: 70px; left: -50px; animation-delay: 0.2s; }
+        .float2 { bottom: 120px; right: -40px; animation-delay: 1s; }
+        .float3 { top: 40%; right: 35%; width: 90px; height: 90px; animation-delay: 2s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-22px); }
+            100% { transform: translateY(0px); }
         }
 
-        .eskul-btn {
-            background: #66a7d4;
-            color: #fff;
-            padding: 4px 20px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            text-decoration: none;
+        /* CARD STYLE */
+        .eskul-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e3ecff;
+            transition: .35s ease;
+            position: relative;
         }
-        .eskul-btn:hover {
-            background: #4a8bb7;
+
+        .eskul-card:hover {
+            transform: translateY(-10px);
+            border-color: #c8d9ff;
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .eskul-img {
+            height: 180px;
+            object-fit: cover;
+            width: 100%;
+            transition: .4s ease;
+        }
+        .eskul-card:hover .eskul-img {
+            transform: scale(1.06);
+            filter: brightness(94%);
+        }
+
+        .eskul-name {
+            font-size: 1.36rem;
+            font-weight: 600;
+            color: #1f3c5a;
+        }
+
+        .eskul-desc {
+            font-size: .9rem;
+            color: #6b7d90;
+            min-height: 42px;
+        }
+
+        /* BUTTON CUSTOM */
+        .btn-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .btn-lihat {
+            background: #5aa9ff;
+            color: #ffffff;
+            padding: 7px 20px;
+            border-radius: 10px;
+            font-size: .85rem;
+            text-decoration: none;
+            transition: .25s;
+        }
+        .btn-lihat:hover {
+            background: #3f8fde;
+            transform: scale(1.06);
+        }
+
+        .btn-daftar {
+            background: #ffd85a;
+            color: #5a4300;
+            padding: 7px 20px;
+            border-radius: 10px;
+            font-size: .85rem;
+            text-decoration: none;
+            transition: .25s;
+        }
+        .btn-daftar:hover {
+            background: #f5c63c;
+            transform: scale(1.06);
         }
     </style>
 </head>
 
 <body>
+
 @include('layouts.navbar')
 
-    <!-- ================= ESKUL SECTION ================= -->
-    <div class="container py-5">
-        <h2 class="eskul-title text-center mb-5">Pilih Ekstrakurikuler Favoritmu!</h2>
+<!-- FLOAT SHAPES -->
+<div class="float-shape float1"></div>
+<div class="float-shape float2"></div>
+<div class="float-shape float3"></div>
 
-        <div class="row g-4">
+<!-- ================= ESKUL SECTION ================= -->
+<div class="container py-5 position-relative">
 
-            <!-- Card Template -->
-            <div class="col-md-4">
-                <div class="eskul-card">
-                    <img src="{{ asset('images/tari.jpg') }}">
-                    <div class="eskul-overlay">
-                        <h3 class="eskul-nama">Alsan</h3>
-                        <p class="eskul-desc">Aktivitas kreatif dan bermanfaat.</p>
-                        <a href="#" class="eskul-btn">Lihat..</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="eskul-card">
-                    <img src="{{ asset('images/pramuka.jpg') }}">
-                    <div class="eskul-overlay">
-                        <h3 class="eskul-nama">Basket</h3>
-                        <p class="eskul-desc">Ekskul olahraga yang seru.</p>
-                        <a href="#" class="eskul-btn">Lihat..</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="eskul-card">
-                    <img src="{{ asset('images/pmr.jpg') }}">
-                    <div class="eskul-overlay">
-                        <h3 class="eskul-nama">Odong</h3>
-                        <p class="eskul-desc">Pembelajaran seni dan budaya.</p>
-                        <a href="#" class="eskul-btn">Lihat..</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tambah card berikutnya sesuai kebutuhan -->
-            <div class="col-md-4">
-                <div class="eskul-card">
-                    <img src="{{ asset('images/drumband.jpg') }}">
-                    <div class="eskul-overlay">
-                        <h3 class="eskul-nama">Design & Printing</h3>
-                        <p class="eskul-desc">Eksplorasi dunia desain.</p>
-                        <a href="#" class="eskul-btn">Lihat..</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="eskul-card">
-                    <img src="{{ asset('images/pmr.jpg') }}">
-                    <div class="eskul-overlay">
-                        <h3 class="eskul-nama">DrumBand</h3>
-                        <p class="eskul-desc">Ekskul musik meriah.</p>
-                        <a href="#" class="eskul-btn">Lihat..</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="eskul-card">
-                    <img src="{{ asset('images/pramuka.jpg') }}">
-                    <div class="eskul-overlay">
-                        <h3 class="eskul-nama">English Club</h3>
-                        <p class="eskul-desc">Belajar English menyenangkan.</p>
-                        <a href="#" class="eskul-btn">Lihat..</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+    <div class="text-center mb-5">
+        <h2 class="eskul-title">Ekstrakurikuler Sekolah</h2>
+        <p class="eskul-subtitle">Pilih kegiatan terbaik untuk mengembangkan bakatmu ✨</p>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <footer class="py-5 border-top"
-        style="background: linear-gradient(to right, #ffffff, #e8f3ff); width:100%; overflow:hidden; position:relative;">
+    @php
+        use Illuminate\Pagination\LengthAwarePaginator;
 
-    <!-- WAVE SEBAGAI BACKGROUND KIRI -->
-    <img src="{{ asset('images/hias.png') }}" alt="Wave"
-         style="
-            position:absolute;
-            top:0;
-            left:0;
-            height:100%;
-            width:auto;
-            z-index:1;
-         ">
+        $eskulList = [
+            ['img'=>'aksara.jpg','nama'=>'Aksara','desc'=>'Belajar menulis dan literasi.'],
+            ['img'=>'basket.jpg','nama'=>'Basket','desc'=>'Olahraga penuh strategi.'],
+            ['img'=>'coding.jpg','nama'=>'Coding','desc'=>'Belajar pemrograman modern.'],
+            ['img'=>'drumband.jpg','nama'=>'Drumband','desc'=>'Instrumen musik kompak.'],
+            ['img'=>'english.jpg','nama'=>'English Club','desc'=>'Meningkatkan skill bahasa Inggris.'],
+            ['img'=>'futsal.jpg','nama'=>'Futsal','desc'=>'Olahraga cepat dan teamwork.'],
+            ['img'=>'irma.jpg','nama'=>'Irma','desc'=>'Ikatan Remaja Masjid.'],
+            ['img'=>'karate.jpg','nama'=>'Karate','desc'=>'Bela diri dan disiplin.'],
+            ['img'=>'karawitan.jpg','nama'=>'Karawitan','desc'=>'Seni musik tradisional Jawa.'],
+            ['img'=>'kir.jpg','nama'=>'KIR','desc'=>'Karya Ilmiah Remaja.'],
+            ['img'=>'publikasi.jpg','nama'=>'Media Publikasi','desc'=>'Jurnalistik & broadcasting.'],
+            ['img'=>'paduansuara.jpg','nama'=>'Paduan Suara','desc'=>'Vokal & harmoni.'],
+            ['img'=>'paskibra.jpg','nama'=>'Paskibra','desc'=>'Disiplin & upacara nasional.'],
+            ['img'=>'pramuka.jpg','nama'=>'Pramuka','desc'=>'Kemandirian & survival.'],
+            ['img'=>'silat.jpg','nama'=>'Pencak Silat','desc'=>'Seni bela diri Indonesia.'],
+            ['img'=>'photography.jpg','nama'=>'Photography','desc'=>'Belajar foto dan editing.'],
+            ['img'=>'pmr.jpg','nama'=>'PMR','desc'=>'Pertolongan pertama & kemanusiaan.'],
+            ['img'=>'senitari.jpg','nama'=>'Seni Tari','desc'=>'Ekspresi seni dan budaya.'],
+            ['img'=>'tataboga.jpg','nama'=>'Tata Boga','desc'=>'Kuliner dan memasak.'],
+            ['img'=>'rias.jpg','nama'=>'Tata Rias','desc'=>'Make-up dan kecantikan.'],
+            ['img'=>'voly.jpg','nama'=>'Voli','desc'=>'Olahraga kerja sama tim.'],
+        ];
 
-    <!-- KONTEN FOOTER DI ATAS WAVE -->
-    <div style="position:relative; z-index:2; padding-left:170px;">
+        $perPage = 6;
+        $page = request()->get('page', 1);
 
-        <!-- LOGO & TEXT -->
-        <div class="d-flex align-items-center mb-2">
-            <img src="{{ asset('images/logoGe.png') }}" alt="Logo" style="height:55px;">
-            <h2 class="ms-2 mb-0 fw-bold text-primary">- EXIS</h2>
+        $collection = collect($eskulList);
+        $paged = new LengthAwarePaginator(
+            $collection->slice(($page - 1) * $perPage, $perPage)->values(),
+            $collection->count(),
+            $perPage,
+            $page,
+            ['path' => url()->current()]
+        );
+    @endphp
+
+    <!-- CARD LIST -->
+    <div class="row g-4">
+        @foreach ($paged as $eskul)
+        <div class="col-md-4">
+            <div class="eskul-card">
+                <img src="{{ asset('images/' . $eskul['img']) }}" class="eskul-img">
+                <div class="p-3 text-center">
+                    <h4 class="eskul-name">{{ $eskul['nama'] }}</h4>
+                    <p class="eskul-desc">{{ $eskul['desc'] }}</p>
+
+                    <!-- BUTTONS SEJAJAR DI TENGAH -->
+                    <div class="btn-wrapper">
+                        <a href="{{ route('siswa.lihatekskul') }}" class="btn-lihat">Lihat Selengkapnya</a>
+
+                        <a href="{{ route('siswa.formpendaftaran') }}" class="btn-daftar">Daftar</a>
+
+
+                    </div>
+
+                </div>
+            </div>
         </div>
+        @endforeach
+    </div>
 
-        <h3 class="fw-bold text-dark" style="margin-top:-5px;">SMKN 2 SUMEDANG</h3>
-
-        <!-- INFO -->
-        <p class="mt-3 mb-1">
-            Jl. Prabu Gajah Agung No. 12 <br>
-            Kabupaten Sumedang, Jawa Barat 45111
-        </p>
-
-        <p class="mb-1">
-            <i class="bi bi-telephone-fill text-danger me-2"></i> (0261) 123456
-        </p>
-
-        <p class="mb-1">
-            <i class="bi bi-envelope-fill text-primary me-2"></i> info@smkn2sumedang.sch.id
-        </p>
-
-        <!-- CHAT BUTTON -->
-        <a href="#"
-           class="btn btn-primary px-4 py-2 shadow mt-4 d-inline-flex align-items-center gap-2"
-           style="border-radius:10px;">
-            <i class="bi bi-chat-dots-fill"></i> Chat Admin
-        </a>
-
-        <!-- COPYRIGHT -->
-<div class="text-center mt-4 pt-3 border-top">
-    <small class="text-secondary">
-        © 2025 <strong>G-EXIS</strong> | Dikembangkan oleh Tim IT Gridas <br>
-        Versi 1.0 – Semua Hak Dilindungi
-    </small>
+    <!-- PAGINATION -->
+    <div class="mt-4 d-flex justify-content-center">
+        {{ $paged->links('pagination::bootstrap-5') }}
+    </div>
 </div>
 
+@include('layouts.footer')
 
-    </div>
-</footer>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
