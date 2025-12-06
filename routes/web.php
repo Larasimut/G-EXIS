@@ -9,16 +9,30 @@ use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\PembinaController;
 use App\Http\Controllers\Admin\AbsensiController;
 use App\Http\Controllers\Pembina\NotifikasiController;
+use App\Http\Controllers\Pembina\ProfilController;
+use App\Http\Controllers\Pembina\RekapController;
+
 
 /*
 |--------------------------------------------------------------------------
-| Routes untuk Siswa
+| Redirect ke dashboard admin sebagai default
+|--------------------------------------------------------------------------
+*/
+Route::get('/', function () {
+    return redirect()->route('admin.dashboard');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| ROUTES SISWA
 |--------------------------------------------------------------------------
 */
 Route::middleware(['role:siswa'])
     ->prefix('siswa')
     ->name('siswa.')
     ->group(function () {
+
         Route::get('/beranda', [HomeController::class, 'beranda'])->name('beranda');
         Route::get('/ekstrakulikuler', [HomeController::class, 'ekstrakulikuler'])->name('ekstrakulikuler');
         Route::get('/kontak', [HomeController::class, 'kontak'])->name('kontak');
@@ -34,6 +48,7 @@ Route::middleware(['role:siswa'])
 
     });
 
+
 /*
 |--------------------------------------------------------------------------
 | Logout
@@ -42,16 +57,21 @@ Route::middleware(['role:siswa'])
 Route::get('/logout/confirm', function () {
     return view('siswa.logout');
 })->name('logout.confirm');
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 /*
 |--------------------------------------------------------------------------
-| Redirect ke Dashboard
+| AUTH ROUTES
 |--------------------------------------------------------------------------
 */
-Route::get('/', function () {
-    return redirect()->route('admin.dashboard');
-});
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'loginProcess'])->name('login.process');
+
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'registerProcess'])->name('register.process');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +115,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     /* REKAP ABSEN */
     Route::view('/rekap-absen', 'admin.rekap_absen')->name('rekap.absen');
+
     Route::get('/rekap-paskib', [AbsensiController::class, 'rekapPaskib'])->name('rekap.paskib');
     Route::get('/rekap-ec', [AbsensiController::class, 'rekapEC'])->name('rekap.ec');
     Route::get('/rekap-coding', [AbsensiController::class, 'rekapCoding'])->name('rekap.coding');
@@ -122,23 +143,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::view('/kelola-notifikasi', 'admin.kelola_notifikasi')->name('kelola.notifikasi');
 });
 
-/* TOMBOL LOGOUT */
-Route::post('/logout', function () {
-    Auth::logout();
-    return redirect('/login');
-})->name('logout');
-
-/*
-|--------------------------------------------------------------------------
-| AUTH ROUTES
-|--------------------------------------------------------------------------
-*/
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'loginProcess'])->name('login.process');
-
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/register', [AuthController::class, 'registerProcess'])->name('register.process');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -150,17 +154,31 @@ Route::middleware(['role:pembina'])
     ->name('pembina.')
     ->group(function () {
 
+        // Dashboard & halaman statis
+        Route::view('/dashboard', 'pembina.dashboard')->name('dashboard');
         Route::view('/beranda', 'pembina.beranda')->name('beranda');
         Route::view('/konfirmasi', 'pembina.konfirmasi_pendaftaran')->name('konfirmasi');
         Route::view('/absen', 'pembina.absen_siswa')->name('absen');
-        Route::view('/rekap', 'pembina.rekap_absen')->name('rekap');
 
-        // Notifikasi Pembina
+        // PROFIL
+        Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+
+        // NOTIFIKASI PEMBINA
         Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
         Route::post('/notifikasi', [NotifikasiController::class, 'store'])->name('notifikasi.store');
 
-        // Sertifikat
+        // SERTIFIKAT
         Route::get('/sertifikat', [SertifikatController::class, 'index'])->name('sertifikat.index');
         Route::post('/sertifikat/generate', [SertifikatController::class, 'generate'])->name('sertifikat.generate');
         Route::get('/sertifikat/download/{id}', [SertifikatController::class, 'download'])->name('sertifikat.download');
+        Route::get('/sertifikat/{id}/preview', [SertifikatController::class, 'preview'])->name('sertifikat.preview');
+        Route::delete('/sertifikat/{id}/delete', [SertifikatController::class, 'destroy'])->name('sertifikat.destroy');
+
+        // REKAP ABSEN PEMBINA
+        Route::get('/rekap', [RekapController::class, 'index'])->name('rekap');
+        Route::get('/rekap/download', [RekapController::class, 'downloadExcel'])->name('rekap.download');
+        Route::get('/pembina/absen-siswa', [RekapController::class, 'absenSiswa'])
+    ->name('pembina.absen.siswa');
     });
+
+

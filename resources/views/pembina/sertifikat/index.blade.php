@@ -49,21 +49,36 @@
                 </tr>
             </thead>
 
-            <tbody>
-                @foreach($certificates as $c)
-                <tr>
-                    <td>{{ $c['nama'] }}</td>
-                    <td>{{ $c['kegiatan'] }}</td>
-                    <td>{{ $c['tanggal'] }}</td>
-                    <td>
-                        <a href="{{ route('pembina.sertifikat.download', $c['id']) }}" 
-                           class="btn btn-primary btn-sm">
-                           Preview / Download
-                        </a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
+           <tbody>
+    @forelse($certificates as $c)
+    <tr>
+        <td>{{ $c->nama }}</td>
+        <td>{{ $c->kegiatan }}</td>
+        <td>{{ $c->tanggal }}</td>
+        <td>
+            <a href="{{ route('pembina.sertifikat.preview', $c->id) }}" 
+               class="btn btn-primary btn-sm">
+               Lihat
+            </a>
+
+            <form action="{{ route('pembina.sertifikat.destroy', $c->id) }}" 
+                  method="POST" 
+                  class="d-inline"
+                  onsubmit="return confirm('Yakin ingin menghapus sertifikat ini?')">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger btn-sm">Hapus</button>
+            </form>
+        </td>
+    </tr>
+    @empty
+    <tr>
+        <td colspan="4" class="text-center text-muted">
+            Belum ada sertifikat dibuat.
+        </td>
+    </tr>
+    @endforelse
+</tbody>
 
         </table>
 

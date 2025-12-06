@@ -6,7 +6,10 @@
 <div class="shadow card">
     <div class="card-body">
 
-        <button class="mb-3 btn btn-success">Download Rekapan (Excel)</button>
+       <a href="{{ route('rekap.download') }}" class="btn btn-success">
+    Download Rekapan (Excel)
+</a>
+
 
         <table class="table table-bordered">
             <thead class="table-success">

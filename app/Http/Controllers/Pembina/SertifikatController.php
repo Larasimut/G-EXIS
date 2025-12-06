@@ -4,34 +4,60 @@ namespace App\Http\Controllers\Pembina;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Sertifikat;
 
 class SertifikatController extends Controller
 {
-    // Data dummy (karena kamu hanya mau tampilan)
-    private $dummyCertificates = [
-        ['id' => 1, 'nama' => 'Rizky Ramadhan', 'kegiatan' => 'Lomba Futsal', 'tanggal' => '2024-10-12'],
-        ['id' => 2, 'nama' => 'Jihan Aulia', 'kegiatan' => 'Pramuka', 'tanggal' => '2024-09-01'],
-    ];
-
+    // Tampilkan halaman + riwayat sertifikat
     public function index()
     {
-        $certificates = $this->dummyCertificates;
+        $certificates = Sertifikat::latest()->get();
         return view('pembina.sertifikat.index', compact('certificates'));
     }
 
+    // Generate PDF + simpan ke database
     public function generate(Request $request)
     {
-        return back()->with('success', 'Sertifikat berhasil dibuat! (dummy)');
+        $request->validate([
+            'nama' => 'required',
+            'kegiatan' => 'required',
+            'tanggal' => 'required|date',
+        ]);
+
+        $data = $request->only('nama','kegiatan','tanggal');
+
+        // Simpan ke database
+        $sertifikat = Sertifikat::create($data);
+
+        // Generate PDF
+        $pdf = Pdf::loadView('pembina.sertifikat.sertifikat', $data);
+
+        return $pdf->download('sertifikat-'.$sertifikat->id.'.pdf');
     }
 
-    public function download($id)
+    // Preview sertifikat
+    public function preview($id)
     {
-        $cert = collect($this->dummyCertificates)->firstWhere('id', $id);
+        $sertifikat = Sertifikat::findOrFail($id);
 
-        if (!$cert) {
-            abort(404);
-        }
+        $data = [
+            'nama' => $sertifikat->nama,
+            'kegiatan' => $sertifikat->kegiatan,
+            'tanggal' => $sertifikat->tanggal,
+        ];
 
-        return view('pembina.sertifikat.template', compact('cert'));
+        $pdf = Pdf::loadView('pembina.sertifikat.sertifikat', $data);
+
+        return $pdf->stream('sertifikat-preview.pdf');
+    }
+
+    // Hapus sertifikat
+    public function destroy($id)
+    {
+        $sertifikat = Sertifikat::findOrFail($id);
+        $sertifikat->delete();
+
+        return redirect()->back()->with('success', 'Sertifikat berhasil dihapus!');
     }
 }

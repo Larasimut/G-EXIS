@@ -1,7 +1,7 @@
 @extends('pembina.layout', ['title' => 'Rekap Absen'])
 
 @section('content')
-<h4 class="mb-3 fw-bold">Rekap Absensi Ekskul</h4>
+<h4 class="mb-3 fw-bold">Rekap Absensi Ekskul {{ $ekskul->nama }}</h4>
 
 <div class="border-0 shadow-sm card rounded-4">
     <div class="card-body">
@@ -20,7 +20,6 @@
         <table class="table table-bordered table-hover">
             <thead class="text-white" style="background:#5F8B4C;">
                 <tr>
-                    <th>Ekskul</th>
                     <th>Nama Siswa</th>
                     <th>Hadir</th>
                     <th>Tidak Hadir</th>
@@ -30,14 +29,13 @@
             <tbody>
                 @forelse ($rekap as $r)
                 <tr>
-                    <td>{{ $r['ekskul'] }}</td>
                     <td>{{ $r['nama'] }}</td>
                     <td class="fw-bold text-success">{{ $r['hadir'] }}</td>
                     <td class="fw-bold text-danger">{{ $r['tidak_hadir'] }}</td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" class="text-center text-muted">Tidak ada data bulan ini</td>
+                    <td colspan="3" class="text-center text-muted">Tidak ada data bulan ini</td>
                 </tr>
                 @endforelse
             </tbody>
