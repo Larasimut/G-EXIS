@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notification; // ⬅ WAJIB
+use App\Models\Pendaftar; // ⬅ WAJIB
+
 
 class HomeController extends Controller
 {
@@ -25,10 +27,12 @@ class HomeController extends Controller
         return view('siswa.tambah-ekskul');
     }
 
-    public function ekskulTerdaftar()
-    {
-        return view('siswa.ekskul-terdaftar');
-    }
+   public function ekskulTerdaftar()
+{
+    $pendaftar = Pendaftar::where('nama', auth()->user()->username)->get();
+    return view('siswa.ekskul-terdaftar', compact('pendaftar'));
+}
+
 
     public function notifikasi()
     {

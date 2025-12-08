@@ -13,6 +13,8 @@ use App\Http\Controllers\Pembina\ProfilController;
 use App\Http\Controllers\Pembina\RekapController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AbsensiSiswaController;
+use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\Pembina\KonfirmasiPendaftaranController;
 
 
 /*
@@ -50,10 +52,12 @@ Route::post('/absensi', [AbsensiSiswaController::class, 'store'])->name('absensi
         Route::get('/jadwal', [HomeController::class, 'jadwal'])->name('jadwal');
         Route::get('/sertifikat', [HomeController::class, 'sertifikat'])->name('sertifikat');
         Route::get('/formpendaftaran', [HomeController::class, 'formpendaftaran'])->name('formpendaftaran');
-
+        Route::post('/daftar-ekskul',[PendaftaranController::class,'store'])->name('daftar.store');
         // 📌 Siswa bisa kirim email ke gexisapplication@gmail.com
         Route::post('siswa/contact/send', [ContactController::class, 'send'])
     ->name('contact.send');
+Route::get('/siswa/ekskul-terdaftar', [HomeController::class, 'ekskulTerdaftar'])
+    ->name('siswa.ekskulTerdaftar');
 
     });
 
@@ -158,7 +162,10 @@ Route::middleware(['role:pembina'])
 
         Route::view('/dashboard', 'pembina.dashboard')->name('dashboard');
         Route::view('/beranda', 'pembina.beranda')->name('beranda');
-        Route::view('/konfirmasi', 'pembina.konfirmasi_pendaftaran')->name('konfirmasi');
+       Route::get('/konfirmasi', [KonfirmasiPendaftaranController::class, 'index'])->name('konfirmasi');
+
+Route::post('/konfirmasi/terima/{id}', [KonfirmasiPendaftaranController::class, 'terima'])->name('terima');
+Route::post('/konfirmasi/tolak/{id}', [KonfirmasiPendaftaranController::class, 'tolak'])->name('tolak');
         Route::view('/absen', 'pembina.absen_siswa')->name('absen');
 
         Route::get('/profil', [ProfilController::class, 'index'])->name('profil');

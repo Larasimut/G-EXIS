@@ -141,12 +141,22 @@
     <div class="registration-container mx-auto" style="max-width: 600px;">
         <h2 class="registration-title">Form Pendaftaran Ekstrakulikuler</h2>
 
-        <form id="registrationForm" action="submit_registration.php" method="POST">
-            <!-- Nama Lengkap -->
-            <div class="mb-3">
-                <label for="nama" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="nama" name="nama" required placeholder="Masukkan nama lengkap Anda">
-            </div>
+       <form id="registrationForm" action="{{ route('siswa.daftar.store') }}" method="POST">
+    @csrf
+
+
+           <!-- Nama Lengkap -->
+<div class="mb-3">
+    <label for="nama" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
+    <input
+        type="text"
+        class="form-control"
+        id="nama"
+        name="nama"
+        value="{{ Auth::user()->name }}"
+        readonly
+    >
+</div>
 
             <!-- Kelas -->
             <div class="mb-3">
