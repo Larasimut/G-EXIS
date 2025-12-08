@@ -293,7 +293,7 @@
         <!-- Card 3 -->
         <div class="col-md-3">
             <div class="ekskul-box shadow-sm position-relative">
-                <img src="{{ asset('images/paskibra.jpg') }}" class="ekskul-img">
+                <img src="{{ asset('images/paskib.jpg') }}" class="ekskul-img">
                 <span class="ekskul-tag"><i class="bi bi-flag-fill"></i> Nasional</span>
                 <div class="p-3">
                     <h5 class="fw-bold mb-2">Paskibra</h5>
