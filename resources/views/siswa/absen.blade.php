@@ -479,59 +479,113 @@
         <p class="mb-2 fs-5">Tunjukkan keaktifanmu hari ini! 💪</p>
         <small>Senin, 3 Februari 2025</small>
     </div>
+<!-- ABSENSI -->
+<div class="absen-card mb-5">
+    <h4 class="fw-bold text-center mb-4">Isi Absensi</h4>
 
-    <!-- ABSENSI -->
-    <div class="absen-card mb-5">
-        <h4 class="fw-bold text-center mb-4">Isi Absensi</h4>
+    <form id="absensiForm" method="POST" enctype="multipart/form-data">
+        @csrf
 
-        <form id="absensiForm">
-            <label class="form-label mb-3 d-block">Status Kehadiran:</label>
-            <div class="radio-group">
-                <div class="radio-option" data-value="hadir">
-                    <input type="radio" name="kehadiran" id="hadir" value="hadir">
-                    <label for="hadir" class="radio-label">
-                        <i class="bi bi-check-circle-fill"></i> Hadir
-                    </label>
-                </div>
-                <div class="radio-option" data-value="izin">
-                    <input type="radio" name="kehadiran" id="izin" value="izin">
-                    <label for="izin" class="radio-label">
-                        <i class="bi bi-exclamation-triangle-fill"></i> Izin
-                    </label>
-                </div>
-                <div class="radio-option" data-value="sakit">
-                    <input type="radio" name="kehadiran" id="sakit" value="sakit">
-                    <label for="sakit" class="radio-label">
-                        <i class="bi bi-thermometer-half"></i> Sakit
-                    </label>
-                </div>
+        <!-- Status Kehadiran -->
+        <label class="form-label mb-3 d-block">Status Kehadiran:</label>
+        <div class="radio-group">
+            <div class="radio-option">
+                <input type="radio" name="kehadiran" id="hadir" value="hadir">
+                <label for="hadir" class="radio-label">
+                    <i class="bi bi-check-circle-fill"></i> Hadir
+                </label>
             </div>
 
-            <label class="form-label mb-2">Keterangan (opsional):</label>
-            <textarea class="form-control mb-4" name="keterangan" rows="3" placeholder="Tulis alasan jika izin/sakit..."></textarea>
-
-            <!-- Kamera -->
-            <div class="text-center mb-4">
-                <button type="button" class="btn btn-camera" id="startCamera">
-                    <i class="bi bi-camera-fill"></i> Scan Wajah (Kamera)
-                </button>
+            <div class="radio-option">
+                <input type="radio" name="kehadiran" id="izin" value="izin">
+                <label for="izin" class="radio-label">
+                    <i class="bi bi-exclamation-triangle-fill"></i> Izin
+                </label>
             </div>
 
-            <video id="cameraFeed" autoplay></video>
-
-            <div class="text-center mt-4">
-                <button type="submit" class="btn btn-primary px-5 py-2">Kirim Absensi</button>
+            <div class="radio-option">
+                <input type="radio" name="kehadiran" id="sakit" value="sakit">
+                <label for="sakit" class="radio-label">
+                    <i class="bi bi-thermometer-half"></i> Sakit
+                </label>
             </div>
-        </form>
-    </div>
-
-    <!-- RIWAYAT -->
-    <h4 class="fw-bold mb-4" style="color: var(--primary-blue);">Riwayat Absensi</h4>
-    <div class="timeline">
-        <div class="timeline-box">
-            <b>31 Januari 2025</b> — <span class="status text-success"><i class="bi bi-check-circle-fill"></i> Hadir</span>
-            <div class="small text-muted mt-1">Tepat waktu</div>
         </div>
 
-        <div class="timeline-box">
-            <b>24 Januari 2025</b> — <span class="status text-warning"><i class="bi bi-exclamation-triangle-fill"></i> Izin</
+        <!-- Keterangan -->
+        <label class="form-label mb-2 mt-3">Keterangan (opsional):</label>
+        <textarea class="form-control mb-4" name="keterangan" rows="3" placeholder="Tulis alasan jika izin/sakit..."></textarea>
+
+        <!-- Kamera -->
+        <div class="text-center mb-4">
+            <button type="button" class="btn btn-camera" id="startCamera">
+                <i class="bi bi-camera-fill"></i> Scan Wajah (Kamera)
+            </button>
+        </div>
+
+        <video id="cameraFeed" autoplay style="display:none; width:100%; max-width:350px;"></video>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary px-5 py-2">Kirim Absensi</button>
+        </div>
+    </form>
+</div>
+<script>
+let camera = document.getElementById("cameraFeed");
+let streamActive = false;
+
+document.getElementById("startCamera").addEventListener("click", async () => {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        camera.srcObject = stream;
+        camera.style.display = "block";
+        streamActive = true;
+    } catch (error) {
+        alert("Tidak bisa mengakses kamera!");
+    }
+});
+
+document.getElementById("absensiForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    if (streamActive) {
+        const canvas = document.createElement("canvas");
+        canvas.width = camera.videoWidth;
+        canvas.height = camera.videoHeight;
+        canvas.getContext("2d").drawImage(camera, 0, 0);
+        const fotoBase64 = canvas.toDataURL("image/png");
+        formData.append("foto", fotoBase64);
+    }
+
+    try {
+        const response = await fetch("{{ route('siswa.absensi.store') }}", {
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: formData
+        });
+
+        const raw = await response.clone().text();
+        console.log("RAW RESPONSE:", raw);
+
+        if (!response.ok) {
+            alert("Gagal mengirim absensi!");
+            return;
+        }
+
+        const result = await response.json();
+        console.log("SERVER RESPONSE:", result);
+
+        if (result.status === "success") {
+            alert("Absensi berhasil!");
+            location.reload();
+        }
+
+    } catch (error) {
+        console.error("CLIENT ERROR:", error);
+        alert("Error saat mengirim absensi!");
+    }
+});
+</script>

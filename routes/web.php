@@ -11,11 +11,13 @@ use App\Http\Controllers\Admin\AbsensiController;
 use App\Http\Controllers\Pembina\NotifikasiController;
 use App\Http\Controllers\Pembina\ProfilController;
 use App\Http\Controllers\Pembina\RekapController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AbsensiSiswaController;
 
 
 /*
 |--------------------------------------------------------------------------
-| Redirect ke dashboard admin sebagai default
+| Redirect default to admin dashboard
 |--------------------------------------------------------------------------
 */
 Route::get('/', function () {
@@ -25,13 +27,16 @@ Route::get('/', function () {
 
 /*
 |--------------------------------------------------------------------------
-| ROUTES SISWA
+| SISWA ROUTES
 |--------------------------------------------------------------------------
 */
 Route::middleware(['role:siswa'])
     ->prefix('siswa')
     ->name('siswa.')
     ->group(function () {
+
+Route::post('/absensi', [AbsensiSiswaController::class, 'store'])->name('absensi.store');
+
 
         Route::get('/beranda', [HomeController::class, 'beranda'])->name('beranda');
         Route::get('/ekstrakulikuler', [HomeController::class, 'ekstrakulikuler'])->name('ekstrakulikuler');
@@ -46,12 +51,16 @@ Route::middleware(['role:siswa'])
         Route::get('/sertifikat', [HomeController::class, 'sertifikat'])->name('sertifikat');
         Route::get('/formpendaftaran', [HomeController::class, 'formpendaftaran'])->name('formpendaftaran');
 
+        // 📌 Siswa bisa kirim email ke gexisapplication@gmail.com
+        Route::post('siswa/contact/send', [ContactController::class, 'send'])
+    ->name('contact.send');
+
     });
 
 
 /*
 |--------------------------------------------------------------------------
-| Logout
+| LOGOUT ROUTES
 |--------------------------------------------------------------------------
 */
 Route::get('/logout/confirm', function () {
@@ -68,7 +77,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 */
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'loginProcess'])->name('login.process');
-
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'registerProcess'])->name('register.process');
 
@@ -82,15 +90,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/notifikasi', function() {
-        return view('admin.notifikasi');
-    })->name('notifikasi');
+    Route::view('/notifikasi', 'admin.notifikasi')->name('notifikasi');
+    Route::view('/profil', 'admin.profil_admin')->name('profil.admin');
 
-    Route::get('/profil', function() {
-        return view('admin.profil_admin');
-    })->name('profil.admin');
-
-    /* DATA SISWA CRUD */
+    // DATA SISWA CRUD
     Route::get('/data-siswa', [SiswaController::class, 'index'])->name('data.siswa');
     Route::get('/data-siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
     Route::post('/data-siswa/store', [SiswaController::class, 'store'])->name('siswa.store');
@@ -98,7 +101,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/data-siswa/{id}/update', [SiswaController::class, 'update'])->name('siswa.update');
     Route::delete('/data-siswa/{id}/delete', [SiswaController::class, 'destroy'])->name('siswa.destroy');
 
-    /* DATA PEMBINA CRUD */
+    // DATA PEMBINA CRUD
     Route::get('/data-pembina', [PembinaController::class, 'index'])->name('data.pembina');
     Route::get('/data-pembina/create', [PembinaController::class, 'create'])->name('create.pembina');
     Route::post('/data-pembina/store', [PembinaController::class, 'store'])->name('pembina.store');
@@ -106,14 +109,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/data-pembina/{id}/update', [PembinaController::class, 'update'])->name('pembina.update');
     Route::delete('/data-pembina/{id}/delete', [PembinaController::class, 'destroy'])->name('pembina.destroy');
 
-    /* MONITORING EKSKUL */
+    // MONITORING EKSKUL
     Route::view('/monitoring', 'admin.monitoring')->name('monitoring');
     Route::view('/monitoring/ekskul-pembina', 'admin.monitoring_ekskul_pembina')->name('monitoring.ekskul.pembina');
     Route::view('/monitoring/ekskul', 'admin.monitoring_ekskul')->name('monitoring.ekskul');
     Route::view('/monitoring/pendaftaran', 'admin.monitoring_pendaftaran')->name('monitoring.pendaftaran');
     Route::view('/monitoring/reward', 'admin.monitoring_reward')->name('monitoring.reward');
 
-    /* REKAP ABSEN */
+    // REKAP ABSEN
     Route::view('/rekap-absen', 'admin.rekap_absen')->name('rekap.absen');
 
     Route::get('/rekap-paskib', [AbsensiController::class, 'rekapPaskib'])->name('rekap.paskib');
@@ -139,7 +142,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/rekap-tatarias', [AbsensiController::class, 'rekapTatarias'])->name('rekap.tatarias');
     Route::get('/rekap-pramuka', [AbsensiController::class, 'rekapPramuka'])->name('rekap.pramuka');
 
-    /* KELOLA NOTIFIKASI */
     Route::view('/kelola-notifikasi', 'admin.kelola_notifikasi')->name('kelola.notifikasi');
 });
 
@@ -154,16 +156,14 @@ Route::middleware(['role:pembina'])
     ->name('pembina.')
     ->group(function () {
 
-        // Dashboard & halaman statis
         Route::view('/dashboard', 'pembina.dashboard')->name('dashboard');
         Route::view('/beranda', 'pembina.beranda')->name('beranda');
         Route::view('/konfirmasi', 'pembina.konfirmasi_pendaftaran')->name('konfirmasi');
         Route::view('/absen', 'pembina.absen_siswa')->name('absen');
 
-        // PROFIL
         Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
 
-        // NOTIFIKASI PEMBINA
+        // NOTIFIKASI
         Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
         Route::post('/notifikasi', [NotifikasiController::class, 'store'])->name('notifikasi.store');
 
@@ -174,11 +174,8 @@ Route::middleware(['role:pembina'])
         Route::get('/sertifikat/{id}/preview', [SertifikatController::class, 'preview'])->name('sertifikat.preview');
         Route::delete('/sertifikat/{id}/delete', [SertifikatController::class, 'destroy'])->name('sertifikat.destroy');
 
-        // REKAP ABSEN PEMBINA
+        // REKAP
         Route::get('/rekap', [RekapController::class, 'index'])->name('rekap');
         Route::get('/rekap/download', [RekapController::class, 'downloadExcel'])->name('rekap.download');
-        Route::get('/pembina/absen-siswa', [RekapController::class, 'absenSiswa'])
-    ->name('pembina.absen.siswa');
+        Route::get('/absen-siswa', [RekapController::class, 'absenSiswa'])->name('absen.siswa');
     });
-
-

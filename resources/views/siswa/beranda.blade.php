@@ -11,7 +11,8 @@
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
   <style>
 
   body {
@@ -20,13 +21,20 @@
     font-family: "Poppins", sans-serif;
   }
 
-  /* HERO TEXT */
   .welcome-title {
-    font-family: "Pacifico", cursive;
-    font-size: 48px;
-    color: #1273c5;
+      font-family: "Style Script", cursive;
+      font-size: 72px;
+      line-height: 0.9;
+      color: #1273c5;
+      margin-bottom: 10px;
+      letter-spacing: 0.6px;
+      text-shadow: 0 4px 18px rgba(18,115,197,0.12);
+    }
+.judul-ekskul {
+    font-family: "Caveat Brush", cursive !important;
+    font-size: 45px;
+    color: #0e3a66;
   }
-
   .subtitle {
     font-size: 38px;
     font-weight: 700;
@@ -120,7 +128,7 @@
 
   .badge-top {
     top: -14px;
-    right: -18px;
+    right: -55px;
   }
 
   .badge-bottom {
@@ -218,7 +226,7 @@
           <div class="spin-circle"></div>
           <div class="blue-bg-circle"></div>
 
-          <img src="{{ asset('images/anak.png') }}" class="hero-img">
+          <img src="{{ asset('images/hd.png') }}" class="hero-img">
 
           <div class="badge-floating badge-top">
             <span style="font-size:22px;">🏅</span>
@@ -243,7 +251,8 @@
 <section class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h2 class="fw-bold" style="font-size: 38px; color:#0e3a66;">Ekstrakurikuler Favorit</h2>
+            <h1 class="fw-bold judul-ekskul">Ekstrakurikuler Favorit</h1>
+
             <p style="max-width:430px; font-size:15px; color:#567189;">
                 Berbagai ekstrakurikuler terbaik dan favorit dengan pembinaan terbaik untuk mengembangkan bakat siswa.
             </p>
@@ -480,8 +489,11 @@ window.addEventListener("scroll", () => {
 
   <div class="container text-center position-relative" style="z-index:10;">
 
-    <h2 class="fw-bold mb-3" style="font-size: 38px; color:#0a2d52;">
-      What They Say?
+    <h2 class="fw-bold mb-3"
+    style="font-size: 60px; color:#0a2d52; font-family: 'Caveat Brush', cursive;">
+  What They Say?
+</h2>
+
     </h2>
     <p style="opacity:0.8; color:#333;">Pendapat alumni mengenai platform G-EXIS</p>
 

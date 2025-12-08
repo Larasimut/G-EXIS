@@ -172,10 +172,15 @@
         <div class="col-lg-6">
             <div class="form-box">
                 <h4 class="fw-bold mb-3">Kirim Pesan</h4>
-                <input type="text" class="form-control mb-3" placeholder="Nama Kamu">
-                <input type="email" class="form-control mb-3" placeholder="Email Kamu">
-                <textarea class="form-control mb-3" rows="4" placeholder="Pesan Kamu..."></textarea>
-                <button class="btn w-100 py-2">Kirim <i class="bi bi-send-fill"></i></button>
+                <form action="{{ route('siswa.contact.send') }}" method="POST">
+
+    @csrf
+    <input type="text" name="name" class="form-control mb-3" placeholder="Nama Kamu" required>
+    <input type="email" name="email" class="form-control mb-3" placeholder="Email Kamu" required>
+    <textarea name="pesan" class="form-control mb-3" rows="4" placeholder="Pesan Kamu..." required></textarea>
+    <button type="submit" class="btn w-100 py-2">Kirim <i class="bi bi-send-fill"></i></button>
+</form>
+
             </div>
         </div>
 
@@ -185,13 +190,6 @@
                 <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.027876680471!2d107.92393267368609!3d-6.932680067791116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68d10a7ca2ae03%3A0x777b9fc5f3867be1!2sSMK%20Negeri%202%20Sumedang!5e0!3m2!1sid!2sid!4v1700000000000"
                 width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>
-            </div>
-
-            <h5 class="fw-semibold mt-4">Ikuti Sosial Media</h5>
-            <div class="d-flex gap-2 mt-2">
-                <a class="social-icon"><i class="bi bi-instagram"></i></a>
-                <a class="social-icon"><i class="bi bi-facebook"></i></a>
-                <a class="social-icon"><i class="bi bi-youtube"></i></a>
             </div>
         </div>
     </div>

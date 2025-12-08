@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ekstrakurikuler</title>
 
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         body {
-            background: linear-gradient(to bottom, #f6faff, #eaf1ff);
+            background: linear-gradient(to bottom, #eff5ff, #dce8ff);
             font-family: "Poppins", sans-serif;
             overflow-x: hidden;
         }
@@ -21,115 +18,90 @@
         /* TITLE */
         .eskul-title {
             font-weight: 700;
-            font-size: 2.6rem;
-            color: #1b3e6e;
+            font-size: 2.7rem;
+            color: #11386b;
             animation: fadeDown 1s ease;
         }
         .eskul-subtitle {
-            font-size: 1rem;
-            color: #6d8bb5;
-            animation: fadeDown 1.3s ease;
+            font-size: 1.05rem;
+            color: #6b7fa1;
+            animation: fadeDown 1.35s ease;
         }
-
         @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-20px); }
+            from { opacity: 0; transform: translateY(-22px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* FLOAT DECORATIONS */
-        .float-shape {
-            position: absolute;
-            width: 160px;
-            height: 160px;
-            background: rgba(79, 129, 189, 0.12);
-            border-radius: 50%;
-            filter: blur(12px);
-            animation: float 6s ease-in-out infinite;
-        }
-        .float1 { top: 70px; left: -50px; animation-delay: 0.2s; }
-        .float2 { bottom: 120px; right: -40px; animation-delay: 1s; }
-        .float3 { top: 40%; right: 35%; width: 90px; height: 90px; animation-delay: 2s; }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-22px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* CARD STYLE */
+        /* CARD DESIGN */
         .eskul-card {
             background: #ffffff;
-            border-radius: 20px;
+            border-radius: 22px;
             overflow: hidden;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-            border: 1px solid #e3ecff;
+            border: 1px solid #d9e4ff;
+            box-shadow: 0 10px 26px rgba(20, 60, 120, 0.08);
             transition: .35s ease;
-            position: relative;
         }
-
         .eskul-card:hover {
-            transform: translateY(-10px);
-            border-color: #c8d9ff;
-            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+            transform: translateY(-12px);
+            box-shadow: 0 14px 42px rgba(20, 60, 120, 0.18);
         }
-
         .eskul-img {
-            height: 180px;
-            object-fit: cover;
+            height: 190px;
             width: 100%;
-            transition: .4s ease;
+            object-fit: cover;
+            transition: .45s;
         }
         .eskul-card:hover .eskul-img {
-            transform: scale(1.06);
-            filter: brightness(94%);
+            transform: scale(1.07);
+            filter: brightness(92%);
         }
 
         .eskul-name {
-            font-size: 1.36rem;
+            font-size: 1.45rem;
             font-weight: 600;
-            color: #1f3c5a;
+            color: #183557;
+            margin-bottom: 6px;
         }
-
         .eskul-desc {
-            font-size: .9rem;
-            color: #6b7d90;
-            min-height: 42px;
+            font-size: .92rem;
+            color: #5f6f82;
+            line-height: 1.45rem;
+            min-height: 70px;
         }
 
-        /* BUTTON CUSTOM */
+        /* BUTTON STYLE */
         .btn-wrapper {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-top: 10px;
+            gap: 14px;
         }
 
         .btn-lihat {
-            background: #5aa9ff;
-            color: #ffffff;
-            padding: 7px 20px;
-            border-radius: 10px;
-            font-size: .85rem;
+            background: linear-gradient(135deg, #4e89ff, #2b6ad8);
+            color: white;
+            border-radius: 12px;
+            padding: 8px 22px;
+            font-size: .87rem;
             text-decoration: none;
             transition: .25s;
         }
         .btn-lihat:hover {
-            background: #3f8fde;
-            transform: scale(1.06);
+            transform: scale(1.09);
+            box-shadow: 0 0 12px rgba(67, 126, 255, 0.65);
         }
 
         .btn-daftar {
-            background: #ffd85a;
-            color: #5a4300;
-            padding: 7px 20px;
-            border-radius: 10px;
-            font-size: .85rem;
+            background: linear-gradient(135deg, #ffd454, #e7b100);
+            color: #4a3600;
+            border-radius: 12px;
+            padding: 8px 22px;
+            font-size: .87rem;
             text-decoration: none;
             transition: .25s;
         }
         .btn-daftar:hover {
-            background: #f5c63c;
-            transform: scale(1.06);
+            transform: scale(1.09);
+            box-shadow: 0 0 12px rgba(255, 212, 76, 0.55);
         }
     </style>
 </head>
@@ -138,44 +110,38 @@
 
 @include('layouts.navbar')
 
-<!-- FLOAT SHAPES -->
-<div class="float-shape float1"></div>
-<div class="float-shape float2"></div>
-<div class="float-shape float3"></div>
-
-<!-- ================= ESKUL SECTION ================= -->
-<div class="container py-5 position-relative">
+<div class="container py-5">
 
     <div class="text-center mb-5">
         <h2 class="eskul-title">Ekstrakurikuler Sekolah</h2>
-        <p class="eskul-subtitle">Pilih kegiatan terbaik untuk mengembangkan bakatmu ✨</p>
+        <p class="eskul-subtitle">Tingkatkan potensi dan bakatmu melalui kegiatan yang bermakna dan menyenangkan ✨</p>
     </div>
 
     @php
         use Illuminate\Pagination\LengthAwarePaginator;
 
         $eskulList = [
-            ['img'=>'aksara.jpg','nama'=>'Aksara','desc'=>'Belajar menulis dan literasi.'],
-            ['img'=>'basket.jpg','nama'=>'Basket','desc'=>'Olahraga penuh strategi.'],
-            ['img'=>'coding.jpg','nama'=>'Coding','desc'=>'Belajar pemrograman modern.'],
-            ['img'=>'drumband.jpg','nama'=>'Drumband','desc'=>'Instrumen musik kompak.'],
-            ['img'=>'english.jpg','nama'=>'English Club','desc'=>'Meningkatkan skill bahasa Inggris.'],
-            ['img'=>'futsal.jpg','nama'=>'Futsal','desc'=>'Olahraga cepat dan teamwork.'],
-            ['img'=>'irma.jpg','nama'=>'Irma','desc'=>'Ikatan Remaja Masjid.'],
-            ['img'=>'karate.jpg','nama'=>'Karate','desc'=>'Bela diri dan disiplin.'],
-            ['img'=>'karawitan.jpg','nama'=>'Karawitan','desc'=>'Seni musik tradisional Jawa.'],
-            ['img'=>'kir.jpg','nama'=>'KIR','desc'=>'Karya Ilmiah Remaja.'],
-            ['img'=>'publikasi.jpg','nama'=>'Media Publikasi','desc'=>'Jurnalistik & broadcasting.'],
-            ['img'=>'paduansuara.jpg','nama'=>'Paduan Suara','desc'=>'Vokal & harmoni.'],
-            ['img'=>'paskibra.jpg','nama'=>'Paskibra','desc'=>'Disiplin & upacara nasional.'],
-            ['img'=>'pramuka.jpg','nama'=>'Pramuka','desc'=>'Kemandirian & survival.'],
-            ['img'=>'silat.jpg','nama'=>'Pencak Silat','desc'=>'Seni bela diri Indonesia.'],
-            ['img'=>'photography.jpg','nama'=>'Photography','desc'=>'Belajar foto dan editing.'],
-            ['img'=>'pmr.jpg','nama'=>'PMR','desc'=>'Pertolongan pertama & kemanusiaan.'],
-            ['img'=>'senitari.jpg','nama'=>'Seni Tari','desc'=>'Ekspresi seni dan budaya.'],
-            ['img'=>'tataboga.jpg','nama'=>'Tata Boga','desc'=>'Kuliner dan memasak.'],
-            ['img'=>'rias.jpg','nama'=>'Tata Rias','desc'=>'Make-up dan kecantikan.'],
-            ['img'=>'voly.jpg','nama'=>'Voli','desc'=>'Olahraga kerja sama tim.'],
+            ['img'=>'aksara.jpg','nama'=>'Aksara','desc'=>'Ekstrakurikuler yang mengasah kemampuan menulis, membaca, dan memahami literasi modern untuk meningkatkan kreativitas dan keterampilan berbahasa.'],
+            ['img'=>'basket.jpg','nama'=>'Basket','desc'=>'Permainan olahraga yang mengandalkan kerja sama tim, ketangkasan, strategi, kekuatan fisik, dan sportivitas dalam setiap pertandingan.'],
+            ['img'=>'coding.jpg','nama'=>'Coding','desc'=>'Belajar pemrograman dari dasar hingga tingkat lanjut untuk menciptakan aplikasi, website, game, dan teknologi modern.'],
+            ['img'=>'drumband.jpg','nama'=>'Drumband','desc'=>'Ekskul musik ritmis dengan harmoni pukulan alat musik yang melatih kekompakan, disiplin, dan ekspresi.'],
+            ['img'=>'english.jpg','nama'=>'English Club','desc'=>'Tempat meningkatkan kemampuan speaking, writing, dan listening melalui kegiatan seru seperti debate, storytelling, dan games.'],
+            ['img'=>'futsal.jpg','nama'=>'Futsal','desc'=>'Olahraga cepat dan intens yang melatih kelincahan, kekuatan, strategi, dan kerja sama antar pemain.'],
+            ['img'=>'irma.jpg','nama'=>'Irma','desc'=>'Ikatan Remaja Masjid dengan kegiatan positif seperti kajian, sosial keagamaan, serta perkembangan karakter islami.'],
+            ['img'=>'karate.jpg','nama'=>'Karate','desc'=>'Seni bela diri yang mengajarkan kekuatan tubuh, kontrol emosi, kedisiplinan, dan ketepatan teknik.'],
+            ['img'=>'karawitan.jpg','nama'=>'Karawitan','desc'=>'Kegiatan seni musik tradisional Jawa yang menggabungkan kultur, harmoni, dan suara gamelan yang khas.'],
+            ['img'=>'kir.jpg','nama'=>'KIR','desc'=>'Karya Ilmiah Remaja yang fokus pada penelitian, penalaran ilmiah, percobaan, inovasi, dan kompetisi akademik.'],
+            ['img'=>'publikasi.jpg','nama'=>'Media Publikasi','desc'=>'Ekskul jurnalistik dan broadcasting yang fokus pada fotografi, penulisan berita, dokumentasi, dan editing.'],
+            ['img'=>'paduansuara.jpg','nama'=>'Paduan Suara','desc'=>'Kegiatan vokal serempak dengan harmoni suara bernuansa seni, teknik bernyanyi, dan kekompakan suara.'],
+            ['img'=>'paskibra.jpg','nama'=>'Paskibra','desc'=>'Ekskul kedisiplinan dan nasionalisme melalui latihan baris berbaris, upacara, dan kompetisi paskibraka.'],
+            ['img'=>'pramuka.jpg','nama'=>'Pramuka','desc'=>'Membangun kemandirian, mental tangguh, survival skill, dan kerja sama melalui kegiatan outdoor.'],
+            ['img'=>'silat.jpg','nama'=>'Pencak Silat','desc'=>'Seni bela diri tradisional Indonesia yang melatih fisik, teknik, mental, dan sportivitas.'],
+            ['img'=>'photography.jpg','nama'=>'Photography','desc'=>'Mengasah keahlian fotografi, pencahayaan, sudut pandang, dan editing untuk menghasilkan karya visual profesional.'],
+            ['img'=>'pmr.jpg','nama'=>'PMR','desc'=>'Ekskul kemanusiaan yang mempelajari pertolongan pertama, kesehatan remaja, aksi sosial, dan kerelawanan.'],
+            ['img'=>'senitari.jpg','nama'=>'Seni Tari','desc'=>'Menampilkan ekspresi budaya melalui gerakan, koreografi, estetika panggung, dan seni pertunjukan.'],
+            ['img'=>'tataboga.jpg','nama'=>'Tata Boga','desc'=>'Belajar memasak, plating, pengolahan bahan, dan pengembangan menu kuliner modern maupun tradisional.'],
+            ['img'=>'rias.jpg','nama'=>'Tata Rias','desc'=>'Kegiatan make-up artist untuk panggung, harian, konten, hingga fashion show dengan teknik profesional.'],
+            ['img'=>'voly.jpg','nama'=>'Voli','desc'=>'Olahraga teamwork yang penuh strategi, refleks cepat, kekuatan, dan koordinasi tim dalam pertandingan.'],
         ];
 
         $perPage = 6;
@@ -191,7 +157,6 @@
         );
     @endphp
 
-    <!-- CARD LIST -->
     <div class="row g-4">
         @foreach ($paged as $eskul)
         <div class="col-md-4">
@@ -201,13 +166,9 @@
                     <h4 class="eskul-name">{{ $eskul['nama'] }}</h4>
                     <p class="eskul-desc">{{ $eskul['desc'] }}</p>
 
-                    <!-- BUTTONS SEJAJAR DI TENGAH -->
                     <div class="btn-wrapper">
                         <a href="{{ route('siswa.lihatekskul') }}" class="btn-lihat">Lihat Selengkapnya</a>
-
                         <a href="{{ route('siswa.formpendaftaran') }}" class="btn-daftar">Daftar</a>
-
-
                     </div>
 
                 </div>
@@ -216,14 +177,12 @@
         @endforeach
     </div>
 
-    <!-- PAGINATION -->
     <div class="mt-4 d-flex justify-content-center">
         {{ $paged->links('pagination::bootstrap-5') }}
     </div>
 </div>
 
 @include('layouts.footer')
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
-<!-- GOOGLE FONT POPPINS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- ICON BOOTSTRAP -->
@@ -18,22 +20,27 @@
     padding: 14px 28px;
   }
 
-  .nav-link {
-    font-weight: 600;
-    font-size: 18px;
-    color: #444 !important;
-    transition: 0.2s;
-  }
+ .nav-link {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 400;
+  font-size: 18px;
+  color: #444 !important;
+  transition: 0.25s ease-in-out;
+  display: inline-block;
+}
 
-  .nav-link:hover {
-    color: #1273c5 !important;
-  }
+.nav-link:hover {
+  color: #0d6efd !important;
+  transform: translateY(-2px);
+}
 
-  .nav-link.active {
-    color: #1273c5 !important;
-    border-bottom: 3px solid #1273c5;
-    padding-bottom: 4px;
-  }
+.nav-link.active {
+  font-weight: 600;
+  color: #0d6efd !important;
+  border-bottom: 3px solid #0d6efd;
+  padding-bottom: 4px;
+}
+
 
   /* SEARCH BOX */
   .search-box {
@@ -108,7 +115,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    background: #d9534f; /* Merah utama */
+    background: #d9534f;
     padding: 12px 16px;
     border-radius: 15px;
     margin-top: 25px;
@@ -121,23 +128,20 @@
     border: none;
     transition: 0.25s;
     cursor: pointer;
-}
-
-.logout-btn i {
-    font-size: 22px;
-}
-
-.logout-btn:hover {
-    background: #c9302c; /* Merah lebih gelap untuk hover */
-}
-
+  }
+  .logout-btn:hover {
+    background: #c9302c;
+  }
 </style>
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
   <a class="navbar-brand fw-bold fs-4 text-primary d-flex align-items-center gap-2" href="#">
     <img src="{{ asset('images/logoge.png') }}" alt="Logo"
-      style="width: 40px; height: 40px; border-radius: 50%;"> - EXIS
+      style="width: 40px; height: 40px; border-radius: 50%;">
+    <span style="font-family: 'Kaushan Script', cursive; font-size: 20px; color:#0d6efd;">
+      - EXIS
+    </span>
   </a>
 
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
@@ -183,17 +187,17 @@
     <h5 class="fw-bold mb-4">Siswa - {{ Auth::user()->name }}</h5>
   </center>
 
- <a href="{{ route('siswa.tambahEkskul') }}" class="menu-item text-white text-decoration-none">
-  <i class="bi bi-plus-circle"></i> Tambah Ekskul
-</a>
+  <a href="{{ route('siswa.tambahEkskul') }}" class="menu-item text-white text-decoration-none">
+    <i class="bi bi-plus-circle"></i> Tambah Ekskul
+  </a>
 
-<a href="{{ route('siswa.ekskulTerdaftar') }}" class="menu-item text-white text-decoration-none">
-  <i class="bi bi-people"></i> Ekskul Terdaftar
-</a>
+  <a href="{{ route('siswa.ekskulTerdaftar') }}" class="menu-item text-white text-decoration-none">
+    <i class="bi bi-people"></i> Ekskul Terdaftar
+  </a>
 
-<a href="{{ route('siswa.notifikasi') }}" class="menu-item text-white text-decoration-none">
-  <i class="bi bi-bell"></i> Notifikasi
-</a>
+  <a href="{{ route('siswa.notifikasi') }}" class="menu-item text-white text-decoration-none">
+    <i class="bi bi-bell"></i> Notifikasi
+  </a>
 
   <a href="{{ route('logout.confirm') }}" class="logout-btn">LOG OUT</a>
 
