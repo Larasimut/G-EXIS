@@ -141,6 +141,7 @@
         <i class="bi bi-list fs-3" style="cursor:pointer;" onclick="openSidebar()"></i>
     </nav>
 
+    <!-- CONTENT -->
     <div class="container py-5">
         <div class="row g-4">
 
@@ -148,6 +149,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="club-card">
 
+                    {{-- Status badge --}}
                     @if($item->status == 'diterima')
                         <span class="status-ribbon bg-success text-white">
                             <i class="bi bi-check-circle"></i> DITERIMA
@@ -161,14 +163,12 @@
                             <i class="bi bi-x-circle"></i> DITOLAK
                         </span>
                     @endif
-<br><br>
+<br> <br>
                     <div class="p-4">
                         <h4 class="fw-bold mb-2 text-capitalize">{{ $item->ekskul }}</h4>
 
                         <div class="detail-info">
-                            <p><i class="bi bi-calendar-plus"></i> Mendaftar: {{ $item->created_at->format('d M Y') }}</p>
                             <p><i class="bi bi-person"></i> Nama: {{ $item->nama }}</p>
-
 
                             @if($item->status == 'diterima')
                                 <p><i class="bi bi-check-circle"></i> Dikonfirmasi: {{ $item->updated_at->format('d M Y') }}</p>
@@ -179,6 +179,7 @@
                             @endif
                         </div>
 
+                        {{-- Tombol hanya muncul kalau status diterima --}}
                         @if($item->status == 'diterima')
                         <div class="d-flex justify-content-between gap-2 mt-3">
                             <a href="{{ route('siswa.detailTerdaftar', $item->id) }}"
@@ -186,13 +187,15 @@
                                 <i class="bi bi-eye"></i> Lihat Detail
                             </a>
 
-                            <form action="{{ route('siswa.batalEkskul', $item->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-outline-danger btn-sm px-4 py-2">
-                                    <i class="bi bi-x-circle"></i> Keluar
-                                </button>
-                            </form>
+                          <form action="#" method="POST">
+    @csrf
+    @method('DELETE')
+    <button class="btn btn-outline-danger btn-sm px-4 py-2">
+        <i class="bi bi-x-circle"></i> Keluar
+    </button>
+</form>
+
+
                         </div>
                         @endif
 
@@ -201,6 +204,7 @@
             </div>
             @endforeach
 
+            {{-- Empty State --}}
             @if($pendaftar->isEmpty())
                 <p class="text-center mt-5 text-muted">Belum ada ekskul yang kamu daftarkan.</p>
             @endif

@@ -50,11 +50,28 @@ class HomeController extends Controller
                          ->with('success', 'Berhasil mendaftar ekskul!');
     }
 
-    public function ekskulTerdaftar()
-    {
-        $pendaftar = Pendaftar::where('user_id', auth()->id())->get();
-        return view('siswa.ekskul-terdaftar', compact('pendaftar'));
+  public function ekskulTerdaftar()
+{
+    // Ambil data pendaftar untuk siswa yang sedang login
+    $pendaftar = Pendaftar::where('user_id', auth()->id())->get();
+
+    return view('siswa.ekskul-terdaftar', compact('pendaftar'));
+}
+public function batalEkskul($id)
+{
+    $pendaftar = Pendaftar::findOrFail($id);
+
+    // Optional: Cek kalau pendaftar milik user yang sedang login
+    if ($pendaftar->user_id != auth()->id()) {
+        abort(403, "Akses ditolak");
     }
+
+    $pendaftar->delete();
+
+    return redirect()->route('siswa.ekskulTerdaftar')
+                     ->with('success', 'Pendaftaran ekskul berhasil dibatalkan.');
+}
+
 
     public function notifikasi()
     {

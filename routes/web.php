@@ -22,8 +22,8 @@ use App\Http\Controllers\Pembina\KonfirmasiPendaftaranController;
 | Redirect default to admin dashboard
 |--------------------------------------------------------------------------
 */
-Route::get('/', function () {
-    return redirect()->route('admin.dashboard');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 
@@ -58,9 +58,19 @@ Route::post('/absensi', [AbsensiSiswaController::class, 'store'])->name('absensi
     ->name('contact.send');
 Route::get('/siswa/ekskul-terdaftar', [HomeController::class, 'ekskulTerdaftar'])
     ->name('siswa.ekskulTerdaftar');
+    Route::delete('/siswa/ekskul/{id}/batal', [HomeController::class, 'batalEkskul'])->name('siswa.batalEkskul');
+
 Route::post('/tambah-ekskul', [HomeController::class, 'tambahEkskulPost'])
      ->name('siswa.tambahEkskulPost')
      ->middleware('auth');
+Route::get('/siswa/ekskul-terdaftar', [HomeController::class, 'ekskulTerdaftar'])
+    ->name('siswa.ekskulTerdaftar');
+
+Route::get('/siswa/ekskul-terdaftar/{id}', [HomeController::class, 'detailTerdaftar'])
+    ->name('siswa.detailTerdaftar');
+
+Route::delete('/siswa/ekskul-batal/{id}', [HomeController::class, 'batalEkskul'])
+    ->name('siswa.batalEkskul');
 
     });
 
