@@ -4,78 +4,80 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;   // ← model user
 
 class SiswaController extends Controller
 {
-    private function dummyData()
-    {
-        return [
-            1 => (object)[
-                'id' => 1,
-                'username' => 'siswa01',
-                'email' => 'siswa01@gmail.com',
-                'role' => 'siswa'
-            ],
-            2 => (object)[
-                'id' => 2,
-                'username' => 'siswa02',
-                'email' => 'siswa02@gmail.com',
-                'role' => 'siswa'
-            ],
-            3 => (object)[
-                'id' => 3,
-                'username' => 'agus123',
-                'email' => 'agus@gmail.com',
-                'role' => 'siswa'
-            ],
-        ];
-    }
-
-    // LIST DATA
+    // LIST DATA (ambil dari database)
     public function index()
     {
-        $siswa = $this->dummyData();
+        // ambil hanya user yang rolenya 'siswa'
+        $siswa = User::where('role', 'siswa')->get(); 
+
         return view('admin.data_siswa', compact('siswa'));
     }
 
-    // FORM TAMBAH (kosong saja dulu)
+    // FORM TAMBAH
     public function create()
     {
         return view('admin.siswa_create');
     }
 
-    // SIMPAN (tidak benar-benar menyimpan)
+    // SIMPAN DATA
     public function store(Request $request)
     {
+        $request->validate([
+            'username' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+
+        User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => 'siswa'
+        ]);
+
         return redirect()->route('admin.data_siswa')
-            ->with('success', 'Dummy: siswa berhasil ditambahkan (tidak disimpan).');
+            ->with('success', 'Siswa berhasil ditambahkan.');
     }
 
     // FORM EDIT
     public function edit($id)
     {
-        $data = $this->dummyData();
-
-        if (!isset($data[$id])) {
-            return redirect()->route('admin.data_siswa')->with('error', 'Data tidak ditemukan.');
-        }
-
-        $siswa = $data[$id];
+        $siswa = User::findOrFail($id);
 
         return view('admin.siswa_edit', compact('siswa'));
     }
 
-    // UPDATE (dummy)
+    // UPDATE DATA
     public function update(Request $request, $id)
     {
+        $siswa = User::findOrFail($id);
+
+        $siswa->update([
+            'username' => $request->username,
+            'email' => $request->email,
+        ]);
+
+        // kalau password diisi, update password
+        if ($request->password) {
+            $siswa->update([
+                'password' => bcrypt($request->password),
+            ]);
+        }
+
         return redirect()->route('admin.data_siswa')
-            ->with('success', 'Dummy: data siswa diupdate (tidak berubah sungguhan).');
+            ->with('success', 'Data siswa berhasil diperbarui.');
     }
 
-    // DELETE (dummy)
+    // DELETE
     public function destroy($id)
     {
+        User::findOrFail($id)->delete();
+
         return redirect()->route('admin.data_siswa')
-            ->with('success', 'Dummy: siswa berhasil dihapus (tidak hilang sungguhan).');
+            ->with('success', 'Siswa berhasil dihapus.');
     }
 }

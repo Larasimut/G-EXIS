@@ -4,78 +4,51 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class PembinaController extends Controller
 {
-    private function dummyData()
-    {
-        return [
-            1 => (object)[
-                'id' => 1,
-                'username' => 'Ulfahtun',
-                'email' => 'ulfahtun@gmail.com',
-                'kode_pembina' => 'pembina'
-            ],
-            2 => (object)[
-                'id' => 2,
-                'username' => 'Larasati',
-                'email' => 'larasati@gmail.com',
-                'kode_pembina' => 'pembina'
-            ],
-            3 => (object)[
-                'id' => 3,
-                'username' => 'Mugni',
-                'email' => 'mugni@gmail.com',
-                'kode_pembina' => 'pembina'
-            ],
-        ];
-    }
-
-    // LIST DATA
     public function index()
     {
-        $pembina = $this->dummyData();
+        $pembina = User::where('role', 'pembina')->get();
         return view('admin.data_pembina', compact('pembina'));
     }
 
-    // FORM TAMBAH (kosong saja dulu)
     public function create()
     {
         return view('admin.create_pembina');
     }
 
-    // SIMPAN (tidak benar-benar menyimpan)
     public function store(Request $request)
     {
-        return redirect()->route('admin.data_pembina')
-            ->with('success', 'Dummy: pembina berhasil ditambahkan (tidak disimpan).');
+        User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => 'pembina',
+            'kode_pembina' => $request->kode_pembina,
+        ]);
+
+        return redirect()->route('admin.pembina.index')->with('success', 'Pembina berhasil ditambahkan.');
     }
 
-    // FORM EDIT
     public function edit($id)
     {
-        $data = $this->dummyData();
-
-        if (!isset($data[$id])) {
-            return redirect()->route('admin.data_pembina')->with('error', 'Data tidak ditemukan.');
-        }
-
-        $pembina = $data[$id];
-
+        $pembina = User::findOrFail($id);
         return view('admin.edit_pembina', compact('pembina'));
     }
 
-    // UPDATE (dummy)
     public function update(Request $request, $id)
     {
-        return redirect()->route('admin.data_pembina')
-            ->with('success', 'Dummy: data pembina diupdate (tidak berubah sungguhan).');
+        $pembina = User::findOrFail($id);
+        $pembina->update($request->all());
+
+        return redirect()->route('admin.pembina.index')->with('success', 'Data pembina berhasil diperbarui.');
     }
 
-    // DELETE (dummy)
     public function destroy($id)
     {
-        return redirect()->route('admin.data_pembina')
-            ->with('success', 'Dummy: pembina berhasil dihapus (tidak hilang sungguhan).');
+        User::findOrFail($id)->delete();
+        return redirect()->route('admin.pembina.index')->with('success', 'Pembina dihapus.');
     }
 }

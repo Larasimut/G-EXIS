@@ -206,9 +206,6 @@ body {
             <i class="bi bi-list-check"></i> Kelola Absen
         </a>
 
-        <a href="{{ route('admin.kelola.notifikasi') }}" class="{{ request()->routeIs('admin.kelola.notifikasi') ? 'active' : '' }}">
-            <i class="bi bi-bell-fill"></i> Kelola Notifikasi
-        </a>
     </div>
 
     <div class="logout-btn" data-bs-toggle="modal" data-bs-target="#logoutModal">
@@ -232,22 +229,12 @@ body {
         <!-- RIGHT ICONS -->
         <div class="d-flex align-items-center">
 
-            <!-- NOTIF -->
-            <div class="dropdown me-3 position-relative">
-                <i class="bi bi-bell-fill icon-btn" data-bs-toggle="dropdown"></i>
-                <span class="notif-badge">4</span>
-
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-custom">
-                    <a href="{{ route('admin.notifikasi') }}">Lihat Semua</a>
-                </div>
-            </div>
-
             <!-- USER -->
             <div class="dropdown">
                 <i class="bi bi-person-circle icon-btn" data-bs-toggle="dropdown"></i>
 
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-custom">
-                    <a href="{{ route('admin.profil.admin') }}">Profil</a>
+                    <a href="#">Admingridas@gmail.</a>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
                 </div>
             </div>

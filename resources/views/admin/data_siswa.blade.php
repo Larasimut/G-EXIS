@@ -5,118 +5,119 @@
 @section('content')
 
 <style>
-    .table-bubble td, .table-bubble th {
-        padding: 14px 22px !important;
-        border: none !important;
+    /* TABEL SIMPLE */
+    table {
+        width: 90%;
+        border-collapse: collapse;
+        margin-top: 30px;
     }
 
-    .bubble-box {
-        background: white;
-        border: 2px solid #164C7B;
-        border-radius: 25px;
-        text-align: center;
-        font-weight: 600;
-        color: #164C7B;
-    }
-
-    .header-bubble {
+    th {
         background: #164C7B;
         color: white;
-        font-size: 20px;
-        font-weight: bold;
-        border-radius: 25px;
         padding: 12px;
+        text-align: center;
+        font-weight: 600;
+        border: 1px solid #ddd;
+    }
+
+    td {
+        padding: 12px;
+        border: 1px solid #ddd;
         text-align: center;
     }
 
+    /* TOMBOL */
     .btn-add {
         background: #0C2C52;
         color: white;
-        padding: 10px 28px;
-        border-radius: 25px;
-        font-weight: 700;
-        font-size: 16px;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 15px;
+        text-decoration: none;
+    }
+
+    .btn-edit, .btn-delete {
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        text-decoration: none;
+    }
+
+    .btn-edit {
+        background: #2980B9;
+        color: white;
+    }
+
+    .btn-delete {
+        background: #C0392B;
+        color: white;
+        border: none;
     }
 </style>
 
 <div class="container py-4">
 
-    <!-- Judul -->
-    <h2 class="text-center fw-bold" style="color:#164C7B; font-size:32px;">
+    <h2 class="text-center fw-bold" style="color:#164C7B; font-size:28px;">
         Data Siswa Ekstrakulikuler Gridas
     </h2>
 
-    <!-- Tombol tambah -->
     <div class="d-flex justify-content-center mt-3">
         <a href="{{ route('admin.siswa.create') }}" class="btn-add">
             + Tambah User
         </a>
     </div>
 
-    <!-- TABEL -->
-    <div class="mt-5 d-flex justify-content-center">
-        <table class="table-bubble" style="width:85%;">
+    <div class="d-flex justify-content-center">
 
+        <table>
             <thead>
                 <tr>
-                    <th class="header-bubble">Username</th>
-                    <th class="header-bubble">Email</th>
-                    <th class="header-bubble">Password</th>
-                    <th class="header-bubble">Aksi</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
 
             <tbody>
-
                 @foreach ($siswa as $item)
                 <tr>
+                    <td>{{ $item->username }}</td>
+                    <td>{{ $item->email }}</td>
+                    <td>******</td>
 
-                    <!-- Username -->
                     <td>
-                        <div class="bubble-box">{{ $item->username }}</div>
-                    </td>
-
-                    <!-- Email -->
-                    <td>
-                        <div class="bubble-box">{{ $item->email }}</div>
-                    </td>
-
-                    <!-- Password -->
-                    <td>
-                        <div class="bubble-box d-flex justify-content-between px-3">
-                            ****** 
-                            <span style="cursor:pointer; color:#164C7B;">👁️</span>
-                        </div>
-                    </td>
-
-                    <!-- Aksi -->
-                    <td class="text-center">
 
                         <!-- Edit -->
-                        <a href="{{ route('admin.siswa.edit', $item->id) }}" class="icon-btn me-3">
-                            ✏️
+                        <a href="{{ route('admin.siswa.edit', $item->id) }}" 
+                           class="btn-edit me-2">
+                           Edit
                         </a>
 
                         <!-- Delete -->
-                        <form action="{{ route('admin.siswa.destroy', $item->id) }}"
+                        <form action="{{ route('admin.siswa.destroy', $item->id) }}" 
                               method="POST" 
                               style="display:inline;"
                               onsubmit="return confirm('Hapus user ini?')">
+
                             @csrf
                             @method('DELETE')
-                            <button class="icon-btn" style="color:#C0392B;">🗑️</button>
+
+                            <button class="btn-delete">
+                                Hapus
+                            </button>
                         </form>
 
                     </td>
-
                 </tr>
                 @endforeach
-
             </tbody>
 
         </table>
-    </div>
 
+    </div>
 </div>
 
 @endsection

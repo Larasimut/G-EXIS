@@ -9,7 +9,7 @@
     <!-- Menu 1 -->
 <div class="menu-box mb-3 d-flex justify-content-between align-items-center p-4 rounded-4"
      style="background:#5d9ad6; color:white;">
-    <h4 class="fw-bold">Ekstrakulikuler & Pembina 🎷</h4>
+    <h4 class="fw-bold">Ekstrakulikuler & Pembina </h4>
 
     <a href="{{ route('admin.monitoring.ekskul.pembina') }}"
        class="btn px-4 py-2 text-white"
@@ -21,7 +21,7 @@
 <!-- Menu 2 -->
 <div class="menu-box mb-3 d-flex justify-content-between align-items-center p-4 rounded-4"
      style="background:#5d9ad6; color:white;">
-    <h4 class="fw-bold">Jadwal Ekstrakulikuler ⏰</h4>
+    <h4 class="fw-bold">Jadwal Ekstrakulikuler </h4>
 
     <a href="{{ route('admin.monitoring.ekskul') }}" 
        class="btn px-4 py-2 text-white"
@@ -34,7 +34,7 @@
     <!-- Menu 3 -->
     <div class="menu-box mb-3 d-flex justify-content-between align-items-center p-4 rounded-4"
          style="background:#5d9ad6; color:white;">
-        <h4 class="fw-bold">Data Pendaftaran Ekstrakulikuler 📁</h4>
+        <h4 class="fw-bold">Data Pendaftaran Ekstrakulikuler </h4>
 
         <a href="{{ route('admin.monitoring.pendaftaran') }}" 
        class="btn px-4 py-2 text-white"
@@ -46,7 +46,7 @@
     <!-- Menu 4 -->
     <div class="menu-box mb-3 d-flex justify-content-between align-items-center p-4 rounded-4"
          style="background:#5d9ad6; color:white;">
-        <h4 class="fw-bold">Reward Siswa Berprestasi 🏆</h4>
+        <h4 class="fw-bold">Reward Siswa Berprestasi </h4>
 
        <a href="{{ route('admin.monitoring.reward') }}" 
        class="btn px-4 py-2 text-white"
