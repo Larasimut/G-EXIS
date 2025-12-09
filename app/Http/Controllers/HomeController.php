@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Notification; // ⬅ WAJIB
-use App\Models\Pendaftar; // ⬅ WAJIB
-
+use App\Models\Notification;
+use App\Models\Pendaftar;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -27,12 +27,34 @@ class HomeController extends Controller
         return view('siswa.tambah-ekskul');
     }
 
-   public function ekskulTerdaftar()
-{
-    $pendaftar = Pendaftar::where('nama', auth()->user()->username)->get();
-    return view('siswa.ekskul-terdaftar', compact('pendaftar'));
-}
+    // === Method untuk menyimpan pendaftaran ekskul ===
+    public function tambahEkskulPost(Request $request)
+    {
+        $request->validate([
+            'ekskul' => 'required|string|max:255',
+            'alasan' => 'required|string',
+            'kontak' => 'required|string|max:255',
+        ]);
 
+        Pendaftar::create([
+            'user_id' => auth()->id(),
+            'nama'    => auth()->user()->name,
+            'kelas'   => auth()->user()->kelas,
+            'ekskul'  => $request->ekskul,
+            'alasan'  => $request->alasan,
+            'kontak'  => $request->kontak,
+            'status'  => 'pending',
+        ]);
+
+        return redirect()->route('siswa.ekskulTerdaftar')
+                         ->with('success', 'Berhasil mendaftar ekskul!');
+    }
+
+    public function ekskulTerdaftar()
+    {
+        $pendaftar = Pendaftar::where('user_id', auth()->id())->get();
+        return view('siswa.ekskul-terdaftar', compact('pendaftar'));
+    }
 
     public function notifikasi()
     {

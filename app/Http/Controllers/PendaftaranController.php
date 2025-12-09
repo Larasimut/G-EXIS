@@ -12,6 +12,7 @@ class PendaftaranController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+
             'nama'   => 'required',
             'kelas'  => 'required',
             'ekskul' => 'required',
@@ -19,14 +20,16 @@ class PendaftaranController extends Controller
             'kontak' => 'required',
         ]);
 
-        Pendaftar::create([
-            'nama'   => $request->nama,
-            'kelas'  => $request->kelas,
-            'ekskul' => $request->ekskul,
-            'alasan' => $request->alasan,
-            'kontak' => $request->kontak,
-            'status' => 'pending'
-        ]);
+       Pendaftar::create([
+    'user_id' => auth()->user()->id,
+    'nama' => auth()->user()->name,
+    'kelas' => $request->kelas,
+    'ekskul' => $request->ekskul,
+    'alasan' => $request->alasan,
+    'kontak' => $request->kontak,
+    'status' => 'pending',
+]);
+
 
         return back()->with('success', 'Pendaftaran berhasil dikirim!');
     }

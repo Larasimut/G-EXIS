@@ -70,6 +70,18 @@
             border-radius: 0 20px 20px 0;
         }
 
+        #sidebar a {
+            display: block;
+            padding: 12px 0;
+            color: #fff;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        #sidebar a:hover {
+            color: #cdd9ff;
+        }
+
         #overlaySidebar {
             position: fixed; top: 0; left: 0;
             width: 100%; height: 100vh;
@@ -91,12 +103,6 @@
         .club-card:hover {
             transform: translateY(-12px) scale(1.02);
             box-shadow: var(--shadow-hover);
-        }
-
-        .club-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
         }
 
         .status-ribbon {
@@ -136,82 +142,70 @@
     </nav>
 
     <div class="container py-5">
-
         <div class="row g-4">
 
-            <!-- ========================= -->
-            <!--    LOOP DATA PENDAFTAR    -->
-            <!-- ========================= -->
             @foreach ($pendaftar as $item)
-                <div class="col-md-6 col-lg-4">
-    <div class="club-card">
+            <div class="col-md-6 col-lg-4">
+                <div class="club-card">
 
-        <!-- STATUS RIBBON -->
-        @if($item->status == 'diterima')
-            <span class="status-ribbon bg-success text-white">
-                <i class="bi bi-check-circle"></i> DITERIMA
-            </span>
-        @elseif($item->status == 'pending')
-            <span class="status-ribbon bg-warning text-dark">
-                <i class="bi bi-clock"></i> MENUNGGU
-            </span>
-        @else
-            <span class="status-ribbon bg-danger text-white">
-                <i class="bi bi-x-circle"></i> DITOLAK
-            </span>
-        @endif
+                    @if($item->status == 'diterima')
+                        <span class="status-ribbon bg-success text-white">
+                            <i class="bi bi-check-circle"></i> DITERIMA
+                        </span>
+                    @elseif($item->status == 'pending')
+                        <span class="status-ribbon bg-warning text-dark">
+                            <i class="bi bi-clock"></i> MENUNGGU
+                        </span>
+                    @else
+                        <span class="status-ribbon bg-danger text-white">
+                            <i class="bi bi-x-circle"></i> DITOLAK
+                        </span>
+                    @endif
+<br><br>
+                    <div class="p-4">
+                        <h4 class="fw-bold mb-2 text-capitalize">{{ $item->ekskul }}</h4>
 
-        <!-- TANPA FOTO (FOTO DIHAPUS) -->
+                        <div class="detail-info">
+                            <p><i class="bi bi-calendar-plus"></i> Mendaftar: {{ $item->created_at->format('d M Y') }}</p>
+                            <p><i class="bi bi-person"></i> Nama: {{ $item->nama }}</p>
 
-        <div class="p-4">
-            <h5 class="fw-bold mb-3 text-dark text-capitalize">{{ $item->ekskul }}</h5>
-<h4 class="fw-bold mb-2">{{ $item->ekskul->nama_ekskul }}</h4>
 
-            <div class="detail-info">
-                <p><i class="bi bi-calendar-plus"></i> Mendaftar: {{ $item->created_at->format('d M Y') }}</p>
+                            @if($item->status == 'diterima')
+                                <p><i class="bi bi-check-circle"></i> Dikonfirmasi: {{ $item->updated_at->format('d M Y') }}</p>
+                            @elseif($item->status == 'pending')
+                                <p><i class="bi bi-hourglass-split"></i> Status: Menunggu Konfirmasi Pembina</p>
+                            @else
+                                <p><i class="bi bi-x-circle"></i> Ditolak: {{ $item->updated_at->format('d M Y') }}</p>
+                            @endif
+                        </div>
 
-                @if($item->status == 'diterima')
-                    <p><i class="bi bi-check-circle"></i> Dikonfirmasi: {{ $item->updated_at->format('d M Y') }}</p>
-                @elseif($item->status == 'pending')
-                    <p><i class="bi bi-hourglass-split"></i> Status: Menunggu Konfirmasi Pembina</p>
-                @else
-                    <p><i class="bi bi-x-circle"></i> Ditolak: {{ $item->updated_at->format('d M Y') }}</p>
-                @endif
-            </div>
+                        @if($item->status == 'diterima')
+                        <div class="d-flex justify-content-between gap-2 mt-3">
+                            <a href="{{ route('siswa.detailTerdaftar', $item->id) }}"
+                                class="btn btn-primary btn-sm px-4 py-2">
+                                <i class="bi bi-eye"></i> Lihat Detail
+                            </a>
 
-            <!-- TOMBOL HANYA MUNCUL JIKA DITERIMA -->
-            @if($item->status == 'diterima')
-                <div class="d-flex justify-content-between gap-2 mt-3">
+                            <form action="{{ route('siswa.batalEkskul', $item->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-outline-danger btn-sm px-4 py-2">
+                                    <i class="bi bi-x-circle"></i> Keluar
+                                </button>
+                            </form>
+                        </div>
+                        @endif
 
-                    <a href="{{ route('siswa.detailTerdaftar', $item->id) }}"
-                       class="btn btn-primary btn-sm px-4 py-2">
-                        <i class="bi bi-eye"></i> Lihat Detail
-                    </a>
-
-                    <form action="{{ route('siswa.batalEkskul', $item->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-outline-danger btn-sm px-4 py-2">
-                            <i class="bi bi-x-circle"></i> Keluar
-                        </button>
-                    </form>
-
+                    </div>
                 </div>
+            </div>
+            @endforeach
+
+            @if($pendaftar->isEmpty())
+                <p class="text-center mt-5 text-muted">Belum ada ekskul yang kamu daftarkan.</p>
             @endif
 
         </div>
-    </div>
-</div>
-
-            @endforeach
-            <!-- END LOOP -->
-
-        </div>
-
-        @if($pendaftar->isEmpty())
-            <p class="text-center mt-5 text-muted">Belum ada ekskul yang kamu daftarkan.</p>
-        @endif
-
     </div>
 
     <script>

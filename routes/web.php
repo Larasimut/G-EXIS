@@ -58,8 +58,9 @@ Route::post('/absensi', [AbsensiSiswaController::class, 'store'])->name('absensi
     ->name('contact.send');
 Route::get('/siswa/ekskul-terdaftar', [HomeController::class, 'ekskulTerdaftar'])
     ->name('siswa.ekskulTerdaftar');
-Route::delete('/siswa/ekskul/batal/{id}', [HomeController::class, 'batalEkskul'])
-    ->name('siswa.batalEkskul');
+Route::post('/tambah-ekskul', [HomeController::class, 'tambahEkskulPost'])
+     ->name('siswa.tambahEkskulPost')
+     ->middleware('auth');
 
     });
 
