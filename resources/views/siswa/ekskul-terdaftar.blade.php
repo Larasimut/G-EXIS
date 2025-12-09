@@ -144,60 +144,65 @@
             <!-- ========================= -->
             @foreach ($pendaftar as $item)
                 <div class="col-md-6 col-lg-4">
-                    <div class="club-card">
+    <div class="club-card">
 
-                        @if($item->status == 'diterima')
-                            <span class="status-ribbon bg-success text-white">
-                                <i class="bi bi-check-circle"></i> DITERIMA
-                            </span>
-                        @elseif($item->status == 'pending')
-                            <span class="status-ribbon bg-warning text-dark">
-                                <i class="bi bi-clock"></i> MENUNGGU
-                            </span>
-                        @else
-                            <span class="status-ribbon bg-danger text-white">
-                                <i class="bi bi-x-circle"></i> DITOLAK
-                            </span>
-                        @endif
+        <!-- STATUS RIBBON -->
+        @if($item->status == 'diterima')
+            <span class="status-ribbon bg-success text-white">
+                <i class="bi bi-check-circle"></i> DITERIMA
+            </span>
+        @elseif($item->status == 'pending')
+            <span class="status-ribbon bg-warning text-dark">
+                <i class="bi bi-clock"></i> MENUNGGU
+            </span>
+        @else
+            <span class="status-ribbon bg-danger text-white">
+                <i class="bi bi-x-circle"></i> DITOLAK
+            </span>
+        @endif
 
-                        <!-- GAMBAR EXSKUL -->
-                        <img src="{{ $item->gambar ?? 'https://picsum.photos/600/400?random=' . $item->id }}" class="club-img">
+        <!-- TANPA FOTO (FOTO DIHAPUS) -->
 
-                        <div class="p-4">
-                            <h5 class="fw-bold mb-3 text-dark">{{ $item->ekskul }}</h5>
+        <div class="p-4">
+            <h5 class="fw-bold mb-3 text-dark text-capitalize">{{ $item->ekskul }}</h5>
+<h4 class="fw-bold mb-2">{{ $item->ekskul->nama_ekskul }}</h4>
 
-                            <div class="detail-info">
-                                <p><i class="bi bi-calendar-plus"></i> Mendaftar: {{ $item->created_at->format('d M Y') }}</p>
+            <div class="detail-info">
+                <p><i class="bi bi-calendar-plus"></i> Mendaftar: {{ $item->created_at->format('d M Y') }}</p>
 
-                                @if($item->status == 'diterima')
-                                    <p><i class="bi bi-check-circle"></i> Dikonfirmasi: {{ $item->updated_at->format('d M Y') }}</p>
-                                @elseif($item->status == 'pending')
-                                    <p><i class="bi bi-hourglass-split"></i> Status: Menunggu Konfirmasi</p>
-                                @else
-                                    <p><i class="bi bi-x-circle"></i> Ditolak: {{ $item->updated_at->format('d M Y') }}</p>
-                                @endif
-                            </div>
+                @if($item->status == 'diterima')
+                    <p><i class="bi bi-check-circle"></i> Dikonfirmasi: {{ $item->updated_at->format('d M Y') }}</p>
+                @elseif($item->status == 'pending')
+                    <p><i class="bi bi-hourglass-split"></i> Status: Menunggu Konfirmasi Pembina</p>
+                @else
+                    <p><i class="bi bi-x-circle"></i> Ditolak: {{ $item->updated_at->format('d M Y') }}</p>
+                @endif
+            </div>
 
-                            @if($item->status == 'diterima')
-                            <div class="d-flex justify-content-between gap-2">
-                                <a href="{{ route('siswa.detailTerdaftar', $item->id) }}"
-                                   class="btn btn-primary btn-sm px-4 py-2">
-                                    <i class="bi bi-eye"></i> Lihat Detail
-                                </a>
+            <!-- TOMBOL HANYA MUNCUL JIKA DITERIMA -->
+            @if($item->status == 'diterima')
+                <div class="d-flex justify-content-between gap-2 mt-3">
 
-                                <form action="{{ route('siswa.batalEkskul', $item->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-outline-danger btn-sm px-4 py-2">
-                                        <i class="bi bi-x-circle"></i> Keluar
-                                    </button>
-                                </form>
-                            </div>
-                            @endif
+                    <a href="{{ route('siswa.detailTerdaftar', $item->id) }}"
+                       class="btn btn-primary btn-sm px-4 py-2">
+                        <i class="bi bi-eye"></i> Lihat Detail
+                    </a>
 
-                        </div>
-                    </div>
+                    <form action="{{ route('siswa.batalEkskul', $item->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-outline-danger btn-sm px-4 py-2">
+                            <i class="bi bi-x-circle"></i> Keluar
+                        </button>
+                    </form>
+
                 </div>
+            @endif
+
+        </div>
+    </div>
+</div>
+
             @endforeach
             <!-- END LOOP -->
 

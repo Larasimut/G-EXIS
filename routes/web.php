@@ -58,6 +58,8 @@ Route::post('/absensi', [AbsensiSiswaController::class, 'store'])->name('absensi
     ->name('contact.send');
 Route::get('/siswa/ekskul-terdaftar', [HomeController::class, 'ekskulTerdaftar'])
     ->name('siswa.ekskulTerdaftar');
+Route::delete('/siswa/ekskul/batal/{id}', [HomeController::class, 'batalEkskul'])
+    ->name('siswa.batalEkskul');
 
     });
 
@@ -149,7 +151,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::view('/kelola-notifikasi', 'admin.kelola_notifikasi')->name('kelola.notifikasi');
 });
 
-
 /*
 |--------------------------------------------------------------------------
 | PEMBINA ROUTES
@@ -162,10 +163,12 @@ Route::middleware(['role:pembina'])
 
         Route::view('/dashboard', 'pembina.dashboard')->name('dashboard');
         Route::view('/beranda', 'pembina.beranda')->name('beranda');
-       Route::get('/konfirmasi', [KonfirmasiPendaftaranController::class, 'index'])->name('konfirmasi');
 
-Route::post('/konfirmasi/terima/{id}', [KonfirmasiPendaftaranController::class, 'terima'])->name('terima');
-Route::post('/konfirmasi/tolak/{id}', [KonfirmasiPendaftaranController::class, 'tolak'])->name('tolak');
+        // INI YANG BENAR
+        Route::get('/konfirmasi', [KonfirmasiPendaftaranController::class, 'index'])->name('konfirmasi');
+        Route::post('/konfirmasi/terima/{id}', [KonfirmasiPendaftaranController::class, 'terima'])->name('terima');
+        Route::post('/konfirmasi/tolak/{id}', [KonfirmasiPendaftaranController::class, 'tolak'])->name('tolak');
+
         Route::view('/absen', 'pembina.absen_siswa')->name('absen');
 
         Route::get('/profil', [ProfilController::class, 'index'])->name('profil');

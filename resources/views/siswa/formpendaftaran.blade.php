@@ -174,14 +174,27 @@
                 <label for="ekskul" class="form-label">Ekstrakulikuler yang Dipilih <span class="text-danger">*</span></label>
                 <select class="form-select" id="ekskul" name="ekskul" required>
                     <option value="">Pilih Ekstrakulikuler</option>
+                    <option value="aksara">Aksara</option>
+                    <option value="basket">Basket</option>
+                    <option value="coding">Coding</option>
+                    <option value="drumband">Drumband</option>
+                    <option value="englishclub">English Club</option>
+                    <option value="futsal">Futsal</option>
+                    <option value="irma">Irma</option>
+                    <option value="karate">Karate</option>
+                    <option value="karawitan">Karawitan</option>
+                    <option value="kir">Kir</option>
+                    <option value="publikasi">Media Publikasi</option>
+                    <option value="padus">Paduan Suara</option>
+                    <option value="pencaksilat">Pencak Silat</option>
                     <option value="paskibra">Paskibra</option>
                     <option value="pramuka">Pramuka</option>
-                    <option value="basket">Basket</option>
+                    <option value="photography">Photography</option>
+                    <option value="pmr">PMR</option>
+                    <option value="senitari">Seni Tari</option>
+                    <option value="tataboga">Tata Boga</option>
+                    <option value="tatarias">Tata Rias</option>
                     <option value="voli">Voli</option>
-                    <option value="futsal">Futsal</option>
-                    <option value="paduan_suara">Paduan Suara</option>
-                    <option value="teater">Teater</option>
-                    <option value="lainnya">Lainnya</option>
                 </select>
             </div>
 

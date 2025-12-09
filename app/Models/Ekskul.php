@@ -17,4 +17,9 @@ class Ekskul extends Model
     {
         return $this->belongsToMany(User::class, 'siswa_ekskul', 'ekskul_id', 'siswa_id');
     }
+    public function pendaftar()
+{
+    return $this->hasMany(Pendaftar::class, 'ekskul_id');
+}
+
 }
