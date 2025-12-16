@@ -27,4 +27,27 @@ class PembinaController extends Controller
 
         return back()->with('success', 'Pendaftaran berhasil ditolak');
     }
+    public function setujuiKeluar($id)
+{
+    $data = Pendaftar::findOrFail($id);
+
+    $data->update([
+        'status' => 'keluar',
+        'status_keluar' => 'disetujui',
+    ]);
+
+    return back()->with('success', 'Siswa berhasil dikeluarkan.');
+}
+
+public function tolakKeluar($id)
+{
+    $data = Pendaftar::findOrFail($id);
+
+    $data->update([
+        'status_keluar' => null
+    ]);
+
+    return back()->with('success', 'Permintaan keluar ditolak.');
+}
+
 }

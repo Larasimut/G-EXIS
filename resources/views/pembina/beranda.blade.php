@@ -7,72 +7,61 @@
     <div class="mb-4">
         <h2 class="fw-bold text-primary">Welcome Pembina!</h2>
         <p class="text-muted">
-            Selamat Datang, {{ auth()->user()->nama ?? 'Pembina' }} <br>
-            Berikut ringkasan kegiatan ekskulmu hari ini!
+            Selamat Datang, {{ auth()->user()->name }} <br>
+            Berikut ringkasan ekskulmu hari ini.
         </p>
     </div>
 
     {{-- ROW CARD --}}
     <div class="mb-4 row g-3">
 
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="p-3 text-white shadow-sm card bg-info rounded-3">
-                <h6>Jumlah Anggota Aktif</h6>
-                <h3 class="fw-bold">250</h3>
+                <h6>Total Anggota Ekstrakulikuler</h6>
+                <h3 class="fw-bold">{{ $totalAnggota }}</h3>
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="p-3 text-white shadow-sm card bg-success rounded-3">
-                <h6>Total Kegiatan Terselesaikan</h6>
-                <h3 class="fw-bold">32</h3>
+                <h6>Total Pendaftar Ekstrakulikuler</h6>
+                <h3 class="fw-bold">{{ $totalPendaftar }}</h3>
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="p-3 text-white shadow-sm card bg-warning rounded-3">
-                <h6>Kegiatan Belum/Tertunda</h6>
-                <h3 class="fw-bold">4</h3>
+                <h6>Jumlah Anggota Yang Harus Diterima</h6>
+                <h3 class="fw-bold">{{ $totalPending }}</h3>
             </div>
         </div>
 
     </div>
 
-    {{-- ROW PIE CHART --}}
+    {{-- PIE CHART --}}
     <div class="mb-4 row g-3">
-
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="p-3 shadow-sm card rounded-3">
-                <h6 class="mb-3 fw-bold">Status Kegiatan Ekskul</h6>
-
-                {{-- Tinggi chart dirapikan --}}
-                <div style="height: 260px;">
+                <h6 class="fw-bold mb-3">Status Pendaftar Ekskul</h6>
+                <div style="height: 280px;">
                     <canvas id="pieChart"></canvas>
                 </div>
             </div>
         </div>
 
-    </div>
-
-    {{-- ROW LINE CHART --}}
-    <div class="mb-4 row g-3">
-
-        <div class="col-md-8">
+        {{-- LINE CHART --}}
+        <div class="col-md-6">
             <div class="p-3 shadow-sm card rounded-3">
-                <h6 class="fw-bold">Grafik Kegiatan Bulanan</h6>
-
-                {{-- Tinggi chart dirapikan --}}
+                <h6 class="fw-bold mb-3">Jumlah Pendaftar Per Bulan</h6>
                 <div style="height: 280px;">
                     <canvas id="lineChart"></canvas>
                 </div>
             </div>
         </div>
-
     </div>
 
 </div>
 
-{{-- CHART JS --}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
@@ -80,14 +69,11 @@
     new Chart(document.getElementById("pieChart"), {
         type: "pie",
         data: {
-            labels: ["Selesai", "Berjalan"],
+            labels: ["Diterima", "Pending", "Ditolak"],
             datasets: [{
-                data: [45, 20],
-                backgroundColor: ["#1e90ff", "#7cc6fe"]
+                data: [{{ $totalAnggota }}, {{ $totalPending }}, {{ $totalDitolak }}],
+                backgroundColor: ["#28a745", "#ffc107", "#dc3545"]
             }]
-        },
-        options: {
-            maintainAspectRatio: false
         }
     });
 
@@ -95,17 +81,15 @@
     new Chart(document.getElementById("lineChart"), {
         type: "line",
         data: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "Mei"],
+            labels: {!! json_encode($chartLabels) !!},
             datasets: [{
-                label: "Jumlah Kegiatan",
-                data: [15, 25, 22, 35, 40],
+                label: "Jumlah Pendaftar",
+                data: {!! json_encode($chartValues) !!},
                 borderWidth: 3,
                 borderColor: "#1e90ff",
-                tension: 0.3
+                tension: 0.3,
+                fill: false
             }]
-        },
-        options: {
-            maintainAspectRatio: false
         }
     });
 </script>

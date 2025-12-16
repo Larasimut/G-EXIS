@@ -182,10 +182,12 @@
                         {{-- Tombol hanya muncul kalau status diterima --}}
                         @if($item->status == 'diterima')
                         <div class="d-flex justify-content-between gap-2 mt-3">
-                            <a href="{{ route('siswa.detailTerdaftar', $item->id) }}"
-                                class="btn btn-primary btn-sm px-4 py-2">
-                                <i class="bi bi-eye"></i> Lihat Detail
-                            </a>
+        <a href="{{ route('siswa.detailTerdaftar', $item->id) }}"
+   class="btn btn-primary btn-sm px-4 py-2">
+    <i class="bi bi-eye"></i> Lihat Detail
+</a>
+
+
 
                           <form action="#" method="POST">
     @csrf

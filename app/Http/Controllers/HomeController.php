@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Notification;
 use App\Models\Pendaftar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -81,6 +83,56 @@ public function batalEkskul($id)
 
         return view('siswa.notifikasi', compact('notifs'));
     }
+
+public function detailTerdaftar($id)
+{
+    $pendaftar = Pendaftar::findOrFail($id);
+
+    return view('siswa.detailTerdaftar', compact('pendaftar'));
+
+}
+
+
+public function absen($id = null)
+{
+    if (!$id) {
+        abort(404);
+    }
+
+    $pendaftar = Pendaftar::where('user_id', Auth::id())
+        ->where('id', $id)
+        ->firstOrFail();
+
+    return view('siswa.absen', compact('pendaftar'));
+}
+
+    public function jadwal()
+    {
+        return view('siswa.jadwal');
+    }
+
+    public function sertifikat()
+    {
+        return view('siswa.sertifikat');
+    }
+public function formpendaftaran()
+    {
+        return view('siswa.formpendaftaran');
+    }
+
+public function keluar($id)
+{
+    $pendaftar = Pendaftar::where('id', $id)
+        ->where('user_id', auth()->id())
+        ->firstOrFail();
+
+    $pendaftar->update([
+        'status_keluar' => 'pending'
+    ]);
+
+    return back()->with('success', 'Permintaan keluar sedang diproses pembina.');
+}
+
 
 public function lihatEkskul()
 {
@@ -651,31 +703,5 @@ public function lihatEkskul()
 
     return view('siswa.eskul-detail', compact('eskul'));
 }
-
-
-    public function detailTerdaftar()
-    {
-        return view('siswa.detailTerdaftar');
-    }
-
-    public function absen()
-    {
-        return view('siswa.absen');
-    }
-
-    public function jadwal()
-    {
-        return view('siswa.jadwal');
-    }
-
-    public function sertifikat()
-    {
-        return view('siswa.sertifikat');
-    }
-public function formpendaftaran()
-    {
-        return view('siswa.formpendaftaran');
-    }
-
 
 }

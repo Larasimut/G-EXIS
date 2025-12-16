@@ -185,7 +185,11 @@
 
     <!-- HEADER -->
     <div class="header-card mb-4 text-center">
-        <h2 class="fw-bold">Paskibra — Ekskul Terdaftar Kamu</h2>
+<h2 class="fw-bold">{{ Str::title($pendaftar->ekskul) }} — Ekskul Terdaftar Kamu</h2>
+
+
+<p class="mb-0">Informasi lengkap tentang ekskul ini ✨</p>
+
         <p class="mb-0">Semangat dan tetap aktif dalam kegiatan! 💪</p>
     </div>
 
@@ -196,7 +200,10 @@
                 <img src="https://cdn-icons-png.flaticon.com/512/599/599328.png" alt="">
                 <h5 class="fw-bold">Absensi</h5>
                 <p>Cek & lakukan absensi kehadiran ekskul.</p>
-                <a href="{{ route('siswa.absen') }}" class="btn btn-blue px-4">Absen</a>
+               <a href="{{ route('siswa.absen', $pendaftar->id) }}" class="btn btn-blue px-4">
+    Absen
+</a>
+
             </div>
         </div>
         <div class="col-md-4 mb-3">
@@ -207,15 +214,7 @@
                <a href="{{ route('siswa.jadwal') }}" class="btn btn-blue px-4">Lihat Jadwal</a>
             </div>
         </div>
-        <div class="col-md-4 mb-3">
-            <div class="menu-box h-100">
-                <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" alt="">
-                <h5 class="fw-bold">Sertifikat Keaktifan</h5>
-                <p>Download / lihat sertifikat partisipasi ekskul.</p>
-<a href="{{ route('siswa.sertifikat') }}" class="btn btn-blue px-4">Lihat Sertifikat</a>
-            </div>
-        </div>
-    </div>
+
 
     <!-- BUTTON KELUAR EKSUL -->
     <div class="text-center mt-4">

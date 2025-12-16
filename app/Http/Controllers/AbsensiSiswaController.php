@@ -3,6 +3,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Absensi;
+use App\Models\Pendaftar;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AbsensiSiswaController extends Controller
 {
@@ -11,22 +14,34 @@ class AbsensiSiswaController extends Controller
         $request->validate([
             'kehadiran' => 'required',
             'keterangan' => 'nullable|string',
-            'foto' => 'required' // base64 dari kamera
+            'foto' => 'required'
         ]);
 
-        // simpan foto ke storage
-        $image = $request->foto;
-        $image = str_replace('data:image/png;base64,', '', $image);
-        $image = str_replace(' ', '+', $image);
-        $imageName = 'absen_' . time() . '.png';
-        \Storage::disk('public')->put('absensi/' . $imageName, base64_decode($image));
+        $user = Auth::user();
+        $pendaftar = Pendaftar::where('user_id', $user->id)->first();
 
-        // simpan ke DB
+        if (!$pendaftar) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Ekskul tidak ditemukan!'
+            ], 400);
+        }
+
+        // simpan foto
+        $imageData = str_replace('data:image/png;base64,', '', $request->foto);
+        $imageData = str_replace(' ', '+', $imageData);
+
+        $imageName = 'absen_' . time() . '.png';
+        Storage::disk('public')->put('absensi/' . $imageName, base64_decode($imageData));
+
+        // simpan absen ke DB
         Absensi::create([
+            'user_id' => $user->id,
+            'nama' => $user->name,
+            'ekskul' => $pendaftar->ekskul,
             'kehadiran' => $request->kehadiran,
             'keterangan' => $request->keterangan,
             'foto' => 'absensi/' . $imageName,
-            'user_id' => auth()->id(), // kalau pakai auth
         ]);
 
         return response()->json(['status' => 'success']);

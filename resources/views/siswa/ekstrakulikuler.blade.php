@@ -33,14 +33,39 @@
         }
 
         /* CARD DESIGN */
-        .eskul-card {
-            background: #ffffff;
-            border-radius: 22px;
-            overflow: hidden;
-            border: 1px solid #d9e4ff;
-            box-shadow: 0 10px 26px rgba(20, 60, 120, 0.08);
-            transition: .35s ease;
-        }
+      /* CARD DESIGN */
+.eskul-card {
+    background: #ffffff;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid #d9e4ff;
+    box-shadow: 0 10px 26px rgba(20, 60, 120, 0.08);
+    transition: .35s ease;
+
+    /* AGAR ISI CARD SIMETRIS */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.eskul-card .p-3 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.eskul-desc {
+    font-size: .92rem;
+    color: #5f6f82;
+    line-height: 1.45rem;
+    min-height: 95px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
         .eskul-card:hover {
             transform: translateY(-12px);
             box-shadow: 0 14px 42px rgba(20, 60, 120, 0.18);
@@ -62,12 +87,7 @@
             color: #183557;
             margin-bottom: 6px;
         }
-        .eskul-desc {
-            font-size: .92rem;
-            color: #5f6f82;
-            line-height: 1.45rem;
-            min-height: 70px;
-        }
+
 
         /* BUTTON STYLE */
         .btn-wrapper {

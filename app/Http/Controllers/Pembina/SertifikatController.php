@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Pembina;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Sertifikat;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class SertifikatController extends Controller
 {

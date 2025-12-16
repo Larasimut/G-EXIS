@@ -13,84 +13,83 @@
 
 <!-- Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-
 <style>
 body {
-    background: #F7F3E9;
+    background: #F5F7FA;
     font-family: 'Poppins', sans-serif;
 }
 
 /* ==================== SIDEBAR ==================== */
 .sidebar {
-    width: 260px;
+    width: 250px;
     height: 100vh;
-    background: #1B517D;
+    background: #0E3A5D;
     position: fixed;
-    padding: 30px 20px;
+    padding: 28px 18px;
     color: #fff;
     overflow-y: auto;
-    padding-bottom: 120px;
 }
 
 .sidebar .title {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
-    margin-bottom: 40px;
+    margin-bottom: 36px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .sidebar .menu a {
     display: flex;
     align-items: center;
-    padding: 12px;
-    font-size: 17px;
-    border-radius: 12px;
-    color: #fff;
-    margin-bottom: 18px;
+    padding: 12px 14px;
+    font-size: 15px;
+    border-radius: 10px;
+    color: #E5ECF3;
+    margin-bottom: 10px;
     text-decoration: none;
-    transition: 0.2s;
+    transition: all .2s ease;
 }
 
-.sidebar .menu a:hover,
-.sidebar .menu a.active {
-    background: rgba(255,255,255,0.2);
-}
-
-.sidebar .menu i {
-    font-size: 22px;
+.sidebar .menu a i {
+    font-size: 20px;
     margin-right: 14px;
 }
 
+.sidebar .menu a:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.sidebar .menu a.active {
+    background: rgba(255,255,255,0.18);
+    font-weight: 600;
+}
+
+/* LOGOUT */
 .logout-btn {
-    background: #FF3B30;
-    padding: 14px;
-    border-radius: 30px;
+    background: #E94E4E;
+    padding: 12px;
+    border-radius: 20px;
     text-align: center;
     font-weight: 600;
     color: #fff;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 40px;
     width: 100%;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 /* ==================== NAVBAR ==================== */
 .navbar-custom {
-    margin-left: 260px;
-    height: 85px;
-    padding: 18px 35px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    margin-left: 250px;
+    height: 80px;
+    padding: 16px 30px;
 }
 
 .navbar-box {
-    background: #1B517D;
-    padding: 12px 20px;
-    border-radius: 50px;
+    background: #0E3A5D;
+    padding: 12px 22px;
+    border-radius: 40px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -100,48 +99,47 @@ body {
 
 /* SEARCH BAR */
 .search-box {
-    background: white;
+    background: #ffffff;
     border-radius: 30px;
     padding: 8px 18px;
-    width: 330px;
+    width: 300px;
     display: flex;
     align-items: center;
     gap: 10px;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.12);
+    margin-left: auto;
+    margin-right: 20px;
 }
 
-.search-box {
-    margin-left: auto;
-    margin-right: 20px; /* jarak ke ikon */
-    color: #1B517D
+.search-box i {
+    color: #0E3A5D;
 }
 
 .search-box input {
     border: none;
     outline: none;
     width: 100%;
-    font-size: 15px;
+    font-size: 14px;
 }
 
-
-/* NOTIF & USER ICON */
+/* ICONS */
 .icon-btn {
-    font-size: 26px;
+    font-size: 24px;
     color: white;
-    margin-left: 18px;
+    margin-left: 16px;
     cursor: pointer;
-    transition: 0.2s;
+    transition: .2s;
 }
 
 .icon-btn:hover {
-    transform: scale(1.15);
+    transform: scale(1.1);
 }
 
-/* BADGE NOTIF */
+/* BADGE */
 .notif-badge {
-    background: red;
+    background: #FF3B30;
     color: white;
-    font-size: 11px;
+    font-size: 10px;
     border-radius: 50%;
     padding: 2px 6px;
     position: absolute;
@@ -151,28 +149,31 @@ body {
 
 /* DROPDOWN */
 .dropdown-menu-custom {
-    background: #1B517D;
-    border-radius: 14px;
-    padding: 10px 0;
-    min-width: 180px;
+    background: #0E3A5D;
+    border-radius: 12px;
+    padding: 8px 0;
+    min-width: 170px;
 }
 
 .dropdown-menu-custom a {
-    padding: 10px 18px;
+    padding: 10px 16px;
     color: white;
     text-decoration: none;
     display: block;
+    font-size: 14px;
 }
 
 .dropdown-menu-custom a:hover {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.15);
 }
 
+/* MAIN CONTENT */
 .main-content {
-    margin-left: 260px;
+    margin-left: 250px;
     padding: 40px;
 }
 </style>
+
 </head>
 
 <body>
@@ -181,39 +182,30 @@ body {
 <div class="sidebar">
 
     <div class="title">
-        <i class="bi bi-person-circle" style="font-size:30px;"></i>
+        <i class="bi bi-grid-fill" style="font-size:30px;"></i>
         Admin G-EXIS
     </div>
 
     <div class="menu">
         <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-            <i class="bi bi-speedometer2"></i> Dashboard
-        </a>
+           <i class="bi bi-clipboard-data"></i> Dashboard
 
-        <a href="{{ route('admin.data.siswa') }}" class="{{ request()->routeIs('admin.data.siswa') ? 'active' : '' }}">
-            <i class="bi bi-people-fill"></i> Data Siswa
         </a>
+       <a href="{{ route('admin.users.index') }}"
+   class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+    <i class="bi bi-person-workspace"></i>Kelola User
+</a>
+<a href="{{ route('admin.riwayat.pendaftaran') }}"
+   class="{{ request()->routeIs('admin.riwayat.pendaftaran') ? 'active' : '' }}">
+    <i class="bi bi-clock-history"></i> Riwayat Pendaftaran
+</a>
 
-        <a href="{{ route('admin.data.pembina') }}" class="{{ request()->routeIs('admin.data.pembina') ? 'active' : '' }}">
-            <i class="bi bi-person-badge-fill"></i> Data Pembina
-        </a>
-
-        <a href="{{ route('admin.monitoring') }}" class="{{ request()->routeIs('admin.monitoring') ? 'active' : '' }}">
-            <i class="bi bi-music-note-beamed"></i> Monitoring Ekskul
-        </a>
-
-        <a href="{{ route('admin.rekap.absen') }}" class="{{ request()->routeIs('admin.rekap.absen') ? 'active' : '' }}">
-            <i class="bi bi-list-check"></i> Kelola Absen
-        </a>
 
         <a href="{{ route('admin.kelola.notifikasi') }}" class="{{ request()->routeIs('admin.kelola.notifikasi') ? 'active' : '' }}">
             <i class="bi bi-bell-fill"></i> Kelola Notifikasi
         </a>
     </div>
 
-    <div class="logout-btn" data-bs-toggle="modal" data-bs-target="#logoutModal">
-        <i class="bi bi-box-arrow-right me-2"></i> Logout
-    </div>
 </div>
 
 <!-- ==================== NAVBAR ==================== -->
@@ -238,7 +230,8 @@ body {
                 <span class="notif-badge">4</span>
 
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-custom">
-                    <a href="{{ route('admin.notifikasi') }}">Lihat Semua</a>
+                    <a href="{{ route('admin.kelola.notifikasi') }}">Lihat Semua</a>
+
                 </div>
             </div>
 
@@ -264,7 +257,7 @@ body {
 <!-- ==================== MODAL LOGOUT ==================== -->
 <div class="modal fade" id="logoutModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" 
+        <div class="modal-content"
             style="background:#0E3A5D; border-radius:25px; padding:35px; color:white;">
 
             <div class="modal-body text-center">

@@ -9,20 +9,27 @@ use Illuminate\Http\Request;
 class KonfirmasiPendaftaranController extends Controller
 {
     // ======================================
-    // TAMPILKAN PENDAFTAR SESUAI PEMBINA
+    // TAMPILKAN PENDAFTAR (PENDING, DITERIMA, DITOLAK)
     // ======================================
-  public function index()
-{
-    $ekskulPembina = auth()->user()->ekskul;
+    public function index()
+    {
+        $ekskulPembina = auth()->user()->ekskul;
 
-    $data = Pendaftar::where('ekskul', $ekskulPembina)
-                     ->where('status', 'pending')
-                     ->get();
+        $pending = Pendaftar::where('ekskul', $ekskulPembina)
+                    ->where('status', 'pending')
+                    ->get();
 
-    return view('pembina.konfirmasi_pendaftaran', compact('data'));
-}
+        $diterima = Pendaftar::where('ekskul', $ekskulPembina)
+                    ->where('status', 'diterima')
+                    ->get();
 
+        $ditolak = Pendaftar::where('ekskul', $ekskulPembina)
+                    ->where('status', 'ditolak')
+                    ->get();
 
+       return view('pembina.konfirmasi_pendaftaran', compact('pending', 'diterima', 'ditolak'));
+
+    }
 
     // ======================================
     // TERIMA PENDAFTAR
@@ -47,5 +54,4 @@ class KonfirmasiPendaftaranController extends Controller
 
         return back()->with('success', 'Pendaftar berhasil ditolak!');
     }
-
 }

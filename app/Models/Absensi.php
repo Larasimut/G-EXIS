@@ -7,7 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Absensi extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+    'user_id',
+    'nama',
+    'ekskul',
+    'kehadiran',
+    'keterangan',
+    'foto',
+];
 
-    protected $table = 'absensis'; // atau nama tabel kamu
 }
