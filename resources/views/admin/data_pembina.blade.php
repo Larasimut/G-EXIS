@@ -10,6 +10,30 @@
         --primary-dark: #0C2C52;
         --soft-bg: #F8FAFC;
     }
+.btn-search {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border-radius: 30px;
+    padding: 10px 22px;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all .25s ease;
+    box-shadow: 0 4px 14px rgba(22,76,123,.25);
+}
+
+.btn-search:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(22,76,123,.35);
+}
+
+.btn-search i {
+    font-size: 16px;
+}
 
     /* PAGE */
     .page-title {
@@ -113,6 +137,29 @@
 </a>
 
     </div>
+<form method="GET" action="{{ route('admin.users.index') }}" class="mb-4">
+    <div class="d-flex align-items-center gap-2" style="max-width: 380px;">
+
+        <div class="input-group shadow-sm">
+            <span class="input-group-text bg-white border-0 ps-3">
+                <i class="bi bi-search text-primary"></i>
+            </span>
+
+            <input
+                type="text"
+                name="search"
+                class="form-control border-0"
+                placeholder="Cari username..."
+                value="{{ request('search') }}"
+            >
+        </div>
+
+        <button class="btn btn-search">
+            <i class="bi bi-arrow-right"></i>
+        </button>
+
+    </div>
+</form>
 
     <!-- TABLE CARD -->
     <div class="card-custom">
@@ -129,7 +176,7 @@
             </thead>
 
             <tbody>
-                @foreach ($users as $item)
+               @foreach ($users as $item)
 
                 <tr>
 
@@ -145,11 +192,7 @@
 
                     <td class="text-center">
 
-                        <a href="{{ route('admin.users.edit', $item->id) }}"
-                           class="action-icon"
-                           title="Edit">
-                            <i class="bi bi-pencil-square"></i>
-                        </a>
+
 
                         <form action="{{ route('admin.users.destroy', $item->id) }}"
                               method="POST"

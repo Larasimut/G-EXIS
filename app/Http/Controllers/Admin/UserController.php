@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -9,29 +8,30 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    // =============================
-    // LIST PEMBINA & SISWA
-    // =============================
-    public function index()
-    {
-        $users = User::whereIn('role', ['pembina', 'siswa'])->get();
-        return view('admin.data_pembina', compact('users'));
+   public function index(Request $request)
+{
+    $query = User::whereIn('role', ['pembina', 'siswa']);
+
+    // 🔍 SEARCH USERNAME
+    if ($request->filled('search')) {
+        $query->where('name', 'LIKE', '%' . $request->search . '%');
     }
 
-    // =============================
-    // FORM TAMBAH USER
-    // =============================
+    $users = $query->get();
+
+    return view('admin.data_pembina', compact('users'));
+}
+
+
     public function create()
     {
         return view('admin.create_pembina');
     }
 
-    // =============================
-    // SIMPAN USER
-    // =============================
     public function store(Request $request)
     {
-        $request->validate([
+
+        $validated = $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|unique:users,email',
             'role'     => 'required|in:pembina,siswa',
@@ -39,32 +39,26 @@ class UserController extends Controller
         ]);
 
         User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'role'     => $request->role,
-            'password' => Hash::make($request->password),
+            'name'     => $validated['name'],
+            'email'    => $validated['email'],
+            'role'     => $validated['role'],
+            'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect()
-            ->route('admin.users.index')
+        return redirect()->route('admin.users.index')
             ->with('success', 'User berhasil ditambahkan');
     }
 
-    // =============================
-    // HAPUS USER
-    // =============================
     public function destroy($id)
     {
         User::findOrFail($id)->delete();
         return back()->with('success', 'User dihapus');
     }
-    // =============================
-// FORM EDIT USER
-// =============================
-public function edit($id)
-{
-    $user = User::findOrFail($id);
-    return view('admin.edit_pembina', compact('user'));
-}
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.edit_pembina', compact('user'));
+    }
 
 }

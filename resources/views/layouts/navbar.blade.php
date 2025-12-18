@@ -154,7 +154,7 @@
         <a class="nav-link {{ Request::is('siswa/beranda') ? 'active' : '' }}" href="{{ route('siswa.beranda') }}">Beranda</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('siswa/ekstrakulikuler') ? 'active' : '' }}" href="{{ route('siswa.ekstrakulikuler') }}">Ekstrakurikuler</a>
+        <a class="nav-link {{ Request::is('siswa/ekstrakulikuler') ? 'active' : '' }}" href="{{ route('siswa.ekstrakulikuler') }}">Ekstrakulikuler</a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ Request::is('siswa/kontak') ? 'active' : '' }}" href="{{ route('siswa.kontak') }}">Kontak</a>
@@ -187,8 +187,8 @@
     <h5 class="fw-bold mb-4">Siswa - {{ Auth::user()->name }}</h5>
   </center>
 
-  <a href="{{ route('siswa.tambahEkskul') }}" class="menu-item text-white text-decoration-none">
-    <i class="bi bi-plus-circle"></i> Tambah Ekskul
+  <a href="{{ route('siswa.formpendaftaran') }}" class="menu-item text-white text-decoration-none">
+    <i class="bi bi-plus-circle"></i> Daftar Ekstrakulikuler
   </a>
 
   <a href="{{ route('siswa.ekskulTerdaftar') }}" class="menu-item text-white text-decoration-none">

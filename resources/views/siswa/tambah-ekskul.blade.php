@@ -200,29 +200,22 @@
 </head>
 
 <body>
+  @include('layouts.sidebar')
+{{-- JUDUL --}}
+<h2 class="eskul-title text-center mt-4">
+    Tambah Ekskul
+</h2>
 
-<!-- OVERLAY SIDEBAR -->
-<div id="overlaySidebar"></div>
-
-<!-- HEADER -->
-<div class="container mt-4">
-    <div class="header-buttons">
-        <div class="btn-back" onclick="history.back()"><i class="fa fa-arrow-left"></i></div>
-        <h2 class="eskul-title">Ekstrakurikuler</h2>
-        <div class="btn-menu"><i class="fa fa-bars"></i></div>
-    </div>
-</div>
-
-<!-- SEARCH -->
-<center>
+{{-- SEARCH --}}
+<div class="d-flex justify-content-center mt-4 mb-4">
     <div class="search-box d-flex align-items-center">
         <i class="fa fa-search me-2"></i>
         <input type="text" id="search" placeholder="Cari ekstrakurikuler...">
     </div>
-</center>
+</div>
 
-<!-- LIST EKSKUL (Data dari halaman pertama) -->
-<div class="container py-4">
+{{-- LIST EKSKUL --}}
+<div class="container py-2">
     <div class="row g-4" id="eksul-container">
 
         @php
@@ -288,31 +281,8 @@
     </div>
 </div>
 
-<!-- SIDEBAR -->
-<div class="profile-sidebar" id="sidebarProfile">
-    <i class="fa fa-times" id="closeSidebar" style="position:absolute; top:25px; right:25px; font-size:24px; cursor:pointer;"></i>
-    <center>
-        <i class="fa fa-user-circle" style="font-size:80px; color:var(--primary-blue);"></i>
-        <h5 class="fw-bold mt-3">Siswa - Mugni Tiarani</h5>
-    </center>
-
-    <a href="{{ route('siswa.tambahEkskul') }}" class="menu-item">Tambah Ekskul</a>
-    <a href="{{ route('siswa.ekskulTerdaftar') }}" class="menu-item">Ekskul Terdaftar</a>
-    <a href="{{ route('siswa.notifikasi') }}" class="menu-item">Notifikasi</a>
-    <a href="{{ route('logout.confirm') }}" class="logout-btn">LOG OUT</a>
-</div>
-
+{{-- SEARCH SCRIPT --}}
 <script>
-    const sidebar = document.getElementById("sidebarProfile");
-    const openBtn = document.querySelector(".btn-menu");
-    const closeBtn = document.getElementById("closeSidebar");
-    const overlay = document.getElementById("overlaySidebar");
-
-    openBtn.onclick = () => { sidebar.classList.add("active"); overlay.style.display = "block"; };
-    closeBtn.onclick = () => { sidebar.classList.remove("active"); overlay.style.display = "none"; };
-    overlay.onclick = () => { sidebar.classList.remove("active"); overlay.style.display = "none"; };
-
-    // SEARCH FILTER
     document.getElementById('search').addEventListener('input', function(){
         let q = this.value.toLowerCase();
         document.querySelectorAll('.ekskul-item').forEach(item => {
@@ -322,6 +292,3 @@
         });
     });
 </script>
-
-</body>
-</html>

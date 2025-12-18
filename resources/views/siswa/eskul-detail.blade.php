@@ -172,7 +172,6 @@ body{
                 <h2 class="header-title">{{ $eskul['nama'] }}</h2>
             </div>
 
-            <p class="header-sub mb-0">{{ $eskul['desc'] }}</p>
         </div>
 
         <!-- RIGHT : DAFTAR -->

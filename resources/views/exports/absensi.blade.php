@@ -18,7 +18,13 @@
             <td>{{ $item->ekskul }}</td>
             <td>{{ $item->kehadiran }}</td>
             <td>{{ $item->keterangan ?? '-' }}</td>
-            <td>{{ $item->created_at->format('d-m-Y') }}</td>
+            <td>
+    {{ $item->created_at->format('d-m-Y') }} <br>
+    <span class="text-muted">
+        {{ $item->created_at->format('H:i:s') }}
+    </span>
+</td>
+
         </tr>
         @endforeach
     </tbody>

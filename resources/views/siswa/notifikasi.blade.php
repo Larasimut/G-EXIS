@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notifikasi G-EXIS</title>
+    <title>Notifikasi</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
@@ -14,31 +14,10 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .notif-header {
-            background: #4A76A8;
-            padding: 18px 22px;
-            border-bottom-left-radius: 35px;
-            border-bottom-right-radius: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: white;
-        }
-
-        .notif-title {
-            font-size: 22px;
-            font-weight: 600;
-        }
-
-        .burger {
-            font-size: 25px;
-            cursor: pointer;
-        }
-
         .notif-card {
             background: white;
             border-radius: 18px;
-            padding: 18px 15px;
+            padding: 18px 16px;
             margin: 18px 0;
             box-shadow: 0 5px 12px rgba(0,0,0,0.12);
             display: flex;
@@ -54,10 +33,12 @@
 
         .notif-icon {
             background: #4A76A8;
-            border-radius: 12px;
+            border-radius: 14px;
             color: white;
-            padding: 10px;
+            padding: 12px;
             font-size: 18px;
+            min-width: 42px;
+            text-align: center;
         }
 
         .notif-time {
@@ -69,44 +50,48 @@
         .alert-info-custom {
             background: #B5D4EB;
             border-radius: 20px;
-            padding: 12px 18px;
-            margin-top: 7px;
+            padding: 14px 20px;
+            margin-top: 10px;
             font-weight: 500;
         }
     </style>
 </head>
 
 <body>
+  @include('layouts.sidebar')
 
-<header class="notif-header shadow-sm">
-    <i class="fa fa-arrow-left burger" onclick="history.back()"></i>
-    <span class="notif-title">Notifikasi</span>
-    <i class="fa fa-bars burger"></i>
-</header>
+<div class="container py-4">
 
-<div class="container mt-3 mb-4">
-
+    {{-- INFO JUMLAH NOTIF --}}
     @if($notifs->count() > 0)
-        <div class="alert-info-custom text-center">
-            📢 Kamu memiliki <b>{{ $notifs->count() }}</b> notifikasi.
+        <div class="alert-info-custom text-center mb-4">
+            📢 Kamu memiliki <b>{{ $notifs->count() }}</b> notifikasi
         </div>
     @else
-        <div class="alert-info-custom text-center">
-            Tidak ada notifikasi.
+        <div class="alert-info-custom text-center mb-4">
+            Tidak ada notifikasi
         </div>
     @endif
 
+    {{-- LIST NOTIF --}}
     @foreach($notifs as $notif)
         <div class="notif-card">
-            <div class="notif-icon"><i class="fa fa-bell"></i></div>
-            <div>
-                <h6 class="fw-bold mb-1">Notifikasi Baru</h6>
-                <p class="mb-1">{{ $notif->pesan }}</p>
+            <div class="notif-icon">
+                <i class="fa fa-bell"></i>
+            </div>
 
-                <p class="notif-time">
-                    <i class="fa fa-clock me-1"></i>
-                    {{ $notif->created_at->diffForHumans() }}
-                </p>
+            <div>
+<h6 class="fw-bold mb-1">
+    <i class="fa fa-user-tie me-1"></i>
+    Pembina {{ ucfirst($notif->ekskul) }}
+</h6>
+
+<p class="mb-1">{{ $notif->pesan }}</p>
+
+<p class="notif-time">
+    <i class="fa fa-clock me-1"></i>
+    {{ $notif->created_at->diffForHumans() }}
+</p>
             </div>
         </div>
     @endforeach

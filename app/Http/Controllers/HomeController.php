@@ -48,8 +48,7 @@ class HomeController extends Controller
             'status'  => 'pending',
         ]);
 
-        return redirect()->route('siswa.ekskulTerdaftar')
-                         ->with('success', 'Berhasil mendaftar ekskul!');
+        return redirect()->back()->with('success', 'Pendaftaran ekstrakulikuler berhasil dikirim!');
     }
 
   public function ekskulTerdaftar()
@@ -141,37 +140,25 @@ public function lihatEkskul()
             'img' => 'aksaralogo.png',
             'nama' => 'Aksara',
             'kategori' => 'Literasi',
-            'desc' => 'Ekstrakurikuler yang mengasah keterampilan menulis, membaca naskah, dan karya sastra.',
-            'galeri' => ['aksara.jpg', 'aksara.jpg', 'aksara.jpg'],
+            'desc' => 'Ekstrakurikuler Aksara berfokus pada pengembangan kemampuan literasi seperti menulis, membaca, dan mengolah karya sastra. Cocok bagi siswa yang gemar menuangkan ide melalui tulisan kreatif maupun jurnalistik.',
+            'galeri' => ['galeriaksara.jpg', 'galeriaksara1.jpg'],
 
             // JADWAL
             'jadwal' => [
-                'hari' => 'Senin & Kamis',
-                'waktu' => '15.30 - 17.00 WIB',
+                'hari' => 'Senin & Rabu',
+                'waktu' => '15.30 - 16.30 WIB',
                 'tempat' => 'Perpustakaan'
             ],
 
-            // PRESTASI
-            'prestasi' => [
-                [
-                    'foto' => 'prestasi1.jpg',
-                    'judul' => 'Juara 1 Lomba Baca Puisi Kabupaten',
-                    'ket' => 'Memenangkan lomba baca puisi tingkat kabupaten tahun 2024.'
-                ],
-                [
-                    'foto' => 'prestasi2.jpg',
-                    'judul' => 'Nominasi Penulis Cerita Pendek',
-                    'ket' => 'Masuk 10 besar lomba cerpen nasional.'
-                ]
-            ]
+
         ],
 
         [
             'img' => 'basketlogo.png',
             'nama' => 'Basket',
             'kategori' => 'Olahraga',
-            'desc' => 'Ekstrakurikuler basket yang melatih fisik, teknik, dan kerja sama tim.',
-            'galeri' => ['basket.jpg','basket.jpg','basket.jpg'],
+            'desc' => 'Ekstrakurikuler Basket melatih keterampilan bermain bola basket, kerja sama tim, dan sportivitas. Selain fisik, siswa juga dibina dalam strategi permainan dan kedisiplinan.',
+            'galeri' => ['galeribasket.jpg','galeribasket1.jpg','galeribasket2.jpg'],
 
             'jadwal' => [
                 'hari' => 'Selasa & Jumat',
@@ -181,7 +168,7 @@ public function lihatEkskul()
 
             'prestasi' => [
                 [
-                    'foto' => 'basket1.jpg',
+                    'foto' => 'juara.jpg',
                     'judul' => 'Juara 2 Turnamen Basket Pelajar',
                     'ket' => 'Turnamen pelajar tingkat kota tahun 2024.'
                 ]
@@ -192,8 +179,8 @@ public function lihatEkskul()
             'img' => 'codinglogo.png',
             'nama' => 'Coding',
             'kategori' => 'Pemrograman',
-            'desc' => 'Belajar dasar pemrograman, algoritma, dan membuat proyek aplikasi.',
-            'galeri' => ['coding.jpg','coding.jpg','coding.jpg'],
+            'desc' => 'Ekstrakurikuler Coding mengajarkan dasar-dasar pemrograman dan teknologi digital. Siswa belajar logika berpikir, problem solving, serta pembuatan aplikasi atau website sederhana.',
+            'galeri' => ['galericoding.jpg','galericoding1.jpg'],
 
             'jadwal' => [
                 'hari' => 'Rabu',
@@ -203,9 +190,9 @@ public function lihatEkskul()
 
             'prestasi' => [
                 [
-                    'foto' => 'coding1.jpg',
-                    'judul' => 'Finalis Hackathon Pelajar',
-                    'ket' => 'Masuk final lomba hackathon se-Jawa Barat.'
+                    'foto' => 'juaracoding.jpg',
+                    'judul' => 'Juara 3 Coding Sumedang',
+                    'ket' => 'Juara lomba coding Sumedang 2025.'
                 ]
             ]
         ],
@@ -214,51 +201,51 @@ public function lihatEkskul()
             'img' => 'dblogo.png',
             'nama' => 'Drumband',
             'kategori' => 'Seni Musik',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['drumband.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Ekstrakurikuler Drumband melatih kekompakan, ritme, dan disiplin melalui permainan alat musik perkusi. Cocok untuk siswa yang menyukai musik dan kegiatan baris-berbaris.',
+            'galeri' => ['galeridrumband.jpg','galeridrumband1.jpg','drumband.jpg'],
 
             'jadwal' => [
-                'hari' => 'Sabtu',
-                'waktu' => '08.00 - 10.00 WIB',
-                'tempat' => 'Lapangan Upacara'
+                'hari' => 'Selasa',
+                'waktu' => '15.00 - 16.30 WIB',
+                'tempat' => 'Lapangan/Kelas MPLB'
             ],
 
             'prestasi' => [
                 [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
+                    'foto' => 'juaradrumband.jpg',
+                    'judul' => 'Juara Terfavorit',
+                    'ket' => 'Prestasi tahun 2025 saat lomba Drumband di Sumedang Tadjimalela'
                 ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
             ]
         ],
         [
             'img' => 'eclogo.png',
             'nama' => 'English Club',
             'kategori' => 'Sastra',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['english club.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'English Club bertujuan meningkatkan kemampuan berbahasa Inggris, terutama speaking dan listening. Kegiatan meliputi diskusi, permainan, presentasi, dan praktik komunikasi sehari-hari.',
+            'galeri' => ['galeriec.jpg','galeriec1.jpg','galeriec2.jpg'],
 
             'jadwal' => [
-                'hari' => 'Sabtu',
-                'waktu' => '08.00 - 10.00 WIB',
-                'tempat' => 'Lapangan Upacara'
+                'hari' => 'Selasa',
+                'waktu' => '15.30 - 16.30 WIB',
+                'tempat' => 'Lab Inggris'
             ],
 
             'prestasi' => [
                 [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
+                    'foto' => 'juaraaksara.jpg',
+                    'judul' => 'Juara 2 Essay Writing Brijafest',
+                    'ket' => 'Prestasi tahun 2024 saat lomba Essay di Sumedang Creative Center 30 Juni 2024.'
                 ],
                 [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
+                    'foto' => 'juaraec.jpg',
+                    'judul' => 'Juara 3 Jurnalistik Provinsi',
+                    'ket' => 'Prestasi tahun 2025 lomba FLS3N Tingkat Provinsi Jawa Barat '
+                ],
+                  [
+                    'foto' => 'juaraec1.jpg',
+                    'judul' => 'Juara 3 Speech',
+                    'ket' => 'Prestasi tahun 2025 saat lomba Speech di Sumedang Creative Center 30 Juni 2024.'
                 ]
             ]
         ],
@@ -266,60 +253,37 @@ public function lihatEkskul()
             'img' => 'futsallogo.png',
             'nama' => 'Futsal',
             'kategori' => 'Olahraga',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['futsall.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Ekstrakurikuler Futsal berfokus pada pengembangan teknik bermain futsal, kebugaran fisik, serta kerja sama tim. Kegiatan ini juga menanamkan jiwa sportivitas dan semangat kompetisi.',
+            'galeri' => ['galerifutsal.jpg', 'galerifutsal1.jpg', 'galerifutsal2.jpg'],
 
             'jadwal' => [
-                'hari' => 'Sabtu',
-                'waktu' => '08.00 - 10.00 WIB',
-                'tempat' => 'Lapangan Upacara'
+                'hari' => 'Kamis',
+                'waktu' => '15.30 - 16.30 WIB',
+                'tempat' => 'Lapangan'
             ],
 
-            'prestasi' => [
-                [
-                    'foto' => 'futsall.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
-                ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
-            ]
         ],
         [
             'img' => 'irmalogo.png',
             'nama' => 'Ikatan Remaja Masjid',
             'kategori' => 'Keagamaan',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['irmah.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'IRMA (Ikatan Remaja Masjid) bertujuan membentuk karakter siswa yang berakhlak mulia dan aktif dalam kegiatan keagamaan. Kegiatan meliputi kajian, bakti sosial, dan pengelolaan kegiatan masjid.',
+            'galeri' => ['galeriirma.jpg','galeriirma1.jpg'],
 
             'jadwal' => [
-                'hari' => 'Sabtu',
-                'waktu' => '08.00 - 10.00 WIB',
-                'tempat' => 'Lapangan Upacara'
+                'hari' => 'Jumat',
+                'waktu' => '15.30 - 16.30 WIB',
+                'tempat' => 'Masjid'
             ],
 
-            'prestasi' => [
-                [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
-                ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
-            ]
+
         ],
         [
-            'img' => 'karate.jpg',
+            'img' => 'karatelogo.png',
             'nama' => 'Karate',
             'kategori' => 'Bela Diri',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['karate.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Ekstrakurikuler Karate melatih bela diri, kedisiplinan, dan pengendalian diri. Selain fisik, siswa juga diajarkan nilai mental seperti rasa percaya diri dan tanggung jawab.',
+            'galeri' => ['galerikarate.jpg','galerikarate1.jpg'],
 
             'jadwal' => [
                 'hari' => 'Sabtu',
@@ -329,127 +293,76 @@ public function lihatEkskul()
 
             'prestasi' => [
                 [
-                    'foto' => 'karate.jpg',
+                    'foto' => 'karate.png',
                     'judul' => 'Juara 1 Marching Band Kota',
                     'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
                 ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
             ]
         ],
         [
             'img' => 'karawitanlogo.png',
             'nama' => 'Karawitan',
             'kategori' => 'Seni Musik',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['karawitan.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Karawitan merupakan ekstrakurikuler seni musik tradisional Jawa. Siswa belajar memainkan alat musik gamelan serta memahami nilai budaya dan kearifan lokal.',
+            'galeri' => ['galerikarawitan.jpg','galerikarawitan1.jpg'],
 
             'jadwal' => [
-                'hari' => 'Sabtu',
-                'waktu' => '08.00 - 10.00 WIB',
-                'tempat' => 'Lapangan Upacara'
+                'hari' => 'Rabu',
+                'waktu' => '15.30 - 16.30 WIB',
+                'tempat' => 'Ruang Kesenian'
+            ]
             ],
 
-            'prestasi' => [
-                [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
-                ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
-            ]
-        ],
         [
             'img' => 'kirlogo.png',
             'nama' => 'Karya Ilmiah Remaja',
             'kategori' => 'Experimence',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['drumband.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Ekstrakurikuler KIR mengembangkan kemampuan berpikir kritis dan ilmiah. Siswa dilatih meneliti, menulis karya ilmiah, dan mempresentasikan hasil penelitian.',
+            'galeri' => ['galerikir.jpg', 'galerikir1.jpeg'],
 
             'jadwal' => [
                 'hari' => 'Sabtu',
                 'waktu' => '08.00 - 10.00 WIB',
-                'tempat' => 'Lapangan Upacara'
+                'tempat' => 'Lab Kimia'
             ],
 
-            'prestasi' => [
-                [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
-                ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
-            ]
+
         ],
         [
-            'img' => 'media.jpg',
+            'img' => 'logomedia.png',
             'nama' => 'Media Publikasi',
             'kategori' => 'Dokumentasi',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['media.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Media Publikasi berfokus pada jurnalistik, fotografi, videografi, dan desain konten. Ekskul ini cocok bagi siswa yang tertarik pada dunia media dan kreatif digital.',
+            'galeri' => ['media.jpg'],
 
             'jadwal' => [
-                'hari' => 'Sabtu',
-                'waktu' => '08.00 - 10.00 WIB',
-                'tempat' => 'Lapangan Upacara'
+                'hari' => 'Selasa',
+                'waktu' => '15.30 - 16.00 WIB',
+                'tempat' => 'Sekolah'
             ],
 
-            'prestasi' => [
-                [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
-                ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
-            ]
+
         ],
         [
             'img' => 'paduanlogo.png',
             'nama' => 'Paduan Suara',
             'kategori' => 'Musikalisasi',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['padus.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Ekstrakurikuler Paduan Suara melatih teknik vokal, harmonisasi, dan kepercayaan diri saat tampil. Siswa belajar bernyanyi secara individu maupun kelompok.',
+            'galeri' => ['galeripaduansuara.jpg', 'galeripaduansuara1.jpg'],
 
             'jadwal' => [
-                'hari' => 'Sabtu',
-                'waktu' => '08.00 - 10.00 WIB',
+                'hari' => 'Rabu',
+                'waktu' => '15.00 - 16.00 WIB',
                 'tempat' => 'Lapangan Upacara'
             ],
 
-            'prestasi' => [
-                [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
-                ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
-            ]
         ],
         [
             'img' => 'paskiblogo.png',
             'nama' => 'Paskibra',
             'kategori' => 'Pasukan Baris Berbaris',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['drumband.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Paskibra membentuk siswa yang disiplin, bertanggung jawab, dan memiliki jiwa nasionalisme. Kegiatan meliputi latihan baris-berbaris dan upacara kenegaraan.',
+            'galeri' => ['galeripaskib.jpg','galeripaskib1.jpg','juarapaskib2.jpg', 'galeripaskib3.jpg'],
 
             'jadwal' => [
                 'hari' => 'Sabtu',
@@ -459,40 +372,46 @@ public function lihatEkskul()
 
             'prestasi' => [
                 [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
+                    'foto' => 'juarapaskib.jpg',
+                    'judul' => 'Juara Harapan Utama 3 ',
+                    'ket' => 'Prestasi tahun 2024 saat lomba di SMPN 3 Sumedang '
                 ],
                 [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
+                    'foto' => 'juarapaskib1.jpg',
+                    'judul' => 'Juara Variasi Formasi 3 ',
+                    'ket' => 'Prestasi Tahun 2024 saat lomba di LKBB Cakrabuana Garut'
+                ],
+                 [
+                    'foto' => 'juarapaskib3.jpg',
+                    'judul' => 'Juara Madya 1',
+                    'ket' => 'Prestasi Tahun 2025 saat lomba di LKBB Adinira CP 2'
+                 ]
+
             ]
         ],
         [
-            'img' => 'pramukalogo.jpg',
+            'img' => 'pramukalogo.png',
             'nama' => 'Pramuka',
             'kategori' => 'Keberanian',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['pramuka.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Ekstrakurikuler Pramuka melatih kemandirian, kepemimpinan, dan kerja sama. Kegiatan mencakup kepramukaan, keterampilan alam, serta pembentukan karakter.',
+            'galeri' => ['galeripramuka.jpg','galeripramuka1.jpg','galeripramuka2.jpg'],
 
             'jadwal' => [
-                'hari' => 'Sabtu',
-                'waktu' => '08.00 - 10.00 WIB',
-                'tempat' => 'Lapangan Upacara'
+                'hari' => 'Jumat',
+                'waktu' => '15.00 - 16.00 WIB',
+                'tempat' => 'Ruang Kesenian'
             ],
 
             'prestasi' => [
                 [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
+                    'foto' => 'juarapramuka.jpg',
+                    'judul' => 'Juara Umum LSD',
+                    'ket' => 'Prestasi tahun 2024 saat di SMPN 7 Sumedang'
                 ],
                 [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
+                    'foto' => 'juarapramuka1.jpg',
+                    'judul' => 'Juara Purwa 6',
+                    'ket' => 'Prestasi tahun 2024 di LKP Unsap'
                 ]
             ]
         ],
@@ -500,86 +419,51 @@ public function lihatEkskul()
             'img' => 'silat.png',
             'nama' => 'Pencak Silat',
             'kategori' => 'Bela Diri',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['drumband.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Pencak Silat adalah seni bela diri tradisional Indonesia yang melatih fisik, mental, dan spiritual. Siswa diajarkan teknik bela diri sekaligus nilai budaya bangsa.',
+            'galeri' => ['galerisilat.jpg','galerisilat1.jpg','silat.jpg'],
 
             'jadwal' => [
-                'hari' => 'Sabtu',
-                'waktu' => '08.00 - 10.00 WIB',
+                'hari' => 'Kamis',
+                'waktu' => '15.00 - 16.30 WIB',
                 'tempat' => 'Lapangan Upacara'
             ],
 
-            'prestasi' => [
-                [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
-                ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
-            ]
+
         ],
         [
             'img' => 'photograhpy.jpg',
             'nama' => 'PhotoGraphy',
             'kategori' => 'Dokumentasi',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['drumband.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Ekstrakurikuler Photography mengajarkan teknik fotografi, komposisi gambar, dan editing. Cocok bagi siswa yang memiliki minat pada seni visual dan dokumentasi.',
+            'galeri' => ['photograhpy.jpg'],
 
             'jadwal' => [
-                'hari' => 'Sabtu',
-                'waktu' => '08.00 - 10.00 WIB',
-                'tempat' => 'Lapangan Upacara'
+                'hari' => 'Senin',
+                'waktu' => '15.00 - 16.00 WIB',
+                'tempat' => 'SMKN 2 SUMEDANG'
             ],
 
-            'prestasi' => [
-                [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
-                ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
-            ]
         ],
         [
             'img' => 'pmrlogo.png',
             'nama' => 'Palang Merah Remaja',
             'kategori' => 'Kesehatan',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['drumband.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'PMR membekali siswa dengan keterampilan pertolongan pertama dan kepedulian sosial. Ekskul ini menanamkan sikap kemanusiaan dan kesiapsiagaan.',
+            'galeri' => ['galeripmr2.jpg','galeripmr1.jpg'],
 
             'jadwal' => [
-                'hari' => 'Sabtu',
-                'waktu' => '08.00 - 10.00 WIB',
-                'tempat' => 'Lapangan Upacara'
+                'hari' => 'Senin',
+                'waktu' => '15.00 - 16.00 WIB',
+                'tempat' => 'Ruangan UKS'
             ],
 
-            'prestasi' => [
-                [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
-                ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
-            ]
         ],
         [
-            'img' => 'tari.jpg',
+            'img' => 'logotari.png',
             'nama' => 'Seni Tari',
             'kategori' => 'Kesenian',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['drumband.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Ekstrakurikuler Seni Tari mengembangkan bakat menari dan ekspresi seni. Siswa belajar tari tradisional maupun modern serta meningkatkan rasa percaya diri saat tampil.',
+            'galeri' => ['galeritari.jpg','galeritari1.jpg','tari.jpg'],
 
             'jadwal' => [
                 'hari' => 'Sabtu',
@@ -587,96 +471,48 @@ public function lihatEkskul()
                 'tempat' => 'Lapangan Upacara'
             ],
 
-            'prestasi' => [
-                [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
-                ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
-            ]
+
+
         ],
         [
             'img' => 'tatabogalogo.png',
             'nama' => 'Tata Boga',
             'kategori' => 'Memasak',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['drumband.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Tata Boga mengajarkan keterampilan memasak, penyajian makanan, dan kebersihan dapur. Cocok bagi siswa yang tertarik pada dunia kuliner dan kewirausahaan.',
+            'galeri' => ['galeritataboga.jpg','galeritataboga1.jpeg','tataboga.jpg'],
 
             'jadwal' => [
-                'hari' => 'Sabtu',
-                'waktu' => '08.00 - 10.00 WIB',
-                'tempat' => 'Lapangan Upacara'
+                'hari' => 'Jumat',
+                'waktu' => '15.00 - 16.00 WIB',
+                'tempat' => 'Di SMKN2 Sumedang'
             ],
-
-            'prestasi' => [
-                [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
-                ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
-            ]
         ],
         [
             'img' => 'tatariaslogo.png',
             'nama' => 'Tata Rias',
             'kategori' => 'Kecantikan',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['drumband.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Ekstrakurikuler Tata Rias melatih keterampilan make-up dan perawatan diri. Siswa belajar teknik rias wajah untuk berbagai acara secara profesional.',
+            'galeri' => ['galeritatarias.jpg','galeritatarias1.jpg'],
 
             'jadwal' => [
-                'hari' => 'Sabtu',
-                'waktu' => '08.00 - 10.00 WIB',
-                'tempat' => 'Lapangan Upacara'
+                'hari' => 'Kamis',
+                'waktu' => '15.00 - 16.00 WIB',
+                'tempat' => 'Salon SMKN 2 SUMEDANG'
             ],
 
-            'prestasi' => [
-                [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
-                ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
-            ]
         ],
         [
             'img' => 'voly.png',
             'nama' => 'Volli',
             'kategori' => 'Olahraga',
-            'desc' => 'Melatih keterampilan musik pukul, ritme, dan penampilan marching.',
-            'galeri' => ['drumband.jpg','drumband.jpg','drumband.jpg'],
+            'desc' => 'Ekstrakurikuler Voli melatih teknik bermain bola voli, kebugaran jasmani, dan kerja sama tim. Kegiatan ini juga membangun semangat sportivitas.',
+            'galeri' => ['galerivoli.jpg','galerivoli1.jpeg'],
 
             'jadwal' => [
-                'hari' => 'Sabtu',
-                'waktu' => '08.00 - 10.00 WIB',
-                'tempat' => 'Lapangan Upacara'
+                'hari' => 'Kamis',
+                'waktu' => '15.00 - 16.00 WIB',
+                'tempat' => 'Lapangan'
             ],
-
-            'prestasi' => [
-                [
-                    'foto' => 'drum1.jpg',
-                    'judul' => 'Juara 1 Marching Band Kota',
-                    'ket' => 'Prestasi tahun 2023 saat lomba marching band tingkat kota.'
-                ],
-                [
-                    'foto' => 'drum2.jpg',
-                    'judul' => 'Best Conductor Award',
-                    'ket' => 'Penghargaan untuk pemimpin drumband terbaik.'
-                ]
-            ]
         ],
     ];
 

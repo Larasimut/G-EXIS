@@ -4,7 +4,7 @@
 
 <style>
     :root {
-        --primary-blue: #11386B; /* biru tua elegan */
+        --primary-blue: #11386B;
     }
 
     .card-custom {
@@ -15,7 +15,6 @@
         background: #ffffff;
     }
 
-    /* HEADER TABEL */
     .table thead th {
         background: #e8eef7;
         color: var(--primary-blue);
@@ -23,12 +22,10 @@
         border-bottom: 2px solid #dee2e6;
     }
 
-    /* HOVER */
     .table tbody tr:hover {
         background: #f4f7fc;
     }
 
-    /* NAV TAB */
     .nav-tabs .nav-link {
         font-weight: 600;
         color: var(--primary-blue);
@@ -40,32 +37,9 @@
         border-radius: 8px 8px 0 0;
     }
 
-    /* BADGE STATUS */
-    .status-badge {
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 600;
-    }
-
     .badge-ekskul {
         background: var(--primary-blue);
         color: white;
-    }
-
-    .status-pending {
-        background: #ffeeba;
-        color: #b88600;
-    }
-
-    .status-diterima {
-        background: #c3f3d7;
-        color: #117c31;
-    }
-
-    .status-ditolak {
-        background: #ffd6d6;
-        color: #a30000;
     }
 </style>
 
@@ -75,7 +49,7 @@
         Daftar Pendaftar Ekstrakurikuler
     </h3>
 
-    {{-- NAV TABS --}}
+    {{-- ================= NAV TABS ================= --}}
     <ul class="nav nav-tabs mb-3 fw-semibold">
         <li class="nav-item">
             <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#pending">
@@ -97,14 +71,20 @@
                 <span class="badge bg-danger ms-1">{{ $ditolak->count() }}</span>
             </button>
         </li>
+
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#keluar">
+                Keluar
+                <span class="badge bg-secondary ms-1">{{ $keluar->count() }}</span>
+            </button>
+        </li>
     </ul>
 
     <div class="tab-content">
 
-        {{-- PENDING --}}
+        {{-- ================= PENDING ================= --}}
         <div class="tab-pane fade show active" id="pending">
             <div class="card-custom mb-4">
-
                 <table class="table align-middle">
                     <thead>
                         <tr>
@@ -113,10 +93,9 @@
                             <th>Ekskul</th>
                             <th>Alasan</th>
                             <th>Kontak</th>
-                            <th style="width:130px;">Aksi</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         @forelse($pending as $d)
                         <tr>
@@ -125,32 +104,30 @@
                             <td><span class="badge badge-ekskul">{{ $d->ekskul }}</span></td>
                             <td>{{ $d->alasan }}</td>
                             <td>{{ $d->kontak }}</td>
-
                             <td>
-                                <form action="{{ route('pembina.terima', $d->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('pembina.terima', $d->id) }}" method="POST">
                                     @csrf
-                                    <button class="btn btn-success btn-sm rounded-pill px-3">✓ Terima</button>
+                                    <button class="btn btn-success btn-sm rounded-pill">✓ Terima</button>
                                 </form>
-
-                                <form action="{{ route('pembina.tolak', $d->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('pembina.tolak', $d->id) }}" method="POST" class="mt-1">
                                     @csrf
-                                    <button class="btn btn-danger btn-sm rounded-pill px-3 mt-1">✗ Tolak</button>
+                                    <button class="btn btn-danger btn-sm rounded-pill">✗ Tolak</button>
                                 </form>
                             </td>
                         </tr>
                         @empty
-                        <tr><td colspan="6" class="text-center text-muted">Belum ada data pending</td></tr>
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">Belum ada data</td>
+                        </tr>
                         @endforelse
                     </tbody>
                 </table>
-
             </div>
         </div>
 
-        {{-- DITERIMA --}}
+        {{-- ================= DITERIMA ================= --}}
         <div class="tab-pane fade" id="diterima">
             <div class="card-custom mb-4">
-
                 <table class="table align-middle">
                     <thead>
                         <tr>
@@ -159,31 +136,42 @@
                             <th>Ekskul</th>
                             <th>Alasan</th>
                             <th>Kontak</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
-
                     <tbody>
-                        @forelse($diterima as $d)
+                        @forelse ($diterima as $item)
                         <tr>
-                            <td>{{ $d->nama }}</td>
-                            <td>{{ $d->kelas }}</td>
-                            <td><span class="badge badge-ekskul">{{ $d->ekskul }}</span></td>
-                            <td>{{ $d->alasan }}</td>
-                            <td>{{ $d->kontak }}</td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->kelas }}</td>
+                            <td><span class="badge badge-ekskul">{{ $item->ekskul }}</span></td>
+                            <td>{{ $item->alasan }}</td>
+                            <td>{{ $item->kontak }}</td>
+                            <td class="text-center">
+                               <form action="{{ route('pembina.keluar', $item->id) }}"
+      method="POST"
+      onsubmit="return confirm('Yakin ingin mengeluarkan anggota ini?')">
+    @csrf
+    <button class="btn btn-outline-danger btn-sm rounded-pill">
+        <i class="bi bi-box-arrow-right"></i> Keluar
+    </button>
+</form>
+
+                            </td>
                         </tr>
                         @empty
-                        <tr><td colspan="5" class="text-center text-muted">Tidak ada pendaftar diterima</td></tr>
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">Tidak ada data</td>
+                        </tr>
                         @endforelse
                     </tbody>
                 </table>
-
             </div>
         </div>
 
-        {{-- DITOLAK --}}
+        {{-- ================= DITOLAK ================= --}}
         <div class="tab-pane fade" id="ditolak">
             <div class="card-custom mb-4">
-
                 <table class="table align-middle">
                     <thead>
                         <tr>
@@ -194,7 +182,6 @@
                             <th>Kontak</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         @forelse($ditolak as $d)
                         <tr>
@@ -205,11 +192,46 @@
                             <td>{{ $d->kontak }}</td>
                         </tr>
                         @empty
-                        <tr><td colspan="5" class="text-center text-muted">Tidak ada pendaftar ditolak</td></tr>
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">Tidak ada data</td>
+                        </tr>
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+        </div>
 
+        {{-- ================= KELUAR ================= --}}
+        <div class="tab-pane fade" id="keluar">
+            <div class="card-custom">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Kelas</th>
+                            <th>Ekskul</th>
+                            <th>Alasan</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($keluar as $item)
+                        <tr>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->kelas }}</td>
+                            <td><span class="badge badge-ekskul">{{ $item->ekskul }}</span></td>
+                            <td>{{ $item->alasan }}</td>
+                            <td><span class="badge bg-secondary">Keluar</span></td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">
+                                Belum ada data keluar
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
 

@@ -214,11 +214,10 @@
         </div>
         <div class="offcanvas-body d-flex flex-column">
             <a class="{{ request()->is('pembina/beranda') ? 'active' : '' }}" href="{{ route('pembina.beranda') }}"><i class="bi bi-house-door"></i> Beranda</a>
-            <a class="{{ request()->is('pembina/konfirmasi') ? 'active' : '' }}" href="{{ route('pembina.konfirmasi') }}"><i class="bi bi-clipboard-check"></i> Pendaftaran</a>
-            <a class="{{ request()->is('pembina/absen') ? 'active' : '' }}" href="{{ route('pembina.absen') }}"><i class="bi bi-people"></i> Absen Siswa</a>
-            <a class="{{ request()->is('pembina/notifikasi') ? 'active' : '' }}" href="{{ route('pembina.notifikasi') }}"><i class="bi bi-bell"></i> Notifikasi</a>
-            <a class="{{ request()->is('pembina/sertifikat') ? 'active' : '' }}" href="{{ route('pembina.sertifikat.index') }}"><i class="bi bi-file-earmark-arrow-up"></i> Upload Sertifikat</a>
-            <a class="{{ request()->is('pembina/rekap') ? 'active' : '' }}" href="{{ route('pembina.rekap') }}"><i class="bi bi-journal-text"></i> Rekapan Absen</a>
+        <a class="{{ request()->is('pembina/konfirmasi') ? 'active' : '' }}" href="{{ route('pembina.konfirmasi') }}"><i class="bi bi-clipboard-check"></i> Kelola Siswa</a>
+        <a class="{{ request()->is('pembina/absen') ? 'active' : '' }}" href="{{ route('pembina.absen') }}"><i class="bi bi-people"></i> Absen Siswa</a>
+        <a class="{{ request()->is('pembina/notifikasi') ? 'active' : '' }}" href="{{ route('pembina.notifikasi') }}"><i class="bi bi-bell"></i> Notifikasi</a>
+        <a class="{{ request()->is('pembina/sertifikat') ? 'active' : '' }}" href="{{ route('pembina.sertifikat.index') }}"><i class="bi bi-file-earmark-arrow-up"></i> Upload Sertifikat</a>
         </div>
     </div>
 
@@ -244,11 +243,6 @@
                 <span class="logo-text">- EXIS</span>
             </div>
 
-            <!-- SEARCH -->
-            <div class="search-group ms-auto me-3">
-                <i class="bi bi-search"></i>
-                <input type="text" class="form-control form-control-sm" placeholder="Search here">
-            </div>
 
             <!-- PROFILE DROPDOWN -->
             <div class="dropdown">

@@ -32,6 +32,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('/users', [UserController::class, 'store'])->name('users.store');
+        Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+        Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::middleware(['role:siswa'])
     ->prefix('siswa')
     ->name('siswa.')
@@ -193,30 +198,6 @@ Route::get('/riwayat-pendaftaran', [DashboardController::class, 'riwayatPendafta
     Route::view('/rekap-absen', 'admin.rekap_absen')
         ->name('rekap.absen');
 
-    Route::get('/rekap-paskib', [AbsensiController::class, 'rekapPaskib'])->name('rekap.paskib');
-    Route::get('/rekap-ec', [AbsensiController::class, 'rekapEC'])->name('rekap.ec');
-    Route::get('/rekap-coding', [AbsensiController::class, 'rekapCoding'])->name('rekap.coding');
-    Route::get('/rekap-voly', [AbsensiController::class, 'rekapVoly'])->name('rekap.voly');
-    Route::get('/rekap-aksara', [AbsensiController::class, 'rekapAksara'])->name('rekap.aksara');
-    Route::get('/rekap-basket', [AbsensiController::class, 'rekapBasket'])->name('rekap.basket');
-    Route::get('/rekap-design', [AbsensiController::class, 'rekapDesign'])->name('rekap.design');
-    Route::get('/rekap-drumband', [AbsensiController::class, 'rekapDrumband'])->name('rekap.drumband');
-    Route::get('/rekap-fotografi', [AbsensiController::class, 'rekapFotografi'])->name('rekap.fotografi');
-    Route::get('/rekap-futsal', [AbsensiController::class, 'rekapFutsal'])->name('rekap.futsal');
-    Route::get('/rekap-irma', [AbsensiController::class, 'rekapIrma'])->name('rekap.irma');
-    Route::get('/rekap-karate', [AbsensiController::class, 'rekapKarate'])->name('rekap.karate');
-    Route::get('/rekap-karawitan', [AbsensiController::class, 'rekapKarawitan'])->name('rekap.karawitan');
-    Route::get('/rekap-kir', [AbsensiController::class, 'rekapKir'])->name('rekap.kir');
-    Route::get('/rekap-padus', [AbsensiController::class, 'rekapPadus'])->name('rekap.padus');
-    Route::get('/rekap-pmr', [AbsensiController::class, 'rekapPmr'])->name('rekap.pmr');
-    Route::get('/rekap-silat', [AbsensiController::class, 'rekapSilat'])->name('rekap.silat');
-    Route::get('/rekap-tari', [AbsensiController::class, 'rekapTari'])->name('rekap.tari');
-    Route::get('/rekap-tataboga', [AbsensiController::class, 'rekapTataboga'])->name('rekap.tataboga');
-    Route::get('/rekap-tatabusana', [AbsensiController::class, 'rekapTatabusana'])->name('rekap.tatabusana');
-    Route::get('/rekap-tatarias', [AbsensiController::class, 'rekapTatarias'])->name('rekap.tatarias');
-    Route::get('/rekap-pramuka', [AbsensiController::class, 'rekapPramuka'])->name('rekap.pramuka');
-
-
 
 });
 
@@ -238,14 +219,28 @@ Route::middleware(['role:pembina'])
         Route::get('/konfirmasi', [KonfirmasiPendaftaranController::class, 'index'])->name('konfirmasi');
         Route::post('/konfirmasi/terima/{id}', [KonfirmasiPendaftaranController::class, 'terima'])->name('terima');
         Route::post('/konfirmasi/tolak/{id}', [KonfirmasiPendaftaranController::class, 'tolak'])->name('tolak');
+        Route::post('/konfirmasi/keluar/{id}',
+    [KonfirmasiPendaftaranController::class, 'keluar']
+)->name('keluar');
 
 
 
         Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+// ================= NOTIFIKASI PEMBINA =================
+Route::get('/notifikasi', [NotifikasiController::class, 'index'])
+    ->name('notifikasi');
 
-        // NOTIFIKASI
-        Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
-        Route::post('/notifikasi', [NotifikasiController::class, 'store'])->name('notifikasi.store');
+Route::post('/notifikasi', [NotifikasiController::class, 'store'])
+    ->name('notifikasi.store');
+
+Route::get('/notifikasi/{id}/edit', [NotifikasiController::class, 'edit'])
+    ->name('notifikasi.edit');
+
+Route::put('/notifikasi/{id}', [NotifikasiController::class, 'update'])
+    ->name('notifikasi.update');
+
+Route::delete('/notifikasi/{id}', [NotifikasiController::class, 'destroy'])
+    ->name('notifikasi.destroy');
 
         // SERTIFIKAT
         Route::get('/sertifikat', [SertifikatController::class, 'index'])->name('sertifikat.index');

@@ -181,7 +181,7 @@
 
 <div class="container py-5">
     <div class="jadwal-container">
-        <h2 class="jadwal-title">Jadwal Ekskul Paskibra</h2>
+        <h2 class="jadwal-title">Jadwal Ekskul</h2>
 
         <div class="row">
             <div class="col-md-4 mb-3">
@@ -189,15 +189,13 @@
                     <div class="jadwal-day"><i class="bi bi-calendar-day"></i> Senin</div>
                     <div class="jadwal-time"><i class="bi bi-clock"></i> 15:30 – 17:30</div>
                     <div class="jadwal-location"><i class="bi bi-geo-alt"></i> Lapangan Utama</div>
-                    <div class="jadwal-description">Latihan Kedisiplinan & Baris Berbaris</div>
                 </div>
             </div>
             <div class="col-md-4 mb-3">
                 <div class="jadwal-card">
                     <div class="jadwal-day"><i class="bi bi-calendar-day"></i> Rabu</div>
                     <div class="jadwal-time"><i class="bi bi-clock"></i> 15:30 – 17:30</div>
-                    <div class="jadwal-location"><i class="bi bi-geo-alt"></i> Aula Serbaguna</div>
-                    <div class="jadwal-description">Pemantapan Formasi Upacara</div>
+                    <div class="jadwal-location"><i class="bi bi-geo-alt"></i> Aula </div>
                 </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -205,7 +203,6 @@
                     <div class="jadwal-day"><i class="bi bi-calendar-day"></i> Jumat</div>
                     <div class="jadwal-time"><i class="bi bi-clock"></i> 14:00 – 17:00</div>
                     <div class="jadwal-location"><i class="bi bi-geo-alt"></i> Lapangan Utama</div>
-                    <div class="jadwal-description">Persiapan Lomba Antar Sekolah</div>
                 </div>
             </div>
         </div>

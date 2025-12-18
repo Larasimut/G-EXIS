@@ -131,10 +131,21 @@
 
         <div class="notif-header">
             <div class="sender">
-                <div class="sender-icon">
-                    <i class="bi bi-people-fill"></i>
-                </div>
-                <span class="sender-name">Pembina</span>
+
+                <div class="sender">
+    <div class="sender-icon">
+        <i class="bi bi-person-badge-fill"></i>
+    </div>
+    <div>
+        <div class="sender-name">
+            Pembina {{ ucfirst($notif->ekskul) }}
+        </div>
+        <small class="text-muted">
+            {{ $notif->pengirim_nama }}
+        </small>
+    </div>
+</div>
+
             </div>
         </div>
 

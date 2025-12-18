@@ -3,226 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ekskul Terdaftar – Paskibra</title>
+    <title>Ekskul Terdaftar</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
     <style>
         :root {
-            --primary-blue: #1e3a8a;
-            --secondary-blue: #3b82f6;
-            --accent-blue: #60a5fa;
-            --light-blue: #dbeafe;
-            --soft-blue: #f0f9ff;
-            --solid-blue: #3b82f6;
-            --green: #10b981;
-            --purple: #8b5cf6;
-            --orange: #f59e0b;
-            --shadow-elegant: 0 10px 30px rgba(30, 58, 138, 0.15);
-            --shadow-hover: 0 20px 50px rgba(30, 58, 138, 0.25);
-            --glass-bg: rgba(255, 255, 255, 0.9);
-            --glass-border: rgba(30, 58, 138, 0.1);
-            --danger-red: #ef4444;
-            --danger-hover: #dc2626;
+            --blue-soft: #e8f1ff;
+            --blue-main: #5b8def;
+            --blue-dark: #3b6fd8;
+            --blue-light: #f4f8ff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --card-shadow: 0 10px 26px rgba(0,0,0,.08);
         }
 
         body {
-            background: var(--soft-blue);
-            font-family: "Poppins", sans-serif;
-            overflow-x: hidden;
-            color: #1e293b;
+            background: var(--blue-soft);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
         }
 
-        .header-card {
-            background: var(--solid-blue);
-            color: white;
+        /* HEADER */
+        .header-box {
+            background: linear-gradient(135deg, #6fa8ff, #8fbaff);
             border-radius: 24px;
-            padding: 30px;
-            box-shadow: var(--shadow-elegant);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .header-card h2 {
-            font-weight: 800;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 1;
-        }
-
-        .header-card p {
-            position: relative;
-            z-index: 1;
-            opacity: 0.9;
-        }
-
-        .menu-box {
-            border-radius: 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            padding: 30px;
-            box-shadow: var(--shadow-elegant);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border: 1px solid var(--glass-border);
-            animation: fadeInUp 0.8s ease-out forwards;
-            opacity: 0;
-        }
-
-        .menu-box:nth-child(1) { animation-delay: 0.1s; }
-        .menu-box:nth-child(2) { animation-delay: 0.2s; }
-        .menu-box:nth-child(3) { animation-delay: 0.3s; }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .menu-box:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .menu-box img {
-            width: 80px;
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-box:hover img {
-            transform: scale(1.1);
-        }
-
-        .menu-box h5 {
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .menu-box p {
-            color: #64748b;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        /* Variasi warna untuk menu box */
-        .menu-box:nth-child(1) h5 {
-            color: var(--green);
-        }
-
-        .menu-box:nth-child(2) h5 {
-            color: var(--purple);
-        }
-
-        .menu-box:nth-child(3) h5 {
-            color: var(--orange);
-        }
-
-        .btn-blue {
-            background: var(--solid-blue);
+            padding: 32px 26px;
+            text-align: center;
             color: white;
-            border-radius: 12px;
-            padding: 10px 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .header-box h3 {
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .header-box .subtitle {
+            font-size: 14px;
+            opacity: .95;
+            margin-bottom: 8px;
+        }
+
+        .header-box .motivation {
+            font-size: 13px;
+            opacity: .9;
+        }
+
+        /* MENU CARD */
+        .menu-card {
+            background: white;
+            border-radius: 22px;
+            padding: 30px 22px;
+            box-shadow: var(--card-shadow);
+            transition: .3s ease;
+            height: 100%;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .menu-icon {
+            width: 66px;
+            height: 66px;
+            background: var(--blue-light);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            color: var(--blue-main);
+            font-size: 26px;
+        }
+
+        .menu-card h5 {
             font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-            border: none;
+            margin-bottom: 8px;
         }
 
-        .btn-blue:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        .menu-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 22px;
         }
 
-        .btn-red {
-            background: var(--danger-red);
+        /* BUTTON */
+        .btn-soft {
+            background: linear-gradient(135deg, #5b8def, #7aa7ff);
             color: white;
-            border-radius: 16px;
-            padding: 14px 28px;
-            font-size: 18px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+            border-radius: 14px;
+            padding: 11px 30px;
+            font-weight: 600;
             border: none;
-            position: relative;
-            overflow: hidden;
+            transition: .3s ease;
+            box-shadow: 0 6px 18px rgba(91,141,239,.35);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .btn-red:hover {
-            background: var(--danger-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+        .btn-soft:hover {
+            background: linear-gradient(135deg, #3b6fd8, #5b8def);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(91,141,239,.45);
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .header-card {
-                padding: 20px;
-            }
-            .header-card h2 {
-                font-size: 1.5rem;
-            }
-            .menu-box {
-                padding: 20px;
-            }
-            .btn-red {
-                font-size: 16px;
-                padding: 12px 24px;
-            }
+        /* EXIT */
+        .btn-exit {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: #b91c1c;
+            border-radius: 16px;
+            padding: 14px 38px;
+            font-weight: 600;
+            border: none;
+            transition: .25s;
+        }
+
+        .btn-exit:hover {
+            background: linear-gradient(135deg, #fecaca, #fca5a5);
         }
     </style>
 </head>
 <body>
+
 @include('layouts.sidebar')
 
 <div class="container py-5">
 
     <!-- HEADER -->
-    <div class="header-card mb-4 text-center">
-<h2 class="fw-bold">{{ Str::title($pendaftar->ekskul) }} — Ekskul Terdaftar Kamu</h2>
-
-
-<p class="mb-0">Informasi lengkap tentang ekskul ini ✨</p>
-
-        <p class="mb-0">Semangat dan tetap aktif dalam kegiatan! 💪</p>
+    <div class="header-box mb-5">
+        <h3>{{ Str::title($pendaftar->ekskul) }}</h3>
+        <div class="subtitle">Ekskul yang sedang kamu ikuti</div>
+        <div class="motivation">
+            Tetap semangat, disiplin, dan konsisten ya! 💙
+        </div>
     </div>
 
-    <!-- 3 MENU -->
-    <div class="row text-center mb-5">
-        <div class="col-md-4 mb-3">
-            <div class="menu-box h-100">
-                <img src="https://cdn-icons-png.flaticon.com/512/599/599328.png" alt="">
-                <h5 class="fw-bold">Absensi</h5>
-                <p>Cek & lakukan absensi kehadiran ekskul.</p>
-               <a href="{{ route('siswa.absen', $pendaftar->id) }}" class="btn btn-blue px-4">
-    Absen
-</a>
+    <!-- MENU -->
+    <div class="row justify-content-center g-4 mb-4">
 
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="menu-box h-100">
-                <img src="https://cdn-icons-png.flaticon.com/512/3208/3208726.png" alt="">
-                <h5 class="fw-bold">Jadwal Latihan</h5>
-                <p>Lihat jadwal latihan ekskul lengkap.</p> <br>
-               <a href="{{ route('siswa.jadwal') }}" class="btn btn-blue px-4">Lihat Jadwal</a>
+        <!-- ABSENSI -->
+        <div class="col-md-5">
+            <div class="menu-card text-center">
+                <div class="menu-icon">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                </div>
+                <h5>Absensi</h5>
+                <p>Catat kehadiran kamu dan pastikan tidak terlewat setiap pertemuan.</p>
+                <a href="{{ route('siswa.absen', $pendaftar->id) }}" class="btn btn-soft">
+                    <i class="fa-solid fa-check"></i> Absen Sekarang
+                </a>
             </div>
         </div>
 
+        <!-- JADWAL -->
+        <div class="col-md-5">
+            <div class="menu-card text-center">
+                <div class="menu-icon">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+                <h5>Jadwal Latihan</h5>
+                <p>Lihat jadwal latihan agar kamu selalu siap dan tepat waktu.</p>
+                <a href="{{ route('siswa.jadwal') }}" class="btn btn-soft">
+                    <i class="fa-solid fa-calendar"></i> Lihat Jadwal
+                </a>
+            </div>
+        </div>
 
-    <!-- BUTTON KELUAR EKSUL -->
-    <div class="text-center mt-4">
-        <button class="btn btn-red" onclick="return confirm('Apakah kamu yakin ingin keluar dari ekskul ini?')">
-            Keluar dari Ekskul
-        </button>
     </div>
+
+
 
 </div>
+
 </body>
 </html>

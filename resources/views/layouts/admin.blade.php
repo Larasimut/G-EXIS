@@ -216,24 +216,7 @@ body {
         <!-- LOGO -->
         <img src="{{ asset('images/logoekskul.png') }}" class="navbar-logo" style="height:48px;">
 
-        <div class="search-box">
-            <i class="bi bi-search"></i>
-            <input type="text" placeholder="Search here...">
-        </div>
 
-        <!-- RIGHT ICONS -->
-        <div class="d-flex align-items-center">
-
-            <!-- NOTIF -->
-            <div class="dropdown me-3 position-relative">
-                <i class="bi bi-bell-fill icon-btn" data-bs-toggle="dropdown"></i>
-                <span class="notif-badge">4</span>
-
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-custom">
-                    <a href="{{ route('admin.kelola.notifikasi') }}">Lihat Semua</a>
-
-                </div>
-            </div>
 
             <!-- USER -->
             <div class="dropdown">

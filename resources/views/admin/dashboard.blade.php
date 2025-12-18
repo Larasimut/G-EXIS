@@ -126,9 +126,9 @@
 
         <div class="col-md-4">
             <div class="stat-card">
-                <h6>Data Pembina</h6>
+                <h6>Data Users</h6>
                 <h2>{{ $data['pembina_count'] }}</h2>
-                <span class="text-muted small">Pembina Terdaftar</span>
+                <span class="text-muted small">Data banyak pengguna</span>
                 <br>
                 <a href="{{ route('admin.users.index') }}">Lihat detail →</a>
 
